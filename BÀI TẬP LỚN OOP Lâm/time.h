@@ -16,3 +16,5 @@ class Time{
 };
 hhhhhhhhhhhhh
 con som ma hoc di
+okkk chuaaaa
+alooooo
