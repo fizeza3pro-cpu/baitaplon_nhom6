@@ -74,3 +74,4 @@ bool couse::ktra_full(){
     }else return false;
 }
 nhanh ve ngu thoi nao cac b
+nghi ngoi mai lam tiep
