@@ -73,4 +73,4 @@ bool couse::ktra_full(){
         return true;
     }else return false;
 }
-nhanh ve ngu thoi
+nhanh ve ngu thoi nao cac b
