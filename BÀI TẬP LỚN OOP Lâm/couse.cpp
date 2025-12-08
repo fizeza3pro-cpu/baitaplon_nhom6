@@ -73,3 +73,4 @@ bool couse::ktra_full(){
         return true;
     }else return false;
 }
+day l qunh
