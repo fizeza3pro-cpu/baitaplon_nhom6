@@ -140,12 +140,5 @@ void dangky_couse::full_ds_monhoc(string ma_sv){
 void add_sv_file(string data){
 
 }
-day la nhu
-       
 
-
-
-        
-        
-    
 
