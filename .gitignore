@@ -1,5 +1,8 @@
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
-
+#cái này là để cho những file ko cần push khi commit all lên github
 /.vs
+bin/
+*.exe
+/.vscode/
