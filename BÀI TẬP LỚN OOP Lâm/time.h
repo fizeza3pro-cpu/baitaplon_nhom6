@@ -14,7 +14,3 @@ class Time{
     void xuat();
     friend class couse;
 };
-hhhhhhhhhhhhh
-con som ma hoc di
-okkk chuaaaa
-alooooo
