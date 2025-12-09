@@ -7,13 +7,15 @@ class couse{
     private:
     string gv;
     int tc;
-    Time time;
     int max_sv;
     int cur_sv;
     static int sl;
     protected:
     string ten_mon_hoc;
     string ma_mon_hoc;
+    int ngay_khai_giang[3];
+    int so_buoi_hoc;
+    int gio_hoc[4];
     public:
     couse(){
         ma_mon_hoc = "";
@@ -24,8 +26,15 @@ class couse{
         sl++;
         tusinhma();
     }
-    couse(int a, int b, int c,int d,int e, string y, string z,int m,int n,int p ):
-    time(a,b,c,d,e){
+    couse(int a, int b, int c,int d,int e,int f, int g,int h, string y, string z,int m,int n,int p ){
+        ngay_khai_giang[0] = a;
+        ngay_khai_giang[1] = b;
+        ngay_khai_giang[2] = c;
+        so_buoi_hoc = d;
+        gio_hoc[0] = e;
+        gio_hoc[1] = f;
+        gio_hoc[2] = g;
+        gio_hoc[3] = h;
         ma_mon_hoc = "";
         ten_mon_hoc = y;
         gv = z;
@@ -43,12 +52,6 @@ class couse{
     }
     string get_gv()const{
         return gv;
-    }
-    string get_time()const{
-        string time_get;
-        time_get = to_string(time.tiet_begin) + "|" + to_string(time.tiet_end) + "|" +to_string( time.d) + 
-        "|" +  to_string(time.m) + "|" + to_string(time.y);
-        return time_get;
     }
     int get_tc()const{
         return tc;
