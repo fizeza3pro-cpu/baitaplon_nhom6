@@ -17,4 +17,7 @@ class list_time{
         ds_time.erase(ds_time.begin() + i);
     }
     void lay_du_lieu_tu_file(string file_name);
+    Time get_time(int i){
+        return ds_time[i];
+    }
 };

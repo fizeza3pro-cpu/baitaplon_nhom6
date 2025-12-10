@@ -6,6 +6,7 @@
 #include"list_giangvien.h"
 #include"list_subject.h"
 #include"list_time.h"
+#include<vector>
 using namespace std;
 class couse{
     protected:
@@ -37,7 +38,8 @@ class couse{
     virtual string get_data()const = 0;
     virtual string get_loai() const = 0; 
     virtual void nhap(giangvien gv_func,Time time_func,subject sub_func) = 0;    
-    virtual bool nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,ifstream &f) = 0;     
+    virtual bool nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,vector<string>a) = 0;  
+    virtual bool xuat_du_lieu_file(string file_name) = 0;  
     virtual void hienthi() = 0;    
     bool ktra_full();
     bool tang_sv();

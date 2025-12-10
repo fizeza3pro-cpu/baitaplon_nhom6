@@ -65,7 +65,7 @@ void list_couse::hienthidanhsach(){
 //     f.close();
 //     cout<<"them mon hoc thanh cong!";
 // } đoạn này ko lỡ xoá vì chức năng tìm kiếm tên gần đúng sau này có thể tham khảo lại
-void list_couse::nhap_test(giangvien &gv_func, Time &time_func, subject &sub_func){
+void list_couse::nhap_test(giangvien &gv_func, Time &time_func, subject &sub_func,string file_name) {
     string chose;
     cout << "Nhap loai lop hoc muon dang (ON / OFF): ";
     getline(cin, chose);
@@ -82,14 +82,52 @@ void list_couse::nhap_test(giangvien &gv_func, Time &time_func, subject &sub_fun
         cout << "Loi nhap lieu, vui long chon dung!\n";
         return;
     }
-
     // Gọi hàm nhập dữ liệu lớp học
     newCourse->nhap(gv_func, time_func, sub_func);
+    newCourse ->xuat_du_lieu_file(file_name);
 
     // Đưa vào danh sách
     p.push_back(newCourse);
-
     cout << "Them mon hoc thanh cong!\n";
+}
+bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,string file_name){
+    vector<string> a;
+    string line;   
+    string temp = "";
+    ifstream f(file_name);
+    if(!f.is_open()){  
+        cout<<"ko mo dc file!"<<endl;
+        return false;
+    }else{
+        while(getline(f,line)){
+         if(line.empty()) return false;
+          for(char c : line){ 
+            if(c == '|'){
+                a.push_back(temp); /* đoạn này tách chuỗi theo dấu '|' */
+                temp = "";
+            }else{
+                temp +=c;
+            }
+        }
+       a.push_back(temp);
+       temp = "";
+       couse *mon = nullptr;
+       if(a[0] == "online"){
+        mon = new online;
+        mon->nhap_du_lieu_file(ds_gv,ds_time,ds_sub,a);
+       }else if(a[0] == "offline"){
+        mon = new offline;
+        mon->nhap_du_lieu_file(ds_gv,ds_time,ds_sub,a);
+       }else{
+        cout<<"loai lop hoc khong hop le!"<<endl;
+        return false;
+       }
+       p.push_back(mon);
+       a.clear();
+    }
+}
+f.close();
+    return true;
 }
 
     

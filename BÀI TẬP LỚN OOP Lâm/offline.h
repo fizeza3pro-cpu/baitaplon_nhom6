@@ -28,7 +28,7 @@ public:
     }
     void nhap(giangvien gv_func,Time time_func,subject sub_func);
     void hienthi();
-    void nhapdulieutufile(giangvien gv_func,Time time_func,subject sub_func,string file_name);
-    bool nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,ifstream &f);
-    // void tusinhma();
+    bool nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,vector<string>a);
+    bool xuat_du_lieu_file(string file_name);
+    
 };

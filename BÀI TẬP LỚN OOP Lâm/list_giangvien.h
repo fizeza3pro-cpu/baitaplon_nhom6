@@ -17,4 +17,7 @@ class list_giangvien{
         if (i < 0 || i >= ds_gv.size()) return;
         ds_gv.erase(ds_gv.begin() + i);
     }
+    giangvien get_giangvien(int i){
+        return ds_gv[i];
+    }
 };

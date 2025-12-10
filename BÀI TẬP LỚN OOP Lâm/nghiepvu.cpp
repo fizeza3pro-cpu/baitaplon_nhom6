@@ -1,9 +1,10 @@
 #include<iostream>
 #include"nghiepvu.h"
 using namespace std;
-void nghiepvu::them_mon_hoc(giangvien c,Time d,subject e){
+void nghiepvu::them_mon_hoc(giangvien c,Time d,subject e,string file_name){
  /* truyền vào hàm có thể là mã gv,... nhưng truyền cả đối tượng cho trực quan */
-    ds_mon.nhap_test(c,d,e);
+    ds_lop.nhap_test(c,d,e,file_name);
+ /*    phải thêm mã  lơp shocj vào cho mon, giangvien vs time */
     
 }
 void nghiepvu::dang_ky_mon_hoc(sinhvien &a,couse *b){

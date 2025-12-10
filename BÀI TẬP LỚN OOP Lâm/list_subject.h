@@ -17,4 +17,7 @@ class list_subject{
         ds_mon.erase(ds_mon.begin() + i);
     }
     void lay_du_lieu_tu_file(string file_name);
+    subject get_subject(int i){
+        return ds_mon[i];
+    }
 };
