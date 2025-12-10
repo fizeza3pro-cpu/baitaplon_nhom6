@@ -2,26 +2,26 @@
 #include<iostream>
 #include"online.h"
 #include"offline.h"
+#include<vector>
 using namespace std;
 class list_couse{
     private:
-    int cnt;
-    couse *p[100];
+    vector<couse*>p;
     public:
-    list_couse(){
-        cnt = 0;
-        for(int i = 0;i<100;i++){
-            p[i] = nullptr;
-        }
-    }
-    void nhapdanhsach(string file_name);
-    void xuatdanhsach();
-    bool timkiem_ten(string ten_mon);
-    bool timkiem_ma(string ma);
-    void nhapfile(string file_name );
-    couse * getp(int i){
+    void nhap_test(giangvien &gv_func,Time &time_func,subject &sub_func);
+    // void nhapdanhsach(string file_name);
+    void hienthidanhsach();
+    // bool timkiem_ten(string ten_mon);
+    // bool timkiem_ma(string ma);
+    // void nhapfile(string file_name );
+    couse * get_p(int i){
         return p[i];
     }
-    friend class dangky_couse;
-    friend class tkb;
+    void add_couse(couse *a){
+        p.push_back(a);
+    }
+    void delete_course(int i){
+    if (i < 0 || i >= p.size()) return;
+    p.erase(p.begin() + i);
+}
 };

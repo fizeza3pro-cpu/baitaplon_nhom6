@@ -2,6 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 #cái này là để cho những file ko cần push khi commit all lên github
+#tất cả các hàm đều có nhập xuất cơ bản, riêng đám couses và dẫn xuất xuất của nó có lẽ cần truyền các class kia vào hàm nhập
 /.vs
 bin/
 *.exe

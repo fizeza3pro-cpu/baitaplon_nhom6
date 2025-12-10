@@ -7,7 +7,7 @@ void couse::tusinhma(){
     while(ma_mon_hoc.length()<3){
         ma_mon_hoc.insert(0,"0");
     }
-    string thay_the = ten_mon_hoc;
+    string thay_the = mon_hoc.get_ten();
     for(char &temp : thay_the){ /*Range-based for loop*/
         temp = tolower(temp);
     }
@@ -33,28 +33,15 @@ void couse::tusinhma(){
     }else ma_mon_hoc = "KT" +ma_mon_hoc;
 }
 void couse::fix_matusinh(){
-    if(ma_mon_hoc[0] == 'K' && ma_mon_hoc[1] == 'K' ){
+    if(ma_mon_hoc[0] == 'K' && ma_mon_hoc[1] == 'T' ){
         ma_mon_hoc.erase(0, 2);
     }
 }
-void couse::nhap(){
-    cout<<"Nhap ten mon hoc: ";
-    getline(cin,ten_mon_hoc);
-    cout<<"Nhap thoi gian hoc: "<<endl;
-    time.nhap();
-    cout<<"Nhap ten giang vien: ";
-    cin.ignore();
-    getline(cin,gv);
-    cout<<"Nhap so luong sinh vien toi da: ";
-    cin>>max_sv;
-    cout<<"nhap so tin chi mon hoc:";
-    cin>>tc;
-}
 void couse::hienthi(){
-    cout<<"[+] Ten mon hoc: "<<ten_mon_hoc<<"\t"<<"Ma mon hoc: "<<ma_mon_hoc<<"\t"<<"Giang vien: "<<gv<<endl;
+    cout<<"[+] Ten mon hoc: "<<mon_hoc.get_ten()<<"\t"<<"Ma mon hoc: "<<ma_mon_hoc<<"\t"<<"Giang vien: "<<gv.get_name()<<endl;
     cout<<"    Thoi gian: ";
-    time.xuat();
-    cout<<"\t"<<"So tin chi: "<<tc<<"\t\t"<<"So luong :"<<cur_sv<<"/"<<max_sv<<endl;
+    time.hienthithongtin();
+    cout<<"\t"<<"So tin chi: "<<mon_hoc.get_tin_chi()<<"\t\t"<<"So luong :"<<cur_sv<<"/"<<max_sv<<endl;
 }
 bool couse::tang_sv(){
     if(cur_sv<max_sv){
@@ -72,4 +59,11 @@ bool couse::ktra_full(){
     if(cur_sv == max_sv){
         return true;
     }else return false;
+}
+void couse::nhap(giangvien gv_func,Time time_func,subject sub_func){
+       gv = gv_func;
+    time = time_func;
+    mon_hoc = sub_func;
+        cout<<"nhap so luong sinh vien toi da: ";
+    cin>>max_sv;
 }

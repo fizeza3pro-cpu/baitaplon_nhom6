@@ -1,65 +1,54 @@
 // #pragma once
 #include<iostream>
+#include<vector>
+#include<string>
+#include<fstream>
 #include"time.h"
 using namespace std;
 void Time::nhap(){
-    do{
-    cout<<"nhap nam:";
-    cin>>y;
-    if(y<0){
-        cout<<"nam khong hop le, vui long nhap lai!";
+    int n;
+    string tmp;
+    cout<<"nhap so buoi hoc trong tuan: ";
+    cin>>n;
+    cout<<"nhap thu hoc trong tuan: ";
+    for(int i = 0;i<n;i++){
+        cin.ignore();
+        getline(cin,tmp);
+        thu_hoc_trong_tuan.push_back(tmp);
     }
-    }while(y<0);
-    do{
-    cout<<"nhap thang:";
-    cin>>m;
-    if(m<=0 || m>12){
-        cout<<"thang khong hop le, vui long nhap lai!";
-    }
-    }while(m<=0 || m>12);
-    if(m == 1 || m == 3 || m == 5 || m == 7|| m == 8 || m == 10 || m == 12){
-        do{
-        cout<<"nhap ngay:";
-        cin>>d;
-        if(d<=0 || d>31){
-            cout<<"ngay khong hop le, vui long nhap lai!";
-    }
-    }while(d<=0 || d>31);
-    }
-    if(m == 4 || m == 6 || m == 9 || m == 11){
-        do{
-        cout<<"nhap ngay:";
-        cin>>d;
-        if(d<0 || d>30){
-            cout<<"ngay khong hop le, vui long nhap lai!";
-    }
-    }while(d<0 || d>30);
-    }
-    if(m == 2){
-        int check = y%4;
-        if(check == 0){
-            do{
-            cout<<"nhap ngay:";
-            cin>>d;
-            if(d<0 || d>29){
-            cout<<"ngay khong hop le, vui long nhap lai!";
-            }
-        }while(d<0 || d>29);
-        }
-        if(check != 0){
-            do{
-            cout<<"nhap ngay:";
-            cin>>d;
-            if(d<0 || d>28){
-            cout<<"ngay khong hop le, vui long nhap lai!";
-            }
-        }while(d<0 || d>28);
-        }
-    }
-    cout<<"nhap tiet bat dau va ket thuc: ";
-    cin>>tiet_begin>>tiet_end;/*can toi uu*/
-   
+    cin.ignore();
+    cout<<"nhap thoi gian hoc: ";
+    getline(cin,thoi_gian_hoc);
 }
-void Time::xuat(){
-    cout<<"Tiet: "<<tiet_begin<<"-"<<tiet_end<<"["<<d<<"/"<<m<<"/"<<y<<"]";
+void Time::hienthithongtin(){
+    cout<<"thoi gian hoc trong tuan: ";
+    for(string x:thu_hoc_trong_tuan){
+        cout<<x<<" ";
+    }
+    cout<<"Thoi gian hoc: tu"<<thoi_gian_hoc;
+}
+bool Time::nhap_du_lieu_tu_file(ifstream &f){
+    vector<string> a;
+    string line;
+    string temp = "";
+    if(!getline(f,line)){
+        return false;
+    }
+    if(line.empty()) return false;
+    for(char c : line){
+            if(c == '|'){
+                a.push_back(temp);
+                temp = "";
+            }else{
+                temp +=c;
+            }
+        }
+       a.push_back(temp);
+       temp = "";
+        if(a.size() > 8) return false;
+        thoi_gian_hoc = a[0];
+        for(int i = 1;i<a.size();i++){
+            thu_hoc_trong_tuan.push_back(a[i]);
+        }
+    return true;
 }
