@@ -57,7 +57,7 @@ void sinhvien::hienthithongtin(){
     cout << "So mon da dang ky: " << so_mon_dky << "\n" << endl;
 }
 void sinhvien::nhap()
-{
+{dsfsdfds
     cout << "Nhap ma sinh vien: ";
     getline(cin, id);
     cout << "Nhap ho va ten: "; 

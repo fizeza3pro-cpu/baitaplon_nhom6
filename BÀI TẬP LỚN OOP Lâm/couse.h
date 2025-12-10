@@ -3,7 +3,7 @@
 #include<string>
 #include"time.h"
 using namespace std;
-class couse{
+class couse{   
     private:
     string gv;
     int tc;

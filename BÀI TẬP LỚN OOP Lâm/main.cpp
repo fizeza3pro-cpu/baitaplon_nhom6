@@ -1,7 +1,4 @@
 #include<iostream>
-#include<string>
-#include"dangky_couse.h"
-#include"thoikhoabieu.h"
 #include<stdlib.h>
 int couse::sl = 0;
 int main(){
