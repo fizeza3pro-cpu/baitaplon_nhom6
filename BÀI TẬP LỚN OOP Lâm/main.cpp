@@ -23,6 +23,5 @@ int main(){
   }
   nghiepvu nv(d,e,a,b,c);
   nv.them_mon_hoc(b.get_giangvien(1),a.get_time(1),c.get_subject(1),"D:/dulieulophoc.txt");
-  return
-      ok
+  return 0;
 }

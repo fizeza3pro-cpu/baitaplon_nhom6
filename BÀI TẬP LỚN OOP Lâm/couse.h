@@ -10,14 +10,13 @@
 using namespace std;
 class couse{   
     private:
-    string gv;
+    giangvien gv;
     int tc;
     Time time;
     int max_sv;
     int cur_sv;
-    Time time;
     subject mon_hoc;
-    string ma_mon_hoc;
+    string ma_mon_hoc; /* thật ra là mã lớp học mới chuẩn */
     static int sl;
     public:
     couse(){
@@ -41,7 +40,7 @@ class couse{
     virtual string get_loai() const = 0; 
     virtual void nhap(giangvien gv_func,Time time_func,subject sub_func) = 0;    
     virtual bool nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,vector<string>a) = 0;  
-    virtual bool xuat_du_lieu_file(string file_name) = 0;  
+    virtual bool xuat_du_lieu_file(string &line) = 0;  
     virtual void hienthi() = 0;    
     bool ktra_full();
     bool tang_sv();

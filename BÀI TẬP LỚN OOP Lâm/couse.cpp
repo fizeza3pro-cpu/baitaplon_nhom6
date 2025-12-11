@@ -67,3 +67,19 @@ void couse::nhap(giangvien gv_func,Time time_func,subject sub_func){
         cout<<"nhap so luong sinh vien toi da: ";
     cin>>max_sv;
 }
+bool couse::nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,vector<string>a){
+       gv = ds_gv.tim_giangvien_theo_id(a[2]);
+    //    if(!gv) return false;
+        time = ds_time.tim_kip_hoc_theo_tg(a[3]);
+        // if(!time) return false;
+        mon_hoc = ds_sub.tim_mon_theo_ten(a[1]);
+        // if(!mon_hoc) return false;
+        max_sv = stoi(a[4]);
+    return true;    
+ }
+ bool couse::xuat_du_lieu_file(string &line){
+    line = mon_hoc.get_ten()+"|"+gv.get_id()+"|"+time.get_thoi_gian_hoc()
+        +"|"+to_string(max_sv);
+    return true;
+
+ }
