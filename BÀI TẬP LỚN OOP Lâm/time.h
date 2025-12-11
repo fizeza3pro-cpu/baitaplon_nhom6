@@ -1,16 +1,20 @@
 #pragma once
 #include<iostream>
+#include<vector>
 #include<string>
 using namespace std;
 class Time{
     private:
-    int d,m,y;
-    int tiet_begin;
-    int tiet_end;
+    vector<string>thu_hoc_trong_tuan;
+    string thoi_gian_hoc;
     public:
-    Time(int a = 12, int b = 12,int c = 1,int d = 1, int e = 1):
-    tiet_begin(a),tiet_end(b),d(c),m(d),y(e){};
+    Time(string a = "chua xac dinh"):thoi_gian_hoc(a){
+    };
     void nhap();
-    void xuat();
+    void hienthithongtin();
+    bool nhap_du_lieu_tu_file(ifstream &f);
+    string get_thoi_gian_hoc()const{
+        return thoi_gian_hoc;
+    }
     friend class couse;
 };

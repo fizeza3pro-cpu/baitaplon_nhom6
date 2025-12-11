@@ -15,11 +15,10 @@ class online: public couse{
         nen_tang = "";
         link = ""; /* link tam thoi chua viet */
     }
-    online(int a, int b, int c,int d,int e, string y, string z,int m,int n,int p ,string q):
-    couse(a,b,c,d,e,y,z,m,n,p),nen_tang(q){
-        link = "";
+    online(int max,giangvien a,Time b, subject c,string k) :
+        couse(max,a,b,c), nen_tang(k) {
         // tusinhma();
-         loai = "ONLINE";
+        loai = "OFFLINE";
     }
     string get_data()const{
         return nen_tang;
@@ -27,8 +26,9 @@ class online: public couse{
     string get_loai()const{
         return loai;
     }
-    void nhap();
+    void xuatlink();
+    void nhap(giangvien gv_func,Time time_func,subject sub_func);
     void hienthi();
-    void xuat_link();
-    // void tusinhma();
+    bool nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,vector<string>a); 
+    bool xuat_du_lieu_file(string file_name);
 };

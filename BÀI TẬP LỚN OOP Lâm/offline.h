@@ -12,11 +12,11 @@ public:
     offline() :couse() {
         // tusinhma();
         loai = "OFFLINE";
-        nha = "";
-        phong_hoc = "";
+        nha = "chua xac dinh";
+        phong_hoc = "chua xac dinh";
     }
-    offline(int a, int b, int c, int d, int e, string y, string z, int m, int n, int p, string k, string q) :
-        couse(a, b, c, d, e, y, z, m, n, p), nha(q), phong_hoc(k) {
+    offline(int max,giangvien a,Time b, subject c,string k, string q) :
+        couse(max,a,b,c), nha(q), phong_hoc(k) {
         // tusinhma();
         loai = "OFFLINE";
     }
@@ -26,7 +26,9 @@ public:
     string get_loai()const {
         return loai;
     }
-    void nhap();
+    void nhap(giangvien gv_func,Time time_func,subject sub_func);
     void hienthi();
-    // void tusinhma();
+    bool nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,vector<string>a);
+    bool xuat_du_lieu_file(string file_name);
+    
 };
