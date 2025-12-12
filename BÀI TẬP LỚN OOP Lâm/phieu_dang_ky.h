@@ -1,4 +1,4 @@
-#include<iostream>
+﻿#include<iostream>
 #include"list_couse.h"
 #include"sinhvien.h"
 #include<string>
@@ -9,8 +9,9 @@ class phieu_dang_ky{
     couse *mon_dky;
     string thoi_gian_dky;
     public:
-    phieu_dang_ky(){
-        thoi_gian_dky = "";
+    phieu_dang_ky()
+    {
+        thoi_gian_dky = "";//lỗi gì gì đấy
     }
     phieu_dang_ky(sinhvien a, couse *b, string c){
         sv_dky = a;
