@@ -29,7 +29,6 @@ void online::nhap(giangvien gv_func,Time time_func,subject sub_func){
         line.insert(0,"online|");
         f<<line+"|"+nen_tang<<"\n";
         f.close();
-
     }
     return true;
 

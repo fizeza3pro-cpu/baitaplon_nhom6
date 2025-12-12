@@ -13,4 +13,5 @@ void add_sinhvien(sinhvien a){
 	void nhapds();
 	void xuatds();
 	void lay_du_lieu_tu_file(string file_name);
+	sinhvien tim_sinhvien_theo_id(string ma_sv);
 };

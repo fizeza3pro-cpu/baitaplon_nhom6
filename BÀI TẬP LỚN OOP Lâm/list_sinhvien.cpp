@@ -36,3 +36,12 @@ void list_sinhvien::lay_du_lieu_tu_file(string file_name){
     }
     f.close();
 }
+sinhvien list_sinhvien::tim_sinhvien_theo_id(string ma_sv){
+	for(int i = 0;i<dssv.size();i++){
+		if(dssv[i].get_ma() == ma_sv){
+			return dssv[i];
+		}
+	}
+	sinhvien sv_null;
+	return sv_null;
+}

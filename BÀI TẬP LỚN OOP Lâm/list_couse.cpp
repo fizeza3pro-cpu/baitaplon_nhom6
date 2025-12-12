@@ -129,6 +129,14 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_time &ds_time,l
 f.close();
     return true;
 }
+couse* list_couse::tim_lop_theo_ma(string ma){
+    for(int i = 0;i<p.size();i++){
+        if(p[i]->get_ma_mon_hoc() == ma){
+            return p[i];
+        }
+    }
+    return nullptr;
+}
 
     
 

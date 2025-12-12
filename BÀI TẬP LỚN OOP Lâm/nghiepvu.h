@@ -8,16 +8,23 @@
 using namespace std;
 class nghiepvu{
     private:
-    list_couse &ds_lop;
-    list_sinhvien &ds_sv;
-    list_time &ds_time;
-    list_giangvien &ds_gv;
-    list_subject &ds_mon;
+    list_couse ds_lop;
+    list_sinhvien ds_sv;
+    list_time ds_time;
+    list_giangvien ds_gv;
+    list_subject ds_mon;
     vector<phieu_dang_ky>ds_phieu_dky;
     public:
     // Sử dụng initializer list để khởi tạo tham chiếu
-    nghiepvu(list_couse &dsl,list_sinhvien &dssv,list_time &dst,list_giangvien &dsgv,list_subject &dsm)
-    :ds_mon(dsm),ds_sv(dssv),ds_lop(dsl),ds_time(dst),ds_gv(dsgv) {};
-    void them_mon_hoc(giangvien c,Time d,subject e,string file_name);
-    void dang_ky_mon_hoc(sinhvien &a,couse *b);
+    // nghiepvu(list_couse dsl,list_sinhvien dssv,list_time dst,list_giangvien dsgv,list_subject dsm)
+    // :ds_mon(dsm),ds_sv(dssv),ds_lop(dsl),ds_time(dst),ds_gv(dsgv) {};
+    void them_mon_hoc(string ma_gv,string thoi_gian,string ten_mon,string file_name);
+    void dang_ky_mon_hoc(string id_sv,string ma_lop);
+    void nhap_du_lieu_tu_all_file();
+    void hienthi_ds_lop_hoc();
+    void hienthi_ds_sv();
+    void hienthi_ds_gv();
+    void hienthi_ds_mon_hoc();
+    void hienthi_ds_thoi_gian_hoc();
+    void hienthi_ds_phieu_dky();
 };

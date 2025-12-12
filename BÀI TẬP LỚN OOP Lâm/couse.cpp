@@ -61,6 +61,7 @@ bool couse::ktra_full(){
     }else return false;
 }
 void couse::nhap(giangvien gv_func,Time time_func,subject sub_func){
+    cur_sv = 0;
        gv = gv_func;
     time = time_func;
     mon_hoc = sub_func;
@@ -75,6 +76,7 @@ bool couse::nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subj
         mon_hoc = ds_sub.tim_mon_theo_ten(a[1]);
         // if(!mon_hoc) return false;
         max_sv = stoi(a[4]);
+        cur_sv = 0;
     return true;    
  }
  bool couse::xuat_du_lieu_file(string &line){

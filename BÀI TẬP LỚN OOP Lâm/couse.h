@@ -26,6 +26,7 @@ class couse{
         tusinhma();
     }
     couse(int max,giangvien a,Time b, subject c){
+        cur_sv = 0;
         gv = a;
         time = b;
         mon_hoc = c;
@@ -35,6 +36,9 @@ class couse{
     }
     int get_tin_chi()const{
         return mon_hoc.get_tin_chi();
+    }
+    string get_ma_mon_hoc()const{
+        return ma_mon_hoc;
     }
     virtual string get_data()const = 0;
     virtual string get_loai() const = 0; 
