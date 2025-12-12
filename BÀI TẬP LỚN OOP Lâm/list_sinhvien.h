@@ -12,7 +12,7 @@ public:
 	}
 	void nhapds();
 	void xuatds();
-	sinhvien tim_sinhvien_theo_id(string ma_sv);
+	sinhvien* tim_sinhvien_theo_id(string ma_sv);
 	bool lay_du_lieu_tu_file(string file_name);
 	void them_sinhvien();
 };

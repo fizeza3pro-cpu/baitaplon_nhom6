@@ -7,7 +7,7 @@
 using namespace std;
 class phieu_dang_ky{
     private:
-    sinhvien sv_dky;
+    sinhvien *sv_dky;
     couse *lop_dky;
     string thoi_gian_dky;
     public:
@@ -15,7 +15,7 @@ class phieu_dang_ky{
     {
         thoi_gian_dky = "";//lỗi gì gì đấy
     }
-    phieu_dang_ky(sinhvien a, couse *b){
+    phieu_dang_ky(sinhvien* a, couse *b){
         sv_dky = a;
         lop_dky = b;
         thoi_gian_dky = lay_tg_thuc();

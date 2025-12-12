@@ -58,11 +58,9 @@ void sinhvien::hienthithongtin() {
 }
 void sinhvien::nhap()
 {
-    cin.ignore();
     cout << "Nhap ma sinh vien: ";
     getline(cin, id);
     cout << "Nhap ho va ten: ";
-    cin.ignore();
     getline(cin, name);
     cout << "Nhap ngay thang nam sinh: \n";
     cout << "  Ngay: ";
@@ -117,8 +115,9 @@ bool sinhvien::nhap_du_lieu_tu_file(ifstream& f) {
     return true;
 }
 
-void sinhvien::ghi_vao_file(ofstream& f)
+void sinhvien::ghi_vao_file()
 {
+    ofstream f("D:/dulieusinhvien.txt", ios::app);  // ghi thêm cuối file
     f << id << "|" << name << "|" << gioi_tinh << "|"
         << chuyen_nganh << "|" << sdt << "|" << birth[0] << "|"
         << birth[1] << "|" << birth[2] << "|" << khoa << "|"

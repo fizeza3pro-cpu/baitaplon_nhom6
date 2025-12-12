@@ -55,6 +55,6 @@ public:
     bool add_couse(couse* mon);
     bool delete_couse(couse* mon);
     bool nhap_du_lieu_tu_file(ifstream& f);
-    void ghi_vao_file(ofstream& f);
+    void ghi_vao_file();
 
 };

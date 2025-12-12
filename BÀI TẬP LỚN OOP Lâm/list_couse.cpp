@@ -100,7 +100,7 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_time &ds_time,l
         return false;
     }else{
         while(getline(f,line)){
-         if(line.empty()) return false;
+         if(line.empty()) continue;
           for(char c : line){ 
             if(c == '|'){
                 a.push_back(temp); /* đoạn này tách chuỗi theo dấu '|' */

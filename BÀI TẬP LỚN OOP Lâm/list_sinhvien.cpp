@@ -14,15 +14,15 @@ void list_sinhvien::nhapds()
 		dssv[i].nhap();
 	}
 }
-//void list_sinhvien::xuatds()
-//{
-//	cout << "-------Thong tin sinh vien-------";
-//	for (int i = 0; i <dssv.size(); i++)
-//	{
-//		dssv[i].hienthithongtin();
-//		cout << "\n";
-//	}
-//}
+void list_sinhvien::xuatds()
+{
+	cout << "-------Thong tin sinh vien-------";
+	for (int i = 0; i <dssv.size(); i++)
+	{
+		dssv[i].hienthithongtin();
+		cout << "\n";
+	}
+}
 bool list_sinhvien::lay_du_lieu_tu_file(string file_name){
     ifstream f(file_name);
     if(!f.is_open()){
@@ -33,19 +33,19 @@ bool list_sinhvien::lay_du_lieu_tu_file(string file_name){
         while(sv_temp.nhap_du_lieu_tu_file(f)){
             dssv.push_back(sv_temp);
         }
-		return true;
     }
     f.close();
+	return true;
 }
-sinhvien list_sinhvien::tim_sinhvien_theo_id(string ma_sv){
+sinhvien * list_sinhvien::tim_sinhvien_theo_id(string ma_sv){
 	for(int i = 0;i<dssv.size();i++){
 		if(dssv[i].get_ma() == ma_sv){
-			return dssv[i];
+			return &dssv[i];
 		}
 	}
-	sinhvien sv_null;
-	return sv_null;
+ 	return nullptr;
 }
+// -------
 void list_sinhvien::them_sinhvien() {
     sinhvien sv;
     sv.nhap();
@@ -53,48 +53,48 @@ void list_sinhvien::them_sinhvien() {
     dssv.push_back(sv);
 
     ofstream f("D:/dulieusinhvien.txt", ios::app);  // ghi thêm cuối file
-    sv.ghi_vao_file(f);
+    sv.ghi_vao_file();
     f.close();
 }
 
 
-void list_sinhvien::xuatds()
-{
-    ifstream f("D:/dulieusinhvien.txt");
-    if (!f.is_open()) {
-        cout << "Không mở được file!\n";
-        return;
-    }
+// void list_sinhvien::xuatds()
+// {
+//     ifstream f("D:/dulieusinhvien.txt");
+//     if (!f.is_open()) {
+//         cout << "Không mở được file!\n";
+//         return;
+//     }
 
-    string line;
+//     string line;
 
-    while (getline(f, line))
-    {
-        vector<string> a;
-        string temp = "";
+//     while (getline(f, line))
+//     {
+//         vector<string> a;
+//         string temp = "";
 
-        for (char c : line)
-        {
-            if (c == '|') {
-                a.push_back(temp);
-                temp = "";
-            }
-            else temp += c;
-        }
-        a.push_back(temp); // phần cuối cùng
+//         for (char c : line)
+//         {
+//             if (c == '|') {
+//                 a.push_back(temp);
+//                 temp = "";
+//             }
+//             else temp += c;
+//         }
+//         a.push_back(temp); // phần cuối cùng
 
-        if (a.size() >= 11)
-        {
-            cout << a[0] << " | " << a[1] << " | " << a[2]
-                << " | " << a[3] << " | " << a[4] << " | "
-                << a[5] << "/" << a[6] << "/" << a[7]
-                << " | " << a[8] << " | " << a[9]
-                << " | " << a[10] << endl;
-        }
-    }
+//         if (a.size() >= 11)
+//         {
+//             cout << a[0] << " | " << a[1] << " | " << a[2]
+//                 << " | " << a[3] << " | " << a[4] << " | "
+//                 << a[5] << "/" << a[6] << "/" << a[7]
+//                 << " | " << a[8] << " | " << a[9]
+//                 << " | " << a[10] << endl;
+//         }
+//     }
 
-    f.close();
-}
+//     f.close();
+// }
 
 
     
