@@ -15,9 +15,8 @@ public:
         nha = "chua xac dinh";
         phong_hoc = "chua xac dinh";
     }
-    offline(int max,giangvien a,Time b, subject c,string k, string q) :
-        couse(max,a,b,c), nha(q), phong_hoc(k) {
-        // tusinhma();
+    offline(string u,subject*c,giangvien *a,int x,int y,int z,int p,string k,string q) :
+        couse(u,c,a,x,y,z,p), phong_hoc(k), nha(q) {
         loai = "OFFLINE";
     }
     string get_data()const {
@@ -26,9 +25,8 @@ public:
     string get_loai()const {
         return loai;
     }
-    void nhap(giangvien gv_func,Time time_func,subject sub_func);
+    bool nhap(giangvien* gv_func,subject* sub_func);
     void hienthi();
-    bool nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,vector<string>a);
     bool xuat_du_lieu_file(string &file_name);
     
 };

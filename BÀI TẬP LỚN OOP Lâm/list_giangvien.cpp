@@ -23,12 +23,11 @@ void list_giangvien::lay_du_lieu_tu_file(string file_name){
             cout<<"\n";
         }
 }
-giangvien list_giangvien::tim_giangvien_theo_id(string ma_gv){
+giangvien* list_giangvien::tim_giangvien_theo_id(string ma_gv){
     for(int i = 0;i<ds_gv.size();i++){
         if(ds_gv[i].get_id() == ma_gv){
-            return ds_gv[i];
+            return &ds_gv[i];
         }
     }
-    giangvien gv_null;
-    return gv_null;
+    return nullptr;
 }

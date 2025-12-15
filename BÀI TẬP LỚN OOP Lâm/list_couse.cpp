@@ -65,7 +65,7 @@ void list_couse::hienthidanhsach(){
 //     f.close();
 //     cout<<"them mon hoc thanh cong!";
 // } đoạn này ko lỡ xoá vì chức năng tìm kiếm tên gần đúng sau này có thể tham khảo lại
-void list_couse::nhap_test(giangvien &gv_func, Time &time_func, subject &sub_func,string file_name) {
+void list_couse::nhap_test(giangvien *gv_func, subject *sub_func,string file_name) {
     string chose;
     cout << "Nhap loai lop hoc muon dang (ON / OFF): ";
     getline(cin, chose);
@@ -83,14 +83,18 @@ void list_couse::nhap_test(giangvien &gv_func, Time &time_func, subject &sub_fun
         return;
     }
     // Gọi hàm nhập dữ liệu lớp học
-    newCourse->nhap(gv_func, time_func, sub_func);
-    newCourse ->xuat_du_lieu_file(file_name);
-
+    if(newCourse->nhap(gv_func, sub_func)){
+        cout<<"tao lop moi thanh cong!";
+        newCourse ->xuat_du_lieu_file(file_name);
     // Đưa vào danh sách
-    p.push_back(newCourse);
-    cout << "Them mon hoc thanh cong!\n";
+        p.push_back(newCourse);
+    }else{
+        newCourse = nullptr;
+        delete newCourse;
+        cout<<"tao lop moi that bai!";
+    }
 }
-bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,string file_name){
+bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub,string file_name){
     vector<string> a;
     string line;   
     string temp = "";
@@ -112,18 +116,26 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_time &ds_time,l
        a.push_back(temp);
        temp = "";
        couse *mon = nullptr;
-       if(a[0] == "online"){
-        mon = new online;
-        mon->nhap_du_lieu_file(ds_gv,ds_time,ds_sub,a);
-       }else if(a[0] == "offline"){
-        mon = new offline;
-        mon->nhap_du_lieu_file(ds_gv,ds_time,ds_sub,a);
+       giangvien *gv_temp = ds_gv.tim_giangvien_theo_id(a[3]);
+       subject *sub_temp = ds_sub.tim_mon_theo_ten(a[2]);
+       if(a[0] == "online" && a.size() == 9){
+        mon = new online(a[1],sub_temp,gv_temp,stoi(a[4]),stoi(a[5]),stoi(a[6]),stoi(a[7]),a[8]);
+       }else if(a[0] == "offline" && a.size() == 10){
+        mon = new offline(a[1],sub_temp,gv_temp,stoi(a[4]),stoi(a[5]),stoi(a[6]),stoi(a[7]),a[8],a[9]);
        }else{
         cout<<"loai lop hoc khong hop le!"<<endl;
         return false;
        }
-       p.push_back(mon);
-       a.clear();
+       if(!gv_temp->kra_trung_lich(mon->get_time())){
+            gv_temp->them_couse_da_day_id(mon->get_ma_lop_hoc());
+            sub_temp->add_ma_lop_hoc(mon->get_ma_lop_hoc());
+            couse::cap_nhat_id(a[1]);
+            p.push_back(mon);
+             a.clear();
+       }else{
+        cout<<"du lieu trong file co trung lich";
+        return false;
+       }
     }
 }
 f.close();
@@ -131,7 +143,7 @@ f.close();
 }
 couse* list_couse::tim_lop_theo_ma(string ma){
     for(int i = 0;i<p.size();i++){
-        if(p[i]->get_ma_mon_hoc() == ma){
+        if(p[i]->get_ma_lop_hoc() == ma){
             return p[i];
         }
     }

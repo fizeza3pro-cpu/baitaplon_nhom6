@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<vector>
+#include"time.h"
 #include<fstream>
 #include<string>
 using namespace std;
@@ -14,6 +15,7 @@ class giangvien{
     string sdt;
     string bo_mon;
     vector<string>couse_da_day;
+    vector<Time>lich_day;
     public:
     giangvien(string a0,string a , string b, string c, string d,string d2,int e, int f, int g){
         id = a0;
@@ -50,5 +52,6 @@ class giangvien{
     string get_name()const{
         return ten_giang_vien;
     }
+    bool kra_trung_lich(Time a);
    /*  get học vị các thứ phục vụ hiển thị về sau */
 };

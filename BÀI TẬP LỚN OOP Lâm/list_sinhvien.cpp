@@ -92,7 +92,6 @@ void list_sinhvien::them_sinhvien() {
 //                 << " | " << a[10] << endl;
 //         }
 //     }
-
 //     f.close();
 // }
 

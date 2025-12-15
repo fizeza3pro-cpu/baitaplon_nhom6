@@ -7,17 +7,15 @@ void online::hienthi(){
     couse::hienthi();
     cout<<"    "<<"Nen tang hoc: "<<nen_tang<<endl;
 }
-void online::nhap(giangvien gv_func,Time time_func,subject sub_func){
-    couse::nhap(gv_func, time_func, sub_func);
+bool online::nhap(giangvien* gv_func,subject* sub_func){
+    if(couse::nhap(gv_func, sub_func)){
     cout<<"nhap nan tang hoc truc tuyen: ";
     cin.ignore();
     getline(cin,nen_tang);
+    return true;
+    }
+    return false;
 }
- bool online::nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,vector<string>a){
-   couse::nhap_du_lieu_file(ds_gv,ds_time,ds_sub,a);
-        nen_tang = a[5];
-    return true;    
- }
   bool online::xuat_du_lieu_file(string &file_name){
     ofstream f(file_name,ios::app);
     if(!f.is_open()){

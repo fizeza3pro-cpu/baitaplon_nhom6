@@ -23,12 +23,11 @@ void list_subject::lay_du_lieu_tu_file(string file_name){
             cout<<"\n";
         }
 }
-subject list_subject::tim_mon_theo_ten(string ten_mon){
+subject* list_subject::tim_mon_theo_ten(string ten_mon){
     for(int i = 0;i<ds_mon.size();i++){
         if(ds_mon[i].get_ten() == ten_mon){
-            return ds_mon[i];
+            return &ds_mon[i];
         }
     }
-    subject mon_null;
-    return mon_null;
+    return nullptr;
 }

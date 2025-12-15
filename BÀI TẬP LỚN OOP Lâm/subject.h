@@ -9,6 +9,7 @@ class subject{
     string ten_mon_hoc;
     int so_tin_chi;
     int so_buoi;
+    vector<string>ma_lop_hoc;
     public:
     subject(string a,int b, int c){
         ten_mon_hoc = a;
@@ -28,5 +29,8 @@ class subject{
     }
     int get_tin_chi()const{
         return so_tin_chi;
+    }
+    void add_ma_lop_hoc(string a){
+        ma_lop_hoc.push_back(a);
     }
 };

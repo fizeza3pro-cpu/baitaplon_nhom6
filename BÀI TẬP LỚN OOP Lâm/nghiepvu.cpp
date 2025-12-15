@@ -1,12 +1,11 @@
 #include<iostream>
 #include"nghiepvu.h"
 using namespace std;
-void nghiepvu::them_mon_hoc(string ma_gv,string thoi_gian,string ten_mon,string file_name){
+void nghiepvu::them_mon_hoc(string ma_gv,string ten_mon,string file_name){
  /* truyền vào hàm có thể là mã gv,... nhưng truyền cả đối tượng cho trực quan */
-    giangvien c = ds_gv.tim_giangvien_theo_id(ma_gv);
-    Time d = ds_time.tim_kip_hoc_theo_tg(thoi_gian);
-    subject e = ds_mon.tim_mon_theo_ten(ten_mon);
-    ds_lop.nhap_test(c,d,e,file_name);
+    giangvien* c = ds_gv.tim_giangvien_theo_id(ma_gv);
+    subject *e = ds_mon.tim_mon_theo_ten(ten_mon);
+    ds_lop.nhap_test(c,e,file_name);
  /*    phải thêm mã  lơp shocj vào cho mon, giangvien vs time */
     
 }
@@ -42,5 +41,5 @@ void nghiepvu::hienthi_ds_phieu_dky(){
     }
 }
 void nghiepvu::nhap_du_lieu_cho_couse(){
-    ds_lop.nhap_du_lieu_tu_file(ds_gv,ds_time,ds_mon,"D:/dulieulophoc.txt");
+    ds_lop.nhap_du_lieu_tu_file(ds_gv,ds_mon,"D:/dulieulophoc.txt");
 }

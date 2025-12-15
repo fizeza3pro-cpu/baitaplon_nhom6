@@ -8,7 +8,7 @@ class list_couse{
     private:
     vector<couse*>p;
     public:
-    void nhap_test(giangvien &gv_func,Time &time_func,subject &sub_func,string file_name);
+    void nhap_test(giangvien *gv_func,subject *sub_func,string file_name);
     // void nhapdanhsach(string file_name);
     void hienthidanhsach();
     // bool timkiem_ten(string ten_mon);
@@ -18,7 +18,7 @@ class list_couse{
         return p[i];
     }
     couse* tim_lop_theo_ma(string ma);
-    bool nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,string file_name);
+    bool nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub,string file_name);
     void add_couse(couse *a){
         p.push_back(a);
     }

@@ -8,7 +8,7 @@ class list_subject{
     vector<subject>ds_mon;
     public:
     void xuatds();
-    subject tim_mon_theo_ten(string ten_mon);
+    subject* tim_mon_theo_ten(string ten_mon);
     void add_mon_hoc(subject a){
         ds_mon.push_back(a);
     }

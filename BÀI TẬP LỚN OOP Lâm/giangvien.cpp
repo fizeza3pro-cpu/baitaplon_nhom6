@@ -156,3 +156,12 @@ bool giangvien::nhap_du_lieu_tu_file(ifstream &f){
         birth[2] = stoi(a[8]);
     return true;
 }
+bool giangvien::kra_trung_lich(Time a){
+    for(auto i : lich_day){
+        if(i.ktra_trung_lich(a)){
+            return true;
+        }
+    }
+    lich_day.push_back(a);
+    return false;
+}

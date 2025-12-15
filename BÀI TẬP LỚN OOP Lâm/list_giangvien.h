@@ -8,7 +8,7 @@ class list_giangvien{
     vector<giangvien>ds_gv;
     public:
     void hienthids();
-    giangvien tim_giangvien_theo_id(string ma_gv);
+    giangvien* tim_giangvien_theo_id(string ma_gv);
     void lay_du_lieu_tu_file(string file_name);
     void add_giangvien(giangvien a){
         ds_gv.push_back(a);
