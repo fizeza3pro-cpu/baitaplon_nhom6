@@ -33,4 +33,5 @@ class subject{
     void add_ma_lop_hoc(string a){
         ma_lop_hoc.push_back(a);
     }
+    bool xoa_ma_lop_hoc(string ma_lop);
 };

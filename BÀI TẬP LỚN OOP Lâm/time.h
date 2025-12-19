@@ -40,4 +40,10 @@ class Time{
     int get_ket_thuc()const{
         return thoi_gian_ket_thuc;
     }
+    bool operator==(Time &a)const{
+        if(thu == a.thu && thoi_gian_bat_dau == a.thoi_gian_bat_dau && thoi_gian_ket_thuc == a.thoi_gian_ket_thuc){
+            return true;
+        }
+        return false;
+    }
 };

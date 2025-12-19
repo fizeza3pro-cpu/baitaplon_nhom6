@@ -85,6 +85,7 @@ void list_couse::nhap_test(giangvien *gv_func, subject *sub_func,string file_nam
     // Gọi hàm nhập dữ liệu lớp học
     if(newCourse->nhap(gv_func, sub_func)){
         cout<<"tao lop moi thanh cong!";
+        
         newCourse ->xuat_du_lieu_file(file_name);
     // Đưa vào danh sách
         p.push_back(newCourse);
@@ -98,6 +99,7 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub
     vector<string> a;
     string line;   
     string temp = "";
+    int dem = 0;
     ifstream f(file_name);
     if(!f.is_open()){  
         cout<<"ko mo dc file!"<<endl;
@@ -114,7 +116,12 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub
             }
         }
        a.push_back(temp);
-       temp = "";
+       temp = ""; 
+       if(!check_id_hop_le(a[1])){
+        cout<<"ma lop hoc khong hop le, bo qua lop hoc thu  "<<dem+1<<"!"<<endl;
+        a.clear();
+        continue;
+       }
        couse *mon = nullptr;
        giangvien *gv_temp = ds_gv.tim_giangvien_theo_id(a[3]);
        subject *sub_temp = ds_sub.tim_mon_theo_ten(a[2]);
@@ -124,20 +131,23 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub
         mon = new offline(a[1],sub_temp,gv_temp,stoi(a[4]),stoi(a[5]),stoi(a[6]),stoi(a[7]),a[8],a[9]);
        }else{
         cout<<"loai lop hoc khong hop le!"<<endl;
-        return false;
+        continue;
        }
        if(!gv_temp->kra_trung_lich(mon->get_time())){
             gv_temp->them_couse_da_day_id(mon->get_ma_lop_hoc());
             sub_temp->add_ma_lop_hoc(mon->get_ma_lop_hoc());
             couse::cap_nhat_id(a[1]);
             p.push_back(mon);
+            dem++;
              a.clear();
        }else{
-        cout<<"du lieu trong file co trung lich";
-        return false;
+        cout<<"du lieu trong file co trung lich, bo qua lop hoc"<<endl;
+        a.clear();
+        continue;
        }
     }
 }
+cout<<"da nhap thanh cong "<<dem+1<<" lop hoc!"<<endl;
 f.close();
     return true;
 }
@@ -148,6 +158,61 @@ couse* list_couse::tim_lop_theo_ma(string ma){
         }
     }
     return nullptr;
+}
+bool list_couse::check_id_hop_le(string id){
+    if(id.length() != 6) return false;
+    if(id.substr(0,3) != "MTA") return false;
+    for(int i =3;i<6;i++){
+        if(id[i]<'0' || id[i]>'9'){
+            return false;
+        }
+    }
+    return true;
+}
+void list_couse::xuat_du_lieu_ra_file(string file_name){
+    ofstream f(file_name);
+        if(!f.is_open()){
+            cout<<"ko mo dc file"<<endl;
+        }else{
+            for(int j = 0;j<p.size();j++){
+                p[j]->xuat_du_lieu_file(file_name);
+            }
+        }
+    f.close();
+}
+bool list_couse::delete_lop_hoc(string ma_lop,string file_name){
+    for(int i = 0;i<p.size();i++){
+        if(p[i]->get_ma_lop_hoc() == ma_lop){
+            // giangvien *x = p[i]->get_gv();
+            // if(x->check_lop_dang_day(ma_lop)){
+            //     cout<<"ko the xoa lop hoc vi giang vien dang day lop nay!"<<endl;
+            //     return false;
+            // }
+            if(p[i]->get_cur_sv() != 0){
+                cout<<"ko the xoa lop hoc vi da co sinh vien dang ky!"<<endl;
+                return false;
+            }
+            delete p[i];
+            p.erase(p.begin() + i);
+            cout<<"xoa lop hoc khoi danh sach thanh cong!"<<endl;
+            subject *y = p[i]->get_mon_hoc();
+            if(!y->xoa_ma_lop_hoc(ma_lop)){
+                cout<<"xoa ma lop hoc khoi mon hoc that bai!"<<endl;
+                return false;
+            }
+            giangvien *x = p[i]->get_gv();
+            if(!x->xoa_couse_da_day_id(ma_lop)){
+                cout<<"xoa lop hoc khoi giang vien that bai!"<<endl;
+                return false;
+            }
+            // Cập nhật lại file sau khi xóa
+           xuat_du_lieu_ra_file(file_name);
+            cout<<"cap nhat file sau xoa lop hoc thanh cong!"<<endl;
+            return true;
+        }
+    }
+    cout<<"ko tim thay lop hoc de xoa!"<<endl;
+    return false;
 }
 
     

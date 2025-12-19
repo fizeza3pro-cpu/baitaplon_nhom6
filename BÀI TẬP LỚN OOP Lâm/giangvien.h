@@ -46,6 +46,15 @@ class giangvien{
     void them_couse_da_day_id(string ma_couse){
         couse_da_day.push_back(ma_couse);
     }
+    bool xoa_couse_da_day_id(string ma_lop);
+    bool check_lop_dang_day(string ma_lop){
+        for(int i = 0;i<couse_da_day.size();i++){
+            if(couse_da_day[i] == ma_lop){
+                return true;
+            }
+        }
+        return false;
+    }
     string get_id()const{
         return id;
     }
@@ -53,5 +62,9 @@ class giangvien{
         return ten_giang_vien;
     }
     bool kra_trung_lich(Time a);
+    void them_lich_day(Time a){
+        lich_day.push_back(a);
+    }
+    void xoa_lich_day(Time a);
    /*  get học vị các thứ phục vụ hiển thị về sau */
 };

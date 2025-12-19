@@ -36,12 +36,16 @@ bool couse::ktra_full(){
 bool couse::nhap(giangvien *gv_func,subject *sub_func){
     time.nhap();
     if(!gv_func->kra_trung_lich(time)){
+        cout<<"nhap so luong sinh vien toi da: ";
+        cin>>max_sv;
+        cout<<"nhap lich hoc cu the: "<<endl;
+        time.nhap();
          cur_sv = 0;
         gv = gv_func;
         gv->them_couse_da_day_id(ma_lop_hoc);
+        gv->them_lich_day(time);
         mon_hoc = sub_func;
-        cout<<"nhap so luong sinh vien toi da: ";
-        cin>>max_sv;
+        mon_hoc->add_ma_lop_hoc(ma_lop_hoc);
         return true;
     }else{
         cout<<"giang vien da trung lich";

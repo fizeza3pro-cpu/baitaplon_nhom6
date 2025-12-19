@@ -31,6 +31,7 @@ class couse{
         mon_hoc = c;
         max_sv = p;
     }
+    // ------------getter------------
     int get_tin_chi()const{
         return mon_hoc->get_tin_chi();
     }
@@ -40,12 +41,33 @@ class couse{
     Time get_time(){
         return time;
     }
-    bool check_id_hop_le();
+    giangvien* get_gv()const{
+        return gv;
+    }
+    subject* get_mon_hoc()const{
+        return mon_hoc;
+    }
+    int get_cur_sv()const{
+        return cur_sv;
+    }
+    // -------------setter-------------
+    void set_giangvien(giangvien *new_gv){
+        this->gv = new_gv;
+    }
+    void set_mon(subject *new_sub){
+        this->mon_hoc = new_sub;
+    }
+    void set_time(Time new_time){
+        this->time = new_time;
+    }
+    void set_max_sv(int new_max_sv){
+        this->max_sv = new_max_sv;
+    }
+
     static void cap_nhat_id(string id);
     virtual string get_data()const = 0;
     virtual string get_loai() const = 0; 
     virtual bool nhap(giangvien* gv_func,subject* sub_func) = 0;    
-    // virtual bool nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,vector<string>a) = 0;  
     virtual bool xuat_du_lieu_file(string &line) = 0;  
     virtual void hienthi() = 0;    
     bool ktra_full();

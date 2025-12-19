@@ -37,3 +37,13 @@ bool subject::nhap_du_lieu_tu_file(ifstream &f){
         so_buoi = stoi(a[2]);
     return true;
 }
+bool subject::xoa_ma_lop_hoc(string ma_lop){
+    for(int i = 0;i<ma_lop_hoc.size();i++){
+        if(ma_lop_hoc[i] == ma_lop){
+            ma_lop_hoc.erase(ma_lop_hoc.begin()+i);
+            cout<<"da xoa ma lop hoc "<<ma_lop<<" khoi danh sach lop hoc cua mon "<<ten_mon_hoc<<endl;
+            return true;
+        }
+    }
+    return false;
+}
