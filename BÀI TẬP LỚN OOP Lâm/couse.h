@@ -67,9 +67,9 @@ class couse{
     static void cap_nhat_id(string id);
     virtual string get_data()const = 0;
     virtual string get_loai() const = 0; 
-    virtual bool nhap(giangvien* gv_func,subject* sub_func) = 0;    
-    virtual bool xuat_du_lieu_file(string &line) = 0;  
-    virtual void hienthi() = 0;    
+    virtual bool nhap(giangvien* gv_func,subject* sub_func);    
+    virtual bool xuat_du_lieu_file(string &line);  
+    virtual void hienthi();    
     bool ktra_full();
     bool tang_sv();
     bool giam_sv();

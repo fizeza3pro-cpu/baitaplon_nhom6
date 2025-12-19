@@ -35,6 +35,9 @@ void nghiepvu::dang_ky_mon_hoc(string id_sv,string ma_lop){
         cout<<"dang ky mon hoc khong thanh cong!"<<endl;
     }   
 }
+void nghiepvu::huy_dang_ky_mon_hoc(string id_sv,string ma_lop){
+    
+}
 void nghiepvu::hienthi_ds_phieu_dky(){
     cout<<"-------Danh sach phieu dang ky-------"<<endl;
     for(int i = 0;i<ds_phieu_dky.size();i++){
@@ -150,7 +153,7 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop,string file_name){
         }
 
     }
-}
     ds_lop.xuat_du_lieu_ra_file(file_name);
     cout<<"cap nhat du lieu vao file thanh cong"<<endl;
+}
 }

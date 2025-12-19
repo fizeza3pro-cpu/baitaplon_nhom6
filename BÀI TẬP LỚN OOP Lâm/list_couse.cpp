@@ -183,18 +183,10 @@ void list_couse::xuat_du_lieu_ra_file(string file_name){
 bool list_couse::delete_lop_hoc(string ma_lop,string file_name){
     for(int i = 0;i<p.size();i++){
         if(p[i]->get_ma_lop_hoc() == ma_lop){
-            // giangvien *x = p[i]->get_gv();
-            // if(x->check_lop_dang_day(ma_lop)){
-            //     cout<<"ko the xoa lop hoc vi giang vien dang day lop nay!"<<endl;
-            //     return false;
-            // }
             if(p[i]->get_cur_sv() != 0){
                 cout<<"ko the xoa lop hoc vi da co sinh vien dang ky!"<<endl;
                 return false;
             }
-            delete p[i];
-            p.erase(p.begin() + i);
-            cout<<"xoa lop hoc khoi danh sach thanh cong!"<<endl;
             subject *y = p[i]->get_mon_hoc();
             if(!y->xoa_ma_lop_hoc(ma_lop)){
                 cout<<"xoa ma lop hoc khoi mon hoc that bai!"<<endl;
@@ -205,6 +197,9 @@ bool list_couse::delete_lop_hoc(string ma_lop,string file_name){
                 cout<<"xoa lop hoc khoi giang vien that bai!"<<endl;
                 return false;
             }
+            delete p[i];
+            p.erase(p.begin() + i);
+            cout<<"xoa lop hoc khoi danh sach thanh cong!"<<endl;
             // Cập nhật lại file sau khi xóa
            xuat_du_lieu_ra_file(file_name);
             cout<<"cap nhat file sau xoa lop hoc thanh cong!"<<endl;

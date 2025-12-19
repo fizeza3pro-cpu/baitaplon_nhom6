@@ -23,7 +23,7 @@ bool couse::tang_sv(){
     }else return false;
 }
 bool couse::giam_sv(){
-    if(cur_sv<max_sv){
+    if(cur_sv>0){
         cur_sv--;
         return true;
     }else return false;
@@ -39,7 +39,6 @@ bool couse::nhap(giangvien *gv_func,subject *sub_func){
         cout<<"nhap so luong sinh vien toi da: ";
         cin>>max_sv;
         cout<<"nhap lich hoc cu the: "<<endl;
-        time.nhap();
          cur_sv = 0;
         gv = gv_func;
         gv->them_couse_da_day_id(ma_lop_hoc);

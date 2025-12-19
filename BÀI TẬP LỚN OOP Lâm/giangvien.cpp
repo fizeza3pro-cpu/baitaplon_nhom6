@@ -78,7 +78,6 @@ void giangvien::nhapthongtin(){
         cin.ignore();  // Xóa bộ đệm
         cout<<"nhap hoc vi giang vien: ";
         getline(cin,hoc_vi);
-        cin.ignore();
           while (true) {
             cout << "\nNhap so dien thoai (10-11 so): ";
             getline(cin, sdt);
