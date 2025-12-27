@@ -5,6 +5,7 @@
 #include"list_giangvien.h"
 #include"list_subject.h"
 #include"phieu_dang_ky.h"
+#include"UI.h"
 using namespace std;
 class nghiepvu{
     private:

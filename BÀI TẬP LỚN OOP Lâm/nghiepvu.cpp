@@ -4,9 +4,15 @@ using namespace std;
 void nghiepvu::them_mon_hoc(string ma_gv,string ten_mon,string file_name){
  /* truyền vào hàm có thể là mã gv,... nhưng truyền cả đối tượng cho trực quan */
     giangvien* c = ds_gv.tim_giangvien_theo_id(ma_gv);
-    if(c == nullptr) cout<<"ko tim thay giang vien"<<endl;
+    if(c == nullptr){
+         cout<<"ko tim thay giang vien"<<endl;
+         return;
+    }
     subject *e = ds_mon.tim_mon_theo_ten(ten_mon);
-    if(e == nullptr) cout<<"ko tim thay mon hoc"<<endl;
+    if(e == nullptr){
+         cout<<"ko tim thay mon hoc"<<endl;
+         return;
+    }
     ds_lop.nhap_test(c,e,file_name);
  /*    phải thêm mã  lơp shocj vào cho mon, giangvien vs time */
     
@@ -30,10 +36,13 @@ void nghiepvu::dang_ky_lop_hoc(string id_sv,string ma_lop){
         b->tang_sv();
         phieu_dang_ky temp(a,b);
         ds_phieu_dky.push_back(temp);
+        doi_mau_full(2);
         cout<<"dang ky mon hoc thanh cong!"<<endl;
     }else{
+        doi_mau_full(4);
         cout<<"dang ky mon hoc khong thanh cong!"<<endl;
     }   
+    doi_mau_full(7);
 }
 void nghiepvu::huy_dang_ky_lop_hoc(string id_sv,string ma_lop){
      sinhvien * a = ds_sv.tim_sinhvien_theo_id(id_sv);
@@ -111,6 +120,7 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop,string file_name){
             break;
         case 2:
         {
+        cin.ignore();
         if(lop->get_cur_sv() != 0 ){
             cout<<"lop da co nguoi dang ky, ko the thay doi mon hoc!";
         }else{

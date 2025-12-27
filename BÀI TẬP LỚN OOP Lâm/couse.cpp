@@ -1,7 +1,6 @@
 #include<iostream>
 #include<string>
 #include"couse.h"
-#include"UI.h"
 using namespace std;
 int couse::sl = 0;
 void couse::tusinhma(){
@@ -39,7 +38,6 @@ bool couse::nhap(giangvien *gv_func,subject *sub_func){
     if(!gv_func->kra_trung_lich(time)){
         cout<<"nhap so luong sinh vien toi da: ";
         cin>>max_sv;
-        cout<<"nhap lich hoc cu the: "<<endl;
          cur_sv = 0;
         gv = gv_func;
         gv->them_couse_da_day_id(ma_lop_hoc);

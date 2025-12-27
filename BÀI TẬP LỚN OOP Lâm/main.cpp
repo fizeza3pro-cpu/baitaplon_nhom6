@@ -1,6 +1,6 @@
 #include<iostream>
 #include<string>
-#include"UI.h"
+// #include"UI.h"
 #include<fstream>
 #include"nghiepvu.h"
 #include<stdlib.h>
@@ -14,13 +14,15 @@ int main() {
     gv.lay_du_lieu_tu_file("D:/dulieugiangvien.txt");
     mon.lay_du_lieu_tu_file("D:/dulieumonhoc.txt");
     sv.lay_du_lieu_tu_file("D:/dulieusinhvien.txt");
-    loading();
+    // loading();
     nghiepvu nv(lop,sv,gv,mon);
     nv.nhap_du_lieu_cho_couse("D:/dulieulophoc.txt");
     cin.get();
     while(1){
     system("cls");
+    // doi_mau_full(6);
     drawTitle();
+    // doi_mau_full(7);
     cout<<"1.hien thi danh sach mon hoc"<<endl;
     cout<<"2.Dang ky lop hoc"<<endl;
     cout<<"3.Huy dang ky lop hoc"<<endl;
@@ -78,6 +80,7 @@ int main() {
       cout<<"nhap ten mon hoc:  ";
       getline(cin,ten_sub);
       nv.them_mon_hoc(magv,ten_sub,"D:/dulieulophoc.txt");
+      cin.ignore();
       cin.get();
     }
       break;
@@ -103,6 +106,7 @@ int main() {
       string ma_lop;
       cout<<"nhap ma lop muon sua: ";
       getline(cin,ma_lop);
+      cin.ignore();
       nv.thaydoithongtin_couse(ma_lop,"D:/dulieulophoc.txt");
       cin.get();
     }
