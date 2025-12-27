@@ -11,7 +11,7 @@ void nghiepvu::them_mon_hoc(string ma_gv,string ten_mon,string file_name){
  /*    phải thêm mã  lơp shocj vào cho mon, giangvien vs time */
     
 }
-void nghiepvu::dang_ky_mon_hoc(string id_sv,string ma_lop){
+void nghiepvu::dang_ky_lop_hoc(string id_sv,string ma_lop){
     sinhvien * a = ds_sv.tim_sinhvien_theo_id(id_sv);
      if(a == nullptr){
         cout << "Khong tim thay sinh vien!" << endl;
@@ -35,8 +35,28 @@ void nghiepvu::dang_ky_mon_hoc(string id_sv,string ma_lop){
         cout<<"dang ky mon hoc khong thanh cong!"<<endl;
     }   
 }
-void nghiepvu::huy_dang_ky_mon_hoc(string id_sv,string ma_lop){
-    
+void nghiepvu::huy_dang_ky_lop_hoc(string id_sv,string ma_lop){
+     sinhvien * a = ds_sv.tim_sinhvien_theo_id(id_sv);
+     if(a == nullptr){
+        cout << "Khong tim thay sinh vien!" << endl;
+        return;
+    }
+    couse *b = ds_lop.tim_lop_theo_ma(ma_lop);
+      if(b == nullptr){
+        cout << "Khong tim thay lop hoc!" << endl;
+        return;
+    }
+    for(int i = 0;i<ds_phieu_dky.size();i++){
+        if(ds_phieu_dky[i].checkphieu(a,b)){
+            if(a->delete_couse(b)){
+                ds_phieu_dky.erase(ds_phieu_dky.begin() + i);
+                b->giam_sv();
+                cout<<"huy dang ky thanh cong!";
+            }
+        }else{
+            cout<<"sinh vien chua dang ky lop nay!";
+        }
+    }
 }
 void nghiepvu::hienthi_ds_phieu_dky(){
     cout<<"-------Danh sach phieu dang ky-------"<<endl;

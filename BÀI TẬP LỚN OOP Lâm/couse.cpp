@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string>
 #include"couse.h"
+#include"UI.h"
 using namespace std;
 int couse::sl = 0;
 void couse::tusinhma(){

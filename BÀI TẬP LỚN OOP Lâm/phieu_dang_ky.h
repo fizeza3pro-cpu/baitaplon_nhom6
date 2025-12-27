@@ -24,4 +24,5 @@ class phieu_dang_ky{
     void hien_thi_phieu_dky();
     string lay_tg_thuc();
     string to_string2(int x);
+    bool checkphieu(sinhvien* a, couse *b);
 };

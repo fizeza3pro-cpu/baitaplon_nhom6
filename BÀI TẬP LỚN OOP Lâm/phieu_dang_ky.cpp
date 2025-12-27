@@ -20,8 +20,12 @@ string phieu_dang_ky::lay_tg_thuc(){
     return thoi_gian;
 }
 void phieu_dang_ky::hien_thi_phieu_dky(){
-    cout<<"-----PHIEU DANG KY MON HOC-----"<<endl;
-    cout<<"Sinh vien: "<<sv_dky->get_name()<<"\t\t"<<"Thoi gian dang ky: "<<thoi_gian_dky<<endl;
-    cout<<"lop dang ky: "<<endl;
-    lop_dky ->hienthi();
+    cout<<"Masinhvien: "<<sv_dky->get_ma()<<"\t"<<"Ho va ten: "<<sv_dky->get_name()<<"\t"<<"Lop dang ky: "<<"["<<lop_dky->get_ma_lop_hoc()<<"]"<<lop_dky->get_mon_hoc()->get_ten()<<endl;
+   cout<<"Thoi gian dang ky: "<<thoi_gian_dky<<endl;
+}
+bool phieu_dang_ky::checkphieu(sinhvien* a, couse *b){
+    if(sv_dky == a &&lop_dky == b){
+        return true;
+    }
+    return false;
 }
