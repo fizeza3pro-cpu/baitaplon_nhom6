@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string>
 #include"subject.h"
+#include"UI.h"
 using namespace std;
 void subject::nhap(){
     cout<<"nhap ten mon hoc: ";

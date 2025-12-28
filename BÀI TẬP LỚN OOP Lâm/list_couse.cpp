@@ -1,34 +1,35 @@
 #include<iostream>
 #include<fstream>
 #include"list_couse.h"
+#include"UI.h"
 #include<string>
 using namespace std;
 void list_couse::hienthidanhsach(){
-    cout<<"--------------DANH SACH TEST---------------"<<endl;
+    cout<<" ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ DANH SÁCH TEST ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦"<<endl;
     for(int i = 0;i<p.size();i++){
         p[i] ->hienthi();
         cout<<"\n";
     }
 }
-// bool list_couse::timkiem_ten(string ten_mon){
-//     int dem = 0;
-//     string ten_mon_upper = ten_mon;
-//     ten_mon_upper[0] = toupper(ten_mon_upper[0]);
-//     for(int i = 0;i<cnt;i++){
-//         if(p[i]->getten_mon_hoc().find(ten_mon_upper) != string::npos||
-//         p[i]->getten_mon_hoc().find(ten_mon) != string::npos){
-//         p[i] ->hienthi();
-//         dem++;
-//         }
-//     }
-//     if(dem == 0){
-//         cout<<"ko tim thay ket qua!"<<endl;
-//         return false;
-//     }else{
-//     cout<<"tim thay tat ca "<<dem<<" mon hoc!"<<endl;
-//     return true;
-//     }
-// }
+bool list_couse::timkiem_ten(string ten_mon){
+    int dem = 0;
+    string ten_mon_upper = ten_mon;
+    ten_mon_upper[0] = toupper(ten_mon_upper[0]);
+    for(int i = 0;i<p.size();i++){
+        if(p[i]->get_mon_hoc()->get_ten().find(ten_mon_upper) != string::npos||
+        p[i]->get_mon_hoc()->get_ten().find(ten_mon) != string::npos){
+        p[i] ->hienthi();
+        dem++;
+        }
+    }
+    if(dem == 0){
+        cout<<"ko tim thay ket qua!"<<endl;
+        return false;
+    }else{
+    cout<<"tim thay tat ca "<<dem<<" mon hoc!"<<endl;
+    return true;
+    }
+}
 // void list_couse::nhapdanhsach(string file_name){
 //     string chose;
 //     string line;
@@ -79,12 +80,16 @@ void list_couse::nhap_test(giangvien *gv_func, subject *sub_func,string file_nam
         newCourse = new offline;
     }
     else {
+        UI::doi_mau_full(4);
         cout << "Loi nhap lieu, vui long chon dung!\n";
+        UI::doi_mau_full(7);
         return;
     }
     // Gọi hàm nhập dữ liệu lớp học
     if(newCourse->nhap(gv_func, sub_func)){
+        UI::doi_mau_full(2);
         cout<<"tao lop moi thanh cong!";
+        UI::doi_mau_full(7);
         
         newCourse ->xuat_du_lieu_file(file_name);
     // Đưa vào danh sách
@@ -92,7 +97,9 @@ void list_couse::nhap_test(giangvien *gv_func, subject *sub_func,string file_nam
     }else{
         newCourse = nullptr;
         delete newCourse;
+        UI::doi_mau_full(4);
         cout<<"tao lop moi that bai!";
+        UI::doi_mau_full(7);
     }
 }
 bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub,string file_name){
@@ -147,10 +154,13 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub
        }
     }
 }
+UI::doi_mau_full(2);
 cout<<"da nhap thanh cong "<<dem+1<<" lop hoc!"<<endl;
+UI::doi_mau_full(7);
 f.close();
     return true;
 }
+
 couse* list_couse::tim_lop_theo_ma(string ma){
     for(int i = 0;i<p.size();i++){
         if(p[i]->get_ma_lop_hoc() == ma){
@@ -159,6 +169,7 @@ couse* list_couse::tim_lop_theo_ma(string ma){
     }
     return nullptr;
 }
+
 bool list_couse::check_id_hop_le(string id){
     if(id.length() != 6) return false;
     if(id.substr(0,3) != "MTA") return false;
@@ -169,6 +180,7 @@ bool list_couse::check_id_hop_le(string id){
     }
     return true;
 }
+
 void list_couse::xuat_du_lieu_ra_file(string file_name){
     ofstream f(file_name);
         if(!f.is_open()){
@@ -180,10 +192,12 @@ void list_couse::xuat_du_lieu_ra_file(string file_name){
         }
     f.close();
 }
+
 bool list_couse::delete_lop_hoc(string ma_lop,string file_name){
     for(int i = 0;i<p.size();i++){
         if(p[i]->get_ma_lop_hoc() == ma_lop){
             if(p[i]->get_cur_sv() != 0){
+
                 cout<<"ko the xoa lop hoc vi da co sinh vien dang ky!"<<endl;
                 return false;
             }

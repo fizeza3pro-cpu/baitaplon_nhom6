@@ -1,12 +1,19 @@
 #include<iostream>
 #include<string>
 #include<fstream>
+#include"UI.h"
 #include"offline.h"
 using namespace std;
 void offline::hienthi(){
-    cout<<"---[OFFLINE]------"<<endl;
+    int width = 58;
+    cout << "  ╭──────────────────────────────────────────────────────────╮" << endl;
+    UI::doi_mau_full(14);
+    // cout << "  │"<<left<< setw(width)<<"OFFLINE" << "│" << endl;
+    cout << "  │" << setw(26) << "" << "OFFINE" << setw(26) << "" << "│" << endl;
+    UI::doi_mau_full(7);
     couse::hienthi();
-    cout<<"    Dia diem: phong "<<phong_hoc<<"-"<<nha<<endl;
+    cout << "  │"<<left<< setw(width + 5)<<(" Địa điểm: "+phong_hoc+"-"+nha)<< " │" << endl;
+      cout << "  ╰──────────────────────────────────────────────────────────╯" << endl;
 }
 bool offline::nhap(giangvien* gv_func,subject* sub_func){
      if(couse::nhap(gv_func, sub_func)){

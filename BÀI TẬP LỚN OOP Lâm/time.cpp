@@ -1,8 +1,7 @@
 // #pragma once
 #include<iostream>
-#include<vector>
+#include"UI.h"
 #include<string>
-#include<fstream>
 #include"time.h"
 using namespace std;
 void Time::nhap(){
@@ -14,6 +13,8 @@ void Time::nhap(){
     cin>>thoi_gian_ket_thuc;
 }
 void Time::hienthithongtin(){
-    cout<<"thoi gian hoc trong tuan: thu"<<thu;
-    cout<<" Thoi gian hoc: tu "<<thoi_gian_bat_dau<<"h den "<<thoi_gian_ket_thuc<<"h";
+    cout<<"Thứ: "<<thu<<" ("<<thoi_gian_bat_dau<<"h00 - "<<thoi_gian_ket_thuc<<"h00)";
+}
+string Time::hienthithongtin_string(){
+    return "Thứ "+to_string(thu) + " (" + to_string(thoi_gian_bat_dau) + "h00-" + to_string(thoi_gian_ket_thuc) + "h00)";
 }

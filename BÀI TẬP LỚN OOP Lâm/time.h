@@ -31,6 +31,7 @@ class Time{
         return true;
     }
     void hienthithongtin();
+    string hienthithongtin_string();
     int get_thu()const{
         return thu;
     }

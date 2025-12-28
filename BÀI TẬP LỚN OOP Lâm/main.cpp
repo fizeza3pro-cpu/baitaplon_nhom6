@@ -1,12 +1,12 @@
 #include<iostream>
 #include<string>
-// #include"UI.h"
+#include"UI.h"
 #include<fstream>
 #include"nghiepvu.h"
 #include<stdlib.h>
 using namespace std;
 int main() {
-    // SetConsoleOutputCP(65001);
+    UI::chuanhoa(65001);
     list_sinhvien sv;
     list_giangvien gv;
     list_subject mon;
@@ -20,16 +20,17 @@ int main() {
     cin.get();
     while(1){
     system("cls");
-    // doi_mau_full(6);
-    drawTitle();
-    // doi_mau_full(7);
-    cout<<"1.hien thi danh sach mon hoc"<<endl;
-    cout<<"2.Dang ky lop hoc"<<endl;
+    UI::doi_mau_full(6);
+    UI::drawTitle();
+    UI::doi_mau_full(7);
+    cout<<"𝟙.hiển thị danh sách lớp học"<<endl;
+    cout<<"𝟚.Dang ky lop hoc"<<endl;
     cout<<"3.Huy dang ky lop hoc"<<endl;
     cout<<"4.Tao lop hoc moi"<<endl;
     cout<<"5.Xoa lop hoc"<<endl;
     cout<<"6.Sua thong tin lop hoc"<<endl;
     cout<<"7.Lich su dang ky lop hoc"<<endl;
+    cout<<"8.Tìm kiếm lớp học"<<endl;
     cout<<"Nhap lua chon cua ban: ";
     int chose;
     cin>>chose;
@@ -66,8 +67,6 @@ int main() {
       getline(cin,ma_lop);
       nv.huy_dang_ky_lop_hoc(masv,ma_lop);
       cin.get();
-
-
     }
       break;
     case 4:
@@ -117,16 +116,28 @@ int main() {
       nv.hienthi_ds_phieu_dky();
       cin.ignore();
       cin.get();
+      break;
+    }
+    case 8:
+    {
+      system("cls");
+      string temp;
+      cout<<"nhập vào :";
+      cin.ignore();
+      getline(cin,temp);
+      if(lop.timkiem_ten(temp)){
+        UI::doi_mau_full(2);
+        cout<<"tìm kiếm thành công";
+      }else{
+        UI::doi_mau_full(4);
+        cout<<"ko có kết quả";
+      }
+      UI::doi_mau_full(7);
+      cin.get();
     }
       break;
-    
     default:
       break;
     }
 }
 }
-      
-
-
-
-
