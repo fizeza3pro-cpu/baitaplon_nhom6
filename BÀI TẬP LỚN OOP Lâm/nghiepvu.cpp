@@ -200,7 +200,7 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop,string file_name){
 
 void nghiepvu::tim_kiem_lop_hoc(){
        cout<<"╭───────────────────────TÌM KIẾM LỚP HỌC────────────────────╮"<<endl;
-       cout<<"│"<<setw(62)<<"│"<<endl;
+       cout<<"│"<<""<<setw(59)<<""<<"│"<<endl;
        cout<<"│"<<setw(6)<<""<<"1.Tìm kiếm lớp học theo môn học"<<setw(22)<<""<<"│"<<endl;
        cout<<"│"<<setw(6)<<""<<"2.Tìm kiếm lớp học theo mã lớp học"<<setw(19)<<""<<"│"<<endl;
        cout<<"│"<<setw(6)<<""<<"3.Tìm kiếm lớp học theo tên giảng viên"<<setw(15)<<""<<"│"<<endl;
@@ -210,10 +210,33 @@ void nghiepvu::tim_kiem_lop_hoc(){
        UI::gotoxy(30,6);
        int temp;
        cin>>temp;
+       if (cin.fail()) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout<<"Nhập không hợp lệ!";
+        }
        switch (temp)
        {
        case 1:
+       {
+        system("cls");
+        string temp;
+        cout<<"Nhập vào tên môn học: "<<endl;
+        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout<<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
+        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        UI::gotoxy(10,2);
+        cin.ignore();
+        getline(cin,temp);
+        system("cls");
+        UI::doi_mau_full(10);
+        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout<<"  │"<<left<<setw(58 + UI::getUTF8LenDiff(temp))<<("⌕ " + temp)<<"│"<<endl;
+        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        UI::doi_mau_full(7);
+        ds_lop.timkiem_ten(temp);
         break;
+       }
        case 2:
         break;
        case 3:
@@ -223,7 +246,35 @@ void nghiepvu::tim_kiem_lop_hoc(){
         cout<<"Nhập vào mã giảng viên: ";
         cin.ignore();
         getline(cin,temp);
-        hien_thi_lop_hoc_cua_gv(temp);
+        system("cls");
+         giangvien *gv_temp = ds_gv.tim_giangvien_theo_id(temp);
+        if(gv_temp == nullptr){
+        cout<<"Không tồn tại giảng viên";
+        return;
+        }
+        string hocvi;
+        if(gv_temp ->get_hoc_vi() == "Tiến Sĩ"){
+            hocvi = "TS";
+        }else if(gv_temp ->get_hoc_vi() == "Giáo Sư"){
+            hocvi ="GS";
+        }else if(gv_temp ->get_hoc_vi() == "Phó Giáo Sư"){
+            hocvi ="PGS";
+        }else if (gv_temp ->get_hoc_vi() == "Thạc Sĩ"){
+            hocvi = "ThS";
+        }else hocvi = "";
+        UI::doi_mau_full(13);
+        cout<<"╭──────────────────────────────────────────────────────────────╮"<<endl;
+        cout<<"│"<<left<<setw(13)<<""<<setw(52 + UI::getUTF8LenDiff(gv_temp->get_name()))<<("GIẢNG VIÊN  "+hocvi+"."+ gv_temp->get_name())<<"│"<<endl;
+        cout<<"│"<<left<<setw(3)<<""<<setw(24)<<("Mã GV:" + gv_temp->get_id())<<setw(39 + UI::getUTF8LenDiff(gv_temp->get_bo_mon()))<<("Bộ môn: " + gv_temp->get_bo_mon())<<"│"<<endl;
+        cout<<"╰───────────────────────DANH SÁCH LỚP HỌC──────────────────────╯"<<endl;
+        UI::doi_mau_full(7);
+        couse * couse_temp;
+        for(int i = 0;i<gv_temp->get_size_lop();i++){
+            couse_temp = ds_lop.tim_lop_theo_ma(gv_temp ->get_lop(i));
+            //ĐOẠN NÀY CHẮC K CẦN CHECK VÌ TRONG VECTOR CHẮC CHẮN LÀ MÃ LỚP TỒN TẠI
+            couse_temp->hienthi();
+        }
+        cout<<"Tìm thấy "<<gv_temp->get_size_lop()<<" kết quả";
            break;
        }
        case 4:

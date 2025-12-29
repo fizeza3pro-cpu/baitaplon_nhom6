@@ -25,5 +25,5 @@ class list_couse{
     }
     bool check_id_hop_le(string id);
     void xuat_du_lieu_ra_file(string file_name);
-    bool timkiem_ten(string ten_mon);
+    void timkiem_ten(string ten_mon);
 };

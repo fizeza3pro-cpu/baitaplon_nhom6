@@ -70,6 +70,12 @@ class giangvien{
     string get_name()const{
         return ten_giang_vien;
     }
+    string get_hoc_vi()const{
+        return hoc_vi;
+    }
+    string get_bo_mon()const{
+        return bo_mon;
+    }
     bool kra_trung_lich(Time a);
     void them_lich_day(Time a){
         lich_day.push_back(a);

@@ -11,10 +11,15 @@ void list_couse::hienthidanhsach(){
         cout<<"\n";
     }
 }
-bool list_couse::timkiem_ten(string ten_mon){
+void list_couse::timkiem_ten(string ten_mon){
+    if(ten_mon == ""){
+        cout<<"Không tìm thấy kết quả!"<<endl;
+        return;
+    }
     int dem = 0;
     string ten_mon_upper = ten_mon;
     ten_mon_upper[0] = toupper(ten_mon_upper[0]);
+
     for(int i = 0;i<p.size();i++){
         if(p[i]->get_mon_hoc()->get_ten().find(ten_mon_upper) != string::npos||
         p[i]->get_mon_hoc()->get_ten().find(ten_mon) != string::npos){
@@ -23,11 +28,10 @@ bool list_couse::timkiem_ten(string ten_mon){
         }
     }
     if(dem == 0){
-        cout<<"ko tim thay ket qua!"<<endl;
-        return false;
+        cout<<"Không tìm thấy kết quả!!"<<endl;
+        return;
     }else{
     cout<<"tim thay tat ca "<<dem<<" mon hoc!"<<endl;
-    return true;
     }
 }
 // void list_couse::nhapdanhsach(string file_name){

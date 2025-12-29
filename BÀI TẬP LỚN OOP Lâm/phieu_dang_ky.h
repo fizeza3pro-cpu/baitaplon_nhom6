@@ -13,6 +13,8 @@ class phieu_dang_ky{
     public:
     phieu_dang_ky()
     {
+        sv_dky = nullptr;
+        lop_dky = nullptr;
         thoi_gian_dky = "";//lỗi gì gì đấy
     }
     phieu_dang_ky(sinhvien* a, couse *b){
