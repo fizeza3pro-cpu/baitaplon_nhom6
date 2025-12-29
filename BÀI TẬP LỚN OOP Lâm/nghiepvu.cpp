@@ -1,4 +1,5 @@
 #include<iostream>
+#include<stdlib.h>
 #include"nghiepvu.h"
 using namespace std;
 void nghiepvu::them_mon_hoc(string ma_gv,string ten_mon,string file_name){
@@ -195,4 +196,58 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop,string file_name){
     ds_lop.xuat_du_lieu_ra_file(file_name);
     cout<<"cap nhat du lieu vao file thanh cong"<<endl;
 }
+} 
+
+void nghiepvu::tim_kiem_lop_hoc(){
+       cout<<"╭───────────────────────TÌM KIẾM LỚP HỌC────────────────────╮"<<endl;
+       cout<<"│"<<setw(62)<<"│"<<endl;
+       cout<<"│"<<setw(6)<<""<<"1.Tìm kiếm lớp học theo môn học"<<setw(22)<<""<<"│"<<endl;
+       cout<<"│"<<setw(6)<<""<<"2.Tìm kiếm lớp học theo mã lớp học"<<setw(19)<<""<<"│"<<endl;
+       cout<<"│"<<setw(6)<<""<<"3.Tìm kiếm lớp học theo tên giảng viên"<<setw(15)<<""<<"│"<<endl;
+       cout<<"│"<<setw(6)<<""<<"4.Tìm kiếm lớp học theo số tín chỉ"<<setw(19)<<""<<"│"<<endl;
+       cout<<"│"<<setw(6)<<""<<"Nhập lựa chọn của bạn: "<<setw(30)<<""<<"│"<<endl;
+       cout<<"╰───────────────────────────────────────────────────────────╯"<<endl;
+       UI::gotoxy(30,6);
+       int temp;
+       cin>>temp;
+       switch (temp)
+       {
+       case 1:
+        break;
+       case 2:
+        break;
+       case 3:
+       {
+        system("cls");
+        string temp;
+        cout<<"Nhập vào mã giảng viên: ";
+        cin.ignore();
+        getline(cin,temp);
+        hien_thi_lop_hoc_cua_gv(temp);
+           break;
+       }
+       case 4:
+        break;
+       
+       default:
+        break;
+       }
+
+
+}
+
+void nghiepvu::hien_thi_lop_hoc_cua_gv(string ma_gv){
+    giangvien *gv_temp = ds_gv.tim_giangvien_theo_id(ma_gv);
+    if(gv_temp == nullptr){
+        cout<<"Không tồn tại giảng viên";
+    }else{
+        couse * couse_temp;
+        for(int i = 0;i<gv_temp->get_size_lop();i++){
+            couse_temp = ds_lop.tim_lop_theo_ma(gv_temp ->get_lop(i));
+            //ĐOẠN NÀY CHẮC K CẦN CHECK VÌ TRONG VECTOR CHẮC CHẮN LÀ MÃ LỚP TỒN TẠI
+            couse_temp->hienthi();
+        }
+
+    }
+
 }

@@ -100,4 +100,5 @@ namespace UI {
     void drawTitle();
     void chuanhoa(int x);
     int getUTF8LenDiff(std::string s);
+    void gotoxy(int x, int y);
 };

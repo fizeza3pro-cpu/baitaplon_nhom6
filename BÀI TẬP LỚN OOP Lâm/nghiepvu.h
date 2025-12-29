@@ -1,7 +1,6 @@
 #include<iostream>
 #include"list_couse.h"
 #include"list_sinhvien.h"
-#include"list_time.h"
 #include"list_giangvien.h"
 #include"list_subject.h"
 #include"phieu_dang_ky.h"
@@ -24,4 +23,7 @@ class nghiepvu{
     void hienthi_ds_phieu_dky();
     void nhap_du_lieu_cho_couse(string file_name);
     void thaydoithongtin_couse(string ma_lop,string file_name);
+    void tim_kiem_lop_hoc();
+    void hien_thi_lop_hoc_cua_gv(string ma_gv);
+    void hien_thi_lop_hoc_cua_mon(string sub_name);
 };

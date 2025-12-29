@@ -100,6 +100,7 @@ void giangvien::nhapthongtin(){
         cout<<"nhap bo mon giang vien: ";
         getline(cin,bo_mon);
 }
+
 void giangvien::hienthithongtin(){
         cout << "\n📋 CHI TIET GIANG VIEN: " << ten_giang_vien << "\n";
         cout << "==========================================\n";
@@ -125,6 +126,7 @@ void giangvien::hienthithongtin(){
         // cout << "==========================================\n";
         // }
 }
+
 bool giangvien::nhap_du_lieu_tu_file(ifstream &f){
     vector<string> a;
     string line;
@@ -155,6 +157,7 @@ bool giangvien::nhap_du_lieu_tu_file(ifstream &f){
         birth[2] = stoi(a[8]);
     return true;
 }
+
 bool giangvien::kra_trung_lich(Time a){
     for(auto i : lich_day){
         if(i.ktra_trung_lich(a)){
@@ -164,6 +167,7 @@ bool giangvien::kra_trung_lich(Time a){
     lich_day.push_back(a);
     return false;
 }
+
 bool giangvien::xoa_couse_da_day_id(string ma_lop){
     for(int i = 0;i<couse_da_day.size();i++){
         if(couse_da_day[i] == ma_lop){
@@ -174,6 +178,7 @@ bool giangvien::xoa_couse_da_day_id(string ma_lop){
     }
     return false;
 }
+
 void giangvien::xoa_lich_day(Time a){
     for(int i = 0;i<lich_day.size();i++){
         if(lich_day[i] == a){

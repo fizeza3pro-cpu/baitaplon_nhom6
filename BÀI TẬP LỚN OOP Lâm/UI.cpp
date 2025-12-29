@@ -54,3 +54,9 @@ int UI::getUTF8LenDiff(std::string s) {
     }
     return diff;
 }
+void UI::gotoxy(int x, int y) {
+    COORD c;
+    c.X = x;
+    c.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
+}

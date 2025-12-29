@@ -58,6 +58,15 @@ class giangvien{
     string get_id()const{
         return id;
     }
+    string get_lop(int i)const{
+        if(i>=0 && i<couse_da_day.size()){
+            return couse_da_day[i];
+        }
+        return "";
+    }
+    int get_size_lop(){
+        return couse_da_day.size();
+    }
     string get_name()const{
         return ten_giang_vien;
     }

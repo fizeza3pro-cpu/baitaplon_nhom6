@@ -121,18 +121,19 @@ int main() {
     case 8:
     {
       system("cls");
-      string temp;
-      cout<<"nhập vào :";
-      cin.ignore();
-      getline(cin,temp);
-      if(lop.timkiem_ten(temp)){
-        UI::doi_mau_full(2);
-        cout<<"tìm kiếm thành công";
-      }else{
-        UI::doi_mau_full(4);
-        cout<<"ko có kết quả";
-      }
-      UI::doi_mau_full(7);
+      // string temp;
+      // cout<<"nhập vào :";
+      // cin.ignore();
+      // getline(cin,temp);
+      // if(lop.timkiem_ten(temp)){
+      //   UI::doi_mau_full(2);
+      //   cout<<"tìm kiếm thành công";
+      // }else{
+      //   UI::doi_mau_full(4);
+      //   cout<<"ko có kết quả";
+      // }
+      // UI::doi_mau_full(7);
+      nv.tim_kiem_lop_hoc();
       cin.get();
     }
       break;
