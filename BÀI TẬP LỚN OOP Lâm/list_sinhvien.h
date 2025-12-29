@@ -15,4 +15,6 @@ public:
 	sinhvien* tim_sinhvien_theo_id(string ma_sv);
 	bool lay_du_lieu_tu_file(string file_name);
 	void them_sinhvien();
+	bool delete_sinhvien(string ma_sv, string file_name);
+
 };
