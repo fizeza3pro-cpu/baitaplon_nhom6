@@ -1,4 +1,5 @@
 #include<iostream>
+#include<stdlib.h>
 #include"nghiepvu.h"
 using namespace std;
 void nghiepvu::them_mon_hoc(string ma_gv, string ten_mon, string file_name) {

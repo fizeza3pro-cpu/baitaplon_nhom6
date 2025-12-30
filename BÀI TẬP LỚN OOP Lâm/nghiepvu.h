@@ -1,7 +1,6 @@
 #include<iostream>
 #include"list_couse.h"
 #include"list_sinhvien.h"
-#include"list_time.h"
 #include"list_giangvien.h"
 #include"list_subject.h"
 #include"phieu_dang_ky.h"
