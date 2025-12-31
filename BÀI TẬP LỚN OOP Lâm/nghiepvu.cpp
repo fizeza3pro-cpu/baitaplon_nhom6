@@ -2,41 +2,42 @@
 #include<stdlib.h>
 #include"nghiepvu.h"
 using namespace std;
-void nghiepvu::them_mon_hoc(string ma_gv,string ten_mon,string file_name){
- /* truyền vào hàm có thể là mã gv,... nhưng truyền cả đối tượng cho trực quan */
+void nghiepvu::them_mon_hoc(string ma_gv, string ten_mon, string file_name) {
+    /* truyền vào hàm có thể là mã gv,... nhưng truyền cả đối tượng cho trực quan */
     giangvien* c = ds_gv.tim_giangvien_theo_id(ma_gv);
-    if(c == nullptr){
-        cout<<"⚠ Không tìm thấy giảng viên"<<endl;
+    if (c == nullptr) {
+        cout << "⚠ Không tìm thấy giảng viên" << endl;
         return;
     }
-    subject *e = ds_mon.tim_mon_theo_ten(ten_mon);
-    if(e == nullptr){
-        cout<<"⚠ Không tìm thấy môn học"<<endl;
+    subject* e = ds_mon.tim_mon_theo_ten(ten_mon);
+    if (e == nullptr) {
+        cout << "⚠ Không tìm thấy môn học" << endl;
         return;
     }
-    ds_lop.nhap_test(c,e,file_name);
- /*    phải thêm mã  lơp shocj vào cho mon, giangvien vs time */
-    
+    ds_lop.nhap_test(c, e, file_name);
+    /*    phải thêm mã  lơp shocj vào cho mon, giangvien vs time */
+
 }
-void nghiepvu::dang_ky_lop_hoc(string id_sv,string ma_lop){
-    sinhvien * a = ds_sv.tim_sinhvien_theo_id(id_sv);
-     if(a == nullptr){
+void nghiepvu::dang_ky_lop_hoc(string id_sv, string ma_lop) {
+    sinhvien* a = ds_sv.tim_sinhvien_theo_id(id_sv);
+    if (a == nullptr) {
         cout << "⚠ Không tìm thấy sinh viên" << endl;
         return;
     }
-    couse *b = ds_lop.tim_lop_theo_ma(ma_lop);
-      if(b == nullptr){
+    couse* b = ds_lop.tim_lop_theo_ma(ma_lop);
+    if (b == nullptr) {
         cout << "⚠ Không tìm thấy lớp học" << endl;
         return;
     }
-    if(b->ktra_full()){
-        cout<<"⚠ Lớp học đã đầy , không thể đăng ký"<<endl;
+    if (b->ktra_full()) {
+        cout << "⚠ Lớp học đã đầy , không thể đăng ký" << endl;
         return;
     }
-    if(a->add_couse(b)){
+    if (a->add_couse(b)) {
         b->tang_sv();
-        phieu_dang_ky temp(a,b);
+        phieu_dang_ky temp(a, b);
         ds_phieu_dky.push_back(temp);
+<<<<<<< HEAD
         doi_mau_full(2);
         cout<<"✔ Đăng ký lớp học thành công!"<<endl;
     }else{
@@ -44,30 +45,42 @@ void nghiepvu::dang_ky_lop_hoc(string id_sv,string ma_lop){
         cout<<"❌ Đăng ký môn học không thành công"<<endl;
     }   
     doi_mau_full(7);
+=======
+        UI::doi_mau_full(2);
+        cout << "✔ Đăng ký lớp học thành công!" << endl;
+    }
+    else {
+        UI::doi_mau_full(4);
+        cout << "❌ Đăng ký môn học không thành công" << endl;
+    }
+    UI::doi_mau_full(7);
+>>>>>>> 73aa9b80af4464efd3f24652abd5453f63bb6cb5
 }
-void nghiepvu::huy_dang_ky_lop_hoc(string id_sv,string ma_lop){
-     sinhvien * a = ds_sv.tim_sinhvien_theo_id(id_sv);
-     if(a == nullptr){
+void nghiepvu::huy_dang_ky_lop_hoc(string id_sv, string ma_lop) {
+    sinhvien* a = ds_sv.tim_sinhvien_theo_id(id_sv);
+    if (a == nullptr) {
         cout << "Khong tim thay sinh vien!" << endl;
         return;
     }
-    couse *b = ds_lop.tim_lop_theo_ma(ma_lop);
-      if(b == nullptr){
+    couse* b = ds_lop.tim_lop_theo_ma(ma_lop);
+    if (b == nullptr) {
         cout << "Khong tim thay lop hoc!" << endl;
         return;
     }
-    for(int i = 0;i<ds_phieu_dky.size();i++){
-        if(ds_phieu_dky[i].checkphieu(a,b)){
-            if(a->delete_couse(b)){
+    for (int i = 0; i < ds_phieu_dky.size(); i++) {
+        if (ds_phieu_dky[i].checkphieu(a, b)) {
+            if (a->delete_couse(b)) {
                 ds_phieu_dky.erase(ds_phieu_dky.begin() + i);
                 b->giam_sv();
-                cout<<"huy dang ky thanh cong!";
+                cout << "huy dang ky thanh cong!";
             }
-        }else{
-            cout<<"sinh vien chua dang ky lop nay!";
+        }
+        else {
+            cout << "sinh vien chua dang ky lop nay!";
         }
     }
 }
+<<<<<<< HEAD
 void nghiepvu::hienthi_ds_phieu_dky(){
     cout<<"─────────────────────────────────────LỊCH SỬ ĐĂNG KÝ────────────────────────────────────"<<"\n"<<endl;
     doi_mau_full(6); // Màu vàng cho tiêu đề nổi bật
@@ -79,119 +92,143 @@ void nghiepvu::hienthi_ds_phieu_dky(){
                doi_mau_full(7); // Trả về màu trắng cho dữ liệu
                cout<<"────────────────────────────────────────────────────────────────────────────────────────"<<endl;
     for(int i = 0;i<ds_phieu_dky.size();i++){
+=======
+void nghiepvu::hienthi_ds_phieu_dky() {
+    cout << "─────────────────────────────────────LỊCH SỬ ĐĂNG KÝ────────────────────────────────────" << "\n" << endl;
+    UI::doi_mau_full(6); // Màu vàng cho tiêu đề nổi bật
+    cout << "   " << left
+        << setw(19) << "Mã SV"
+        << setw(29) << "Họ và tên"
+        << setw(25) << "Lớp đăng ký"
+        << "Thời gian" << endl;
+    UI::doi_mau_full(7); // Trả về màu trắng cho dữ liệu
+    cout << "────────────────────────────────────────────────────────────────────────────────────────" << endl;
+    for (int i = 0; i < ds_phieu_dky.size(); i++) {
+>>>>>>> 73aa9b80af4464efd3f24652abd5453f63bb6cb5
         ds_phieu_dky[i].hien_thi_phieu_dky();
-        cout<<"\n";
+        cout << "\n";
     }
-    cout<<"────────────────────────────────────────────────────────────────────────────────────────";
+    cout << "────────────────────────────────────────────────────────────────────────────────────────";
 }
-void nghiepvu::nhap_du_lieu_cho_couse(string file_name){
-    if(ds_lop.nhap_du_lieu_tu_file(ds_gv,ds_mon,file_name)){
-        cout<<"nhap du lieu cho couse thanh cong!"<<endl;
+void nghiepvu::nhap_du_lieu_cho_couse(string file_name) {
+    if (ds_lop.nhap_du_lieu_tu_file(ds_gv, ds_mon, file_name)) {
+        cout << "nhap du lieu cho couse thanh cong!" << endl;
     }
 }
-void nghiepvu::thaydoithongtin_couse(string ma_lop,string file_name){
-    couse * lop = ds_lop.tim_lop_theo_ma(ma_lop);
-    if(lop == nullptr){
-        cout<<"ko tim thay lop hoc!";
-    }else{
+void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
+    couse* lop = ds_lop.tim_lop_theo_ma(ma_lop);
+    if (lop == nullptr) {
+        cout << "ko tim thay lop hoc!";
+    }
+    else {
         int chose;
-        cout<<"1.thay doi giang vien"<<endl;
-        cout<<"2.thay doi mon hoc"<<endl;
-        cout<<"3.thay doi so luong sinh vien toi da"<<endl;
-        cout<<"4.thay doi thoi gian hoc"<<endl;
-        cout<<"Lua chon cua ban: ";
-        cin>>chose;
+        cout << "1.thay doi giang vien" << endl;
+        cout << "2.thay doi mon hoc" << endl;
+        cout << "3.thay doi so luong sinh vien toi da" << endl;
+        cout << "4.thay doi thoi gian hoc" << endl;
+        cout << "Lua chon cua ban: ";
+        cin >> chose;
         switch (chose)
         {
         case 1:
         {
             cin.ignore();
             string ma_gv;
-            cout<<"nhap ma giang vien muon doi: ";
-            getline(cin,ma_gv);
-            giangvien *gv = ds_gv.tim_giangvien_theo_id(ma_gv);
-            if(gv == nullptr){
-                cout<<"ko tim thay giang vien ";
-            }else{
-                cout<<"THONG TIN GIANG VIEN:"<<endl;
+            cout << "nhap ma giang vien muon doi: ";
+            getline(cin, ma_gv);
+            giangvien* gv = ds_gv.tim_giangvien_theo_id(ma_gv);
+            if (gv == nullptr) {
+                cout << "ko tim thay giang vien ";
+            }
+            else {
+                cout << "THONG TIN GIANG VIEN:" << endl;
                 gv->hienthithongtin();
-                if(gv == lop->get_gv()){
-                    cout<<"giang vien dang day lop nay!";
-                }else if(gv->kra_trung_lich(lop->get_time())){
-                    cout<<"giang vien bi trung lich , ko the doi";
-                }else{
+                if (gv == lop->get_gv()) {
+                    cout << "giang vien dang day lop nay!";
+                }
+                else if (gv->kra_trung_lich(lop->get_time())) {
+                    cout << "giang vien bi trung lich , ko the doi";
+                }
+                else {
                     lop->set_giangvien(gv);
                     gv->them_couse_da_day_id(lop->get_ma_lop_hoc());
-                    cout<<"thay doi giang vien thanh cong";
+                    cout << "thay doi giang vien thanh cong";
+                }
+
             }
-            
-        } 
-    }
-            break;
+        }
+        break;
         case 2:
         {
-        cin.ignore();
-        if(lop->get_cur_sv() != 0 ){
-            cout<<"lop da co nguoi dang ky, ko the thay doi mon hoc!";
-        }else{
             cin.ignore();
-            string ten_mon;
-            cout<<"nhap ten mon muon doi: ";
-            getline(cin,ten_mon);
-            subject *mon = ds_mon.tim_mon_theo_ten(ten_mon);
-            if(mon == nullptr){
-                cout<<"ko ton tai mon hoc!";
-            }else{
-                cout<<"THONG TIN MON HOC: "<<endl;
-                mon->hienthithongtin();
-                if(lop->get_mon_hoc() == mon){
-                    cout<<"lop hoc dang day mon nay, ko the doi!";
-                }else{
-                    lop->set_mon(mon);
-                    mon->add_ma_lop_hoc(lop->get_ma_lop_hoc());
-                    cout<<"thay doi mon hoc thanh cong!";
-                }   
+            if (lop->get_cur_sv() != 0) {
+                cout << "lop da co nguoi dang ky, ko the thay doi mon hoc!";
+            }
+            else {
+                cin.ignore();
+                string ten_mon;
+                cout << "nhap ten mon muon doi: ";
+                getline(cin, ten_mon);
+                subject* mon = ds_mon.tim_mon_theo_ten(ten_mon);
+                if (mon == nullptr) {
+                    cout << "ko ton tai mon hoc!";
+                }
+                else {
+                    cout << "THONG TIN MON HOC: " << endl;
+                    mon->hienthithongtin();
+                    if (lop->get_mon_hoc() == mon) {
+                        cout << "lop hoc dang day mon nay, ko the doi!";
+                    }
+                    else {
+                        lop->set_mon(mon);
+                        mon->add_ma_lop_hoc(lop->get_ma_lop_hoc());
+                        cout << "thay doi mon hoc thanh cong!";
+                    }
+                }
             }
         }
-    }
-            break;
+        break;
         case 3:
         {
-        int new_max;
-        cout<<"nhap so luong sinh vien toi da: ";
-        cin>>new_max;
-        if(new_max < lop->get_cur_sv()){
-            cout<<"ko the duoi hoc sinh vien =))";
-        }else{
-            lop->set_max_sv(new_max);
-            cout<<"thay doi so luong sinh vien toi da thanh cong";
+            int new_max;
+            cout << "nhap so luong sinh vien toi da: ";
+            cin >> new_max;
+            if (new_max < lop->get_cur_sv()) {
+                cout << "ko the duoi hoc sinh vien =))";
+            }
+            else {
+                lop->set_max_sv(new_max);
+                cout << "thay doi so luong sinh vien toi da thanh cong";
+            }
         }
-    }
-            break;
+        break;
         case 4:
         {
-         if(lop->get_cur_sv() != 0 ){
-            cout<<"lop da co nguoi dang ky, ko the thay doi thoi gian!";
-        }else{
-            Time new_time;
-            cout<<"nhap thoi gian hoc moi: "<<endl;
-            new_time.nhap();
-            giangvien *now = lop->get_gv();
-            if(now->kra_trung_lich(new_time)){
-                cout<<"thoi gian moi bi trung lich giang vien, ko the doi";
-            }else{
-                lop->set_time(new_time);
-                now->xoa_lich_day(lop->get_time());
-                now->them_lich_day(new_time);
-                cout<<"thay doi lich hoc thanh cong!";
-            }      
-            break;
-        }
+            if (lop->get_cur_sv() != 0) {
+                cout << "lop da co nguoi dang ky, ko the thay doi thoi gian!";
+            }
+            else {
+                Time new_time;
+                cout << "nhap thoi gian hoc moi: " << endl;
+                new_time.nhap();
+                giangvien* now = lop->get_gv();
+                if (now->kra_trung_lich(new_time)) {
+                    cout << "thoi gian moi bi trung lich giang vien, ko the doi";
+                }
+                else {
+                    lop->set_time(new_time);
+                    now->xoa_lich_day(lop->get_time());
+                    now->them_lich_day(new_time);
+                    cout << "thay doi lich hoc thanh cong!";
+                }
+                break;
+            }
         default:
-        cout<<"lua cho khong hop le";
+            cout << "lua cho khong hop le";
             break;
         }
 
+<<<<<<< HEAD
     }
     ds_lop.xuat_du_lieu_ra_file(file_name);
     cout<<"cap nhat du lieu vao file thanh cong"<<endl;
@@ -356,8 +393,19 @@ void nghiepvu::hien_thi_lop_hoc_cua_gv(string ma_gv){
             couse_temp = ds_lop.tim_lop_theo_ma(gv_temp ->get_lop(i));
             //ĐOẠN NÀY CHẮC K CẦN CHECK VÌ TRONG VECTOR CHẮC CHẮN LÀ MÃ LỚP TỒN TẠI
             couse_temp->hienthi();
+=======
+>>>>>>> 73aa9b80af4464efd3f24652abd5453f63bb6cb5
         }
-
+        ds_lop.xuat_du_lieu_ra_file(file_name);
+        cout << "cap nhat du lieu vao file thanh cong" << endl;
     }
-
+}
+void nghiepvu::xoa_sinh_vien(string ma_sv, string file_sv) {
+    bool ok = ds_sv.delete_sinhvien(ma_sv, file_sv);
+    if (ok) {
+        cout << "Xoa sinh vien hoan tat!" << endl;
+    }
+    else {
+        cout << "Xoa sinh vien that bai!" << endl;
+    }
 }

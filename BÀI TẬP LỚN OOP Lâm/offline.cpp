@@ -4,7 +4,7 @@
 #include"UI.h"
 #include"offline.h"
 using namespace std;
-void offline::hienthi(){
+void offline::hienthi() {
     int width = 58;
     cout << "  ╭──────────────────────────────────────────────────────────╮" << endl;
    doi_mau_full(14);
@@ -12,31 +12,32 @@ void offline::hienthi(){
     cout << "  │" << setw(26) << "" << "OFFINE" << setw(26) << "" << "│" << endl;
    doi_mau_full(7);
     couse::hienthi();
-    cout << "  │"<<left<< setw(width + 5)<<(" Địa điểm: "+phong_hoc+"-"+nha)<< " │" << endl;
-      cout << "  ╰──────────────────────────────────────────────────────────╯" << endl;
+    cout << "  │" << left << setw(width + 5) << (" Địa điểm: " + phong_hoc + "-" + nha) << " │" << endl;
+    cout << "  ╰──────────────────────────────────────────────────────────╯" << endl;
 }
-bool offline::nhap(giangvien* gv_func,subject* sub_func){
-     if(couse::nhap(gv_func, sub_func)){
-    cout<<"nhap phong hoc: ";
-    cin>>phong_hoc;
-    cout<<"nhap toa nha: ";
-    cin>>nha;
-    return true;
+bool offline::nhap(giangvien* gv_func, subject* sub_func) {
+    if (couse::nhap(gv_func, sub_func)) {
+        cout << "nhap phong hoc: ";
+        cin >> phong_hoc;
+        cout << "nhap toa nha: ";
+        cin >> nha;
+        return true;
     }
     return false;
 }
- bool offline::xuat_du_lieu_file(string &file_name){
-    ofstream f(file_name,ios::app);
-    if(!f.is_open()){
-        cout<<"ko mo dc file!";
+bool offline::xuat_du_lieu_file(string& file_name) {
+    ofstream f(file_name, ios::app);
+    if (!f.is_open()) {
+        cout << "ko mo dc file!";
         return false;
-    }else{
+    }
+    else {
         string line;
         couse::xuat_du_lieu_file(line);
-        line.insert(0,"offline|");
-        f<<line+"|"+phong_hoc+"|"+nha<<"\n";
+        line.insert(0, "offline|");
+        f << line + "|" + phong_hoc + "|" + nha << "\n";
         f.close();
     }
     return true;
 
- }
+}

@@ -57,4 +57,12 @@ public:
     bool nhap_du_lieu_tu_file(ifstream& f);
     void ghi_vao_file();
 
+    string get_gioi_tinh() const { return gioi_tinh; }
+    string get_sdt() const { return sdt; }
+    string get_chuyen_nganh() const { return chuyen_nganh; }
+    int get_birth(int i) const { return birth[i]; }
+    int get_khoa() const { return khoa; }
+    int get_cur_tc() const { return cur_tc; }
+    int get_max_tc() const { return max_tc; }
+    vector<couse*> get_ds_mon_dky() const { return ds_mon_dky; }
 };

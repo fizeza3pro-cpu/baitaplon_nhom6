@@ -15,7 +15,7 @@ int main() {
     mon.lay_du_lieu_tu_file("D:/dulieumonhoc.txt");
     sv.lay_du_lieu_tu_file("D:/dulieusinhvien.txt");
     // loading();
-    nghiepvu nv(lop,sv,gv,mon);
+    nghiepvu nv(lop, sv, gv, mon);
     nv.nhap_du_lieu_cho_couse("D:/dulieulophoc.txt");
     pause();
     while(1){
