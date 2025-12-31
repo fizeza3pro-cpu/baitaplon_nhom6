@@ -87,18 +87,20 @@
 #include<iomanip>
 #include<iostream>
 
-namespace UI {
-    enum Color {
-        DEFAULT = 7,
-        RED = 12,
-        GREEN = 10,
-        YELLOW = 14
-    };
+// namespace UI {
+//     enum Color {
+//         DEFAULT = 7,
+//         RED = 12,
+//         GREEN = 10,
+//         YELLOW = 14
+//     };
     void doi_mau_full(int x);
-    void setColor(Color c);
-    void println(const std::string& s, Color c = DEFAULT);
+    // void setColor(Color c);
+    // void println(const std::string& s, Color c = DEFAULT);
     void drawTitle();
     void chuanhoa(int x);
     int getUTF8LenDiff(std::string s);
     void gotoxy(int x, int y);
-};
+    void pause();
+    // void form_tim_kiem(string search);
+// };

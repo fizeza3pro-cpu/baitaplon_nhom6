@@ -172,17 +172,20 @@ bool giangvien::xoa_couse_da_day_id(string ma_lop){
     for(int i = 0;i<couse_da_day.size();i++){
         if(couse_da_day[i] == ma_lop){
             couse_da_day.erase(couse_da_day.begin()+i);
-            cout<<"da xoa lop hoc "<<ma_lop<<" khoi danh sach mon da day cua giang vien "<<ten_giang_vien<<endl;
+            cout<<"Đã xoá lớp học "<<ma_lop<<" khỏi danh sách lớp đã dạy của giảng viên "<<ten_giang_vien<<endl;
             return true;
         }
     }
     return false;
 }
 
-void giangvien::xoa_lich_day(Time a){
+bool giangvien::xoa_lich_day(Time a){
     for(int i = 0;i<lich_day.size();i++){
         if(lich_day[i] == a){
             lich_day.erase(lich_day.begin()+i);
+            cout<<"Đã xoá lớp học khỏi lịch dạy của giảng viên "<<ten_giang_vien<<endl;
+            return true;
         }
     }
+    return false;
 }

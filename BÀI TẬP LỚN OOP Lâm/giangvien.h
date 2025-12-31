@@ -80,6 +80,6 @@ class giangvien{
     void them_lich_day(Time a){
         lich_day.push_back(a);
     }
-    void xoa_lich_day(Time a);
+    bool xoa_lich_day(Time a);
    /*  get học vị các thứ phục vụ hiển thị về sau */
 };

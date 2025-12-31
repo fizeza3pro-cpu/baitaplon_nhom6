@@ -25,7 +25,7 @@ string phieu_dang_ky::lay_tg_thuc(){
 //    cout<<"Thoi gian dang ky: "<<thoi_gian_dky<<endl;
 // }
 void phieu_dang_ky::hien_thi_phieu_dky(){
-    int do_lech = UI::getUTF8LenDiff(sv_dky->get_name());
+    int do_lech = getUTF8LenDiff(sv_dky->get_name());
     cout << "   " << left
                << setw(18) << sv_dky->get_ma()
                << setw(25 + do_lech) << sv_dky->get_name()

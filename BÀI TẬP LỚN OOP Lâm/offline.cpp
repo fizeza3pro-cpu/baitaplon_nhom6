@@ -7,10 +7,10 @@ using namespace std;
 void offline::hienthi(){
     int width = 58;
     cout << "  ╭──────────────────────────────────────────────────────────╮" << endl;
-    UI::doi_mau_full(14);
+   doi_mau_full(14);
     // cout << "  │"<<left<< setw(width)<<"OFFLINE" << "│" << endl;
     cout << "  │" << setw(26) << "" << "OFFINE" << setw(26) << "" << "│" << endl;
-    UI::doi_mau_full(7);
+   doi_mau_full(7);
     couse::hienthi();
     cout << "  │"<<left<< setw(width + 5)<<(" Địa điểm: "+phong_hoc+"-"+nha)<< " │" << endl;
       cout << "  ╰──────────────────────────────────────────────────────────╯" << endl;

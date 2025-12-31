@@ -31,45 +31,26 @@ void list_couse::timkiem_ten(string ten_mon){
         cout<<"Không tìm thấy kết quả!!"<<endl;
         return;
     }else{
-    cout<<"tim thay tat ca "<<dem<<" mon hoc!"<<endl;
+    cout<<"Tìm thấy tất cả "<<dem<<" môn học!"<<endl;
     }
 }
-// void list_couse::nhapdanhsach(string file_name){
-//     string chose;
-//     string line;
-//     ofstream f(file_name,ios::app);
-//     if(!f.is_open()){
-//         cout<<"ko mo dc file!"<<endl;
-//         return;
-//     }
-//     cout<<"Nhap loai lop hoc muon dang ( ON / OFF): ";
-//     getline(cin,chose);
-//     if(chose == "ON" || chose == "on"){
-//         p[cnt] = new online;
-//         p[cnt] -> nhap();
-//         p[cnt] ->fix_matusinh();
-//         p[cnt] ->tusinhma(); /* xử lý hàm tự sinh mã khởi tạo trc khi có tên môn ->mã sai */
-//         line = "online|"+ p[cnt]->get_time()+"|"+p[cnt]->getten_mon_hoc()
-//         +"|"+p[cnt]->get_gv()+"|"+to_string(p[cnt]->get_tc())+"|"+to_string(p[cnt]->get_cursv())
-//         +"|"+to_string(p[cnt]->get_maxsv())+"|"+p[cnt]->get_data();
-//         cnt++;
-//     }else if(chose == "OFF" || chose == "off"){
-//         p[cnt] = new offline;
-//         p[cnt] -> nhap();
-//          p[cnt] ->fix_matusinh();
-//         p[cnt] ->tusinhma();
-//         line = "offline|" + p[cnt]->get_time()+"|"+p[cnt]->getten_mon_hoc()
-//         +"|"+p[cnt]->get_gv()+"|"+to_string(p[cnt]->get_tc())+"|"+to_string(p[cnt]->get_cursv())
-//         +"|"+to_string(p[cnt]->get_maxsv())+"|"+p[cnt]->get_data();
-//         cnt++;
-//     }else{
-//         cout<<"loi nhap lieu, vui long chon dung!"<<endl;
-//     }
-//     f<<endl;
-//     f<<line;
-//     f.close();
-//     cout<<"them mon hoc thanh cong!";
-// } đoạn này ko lỡ xoá vì chức năng tìm kiếm tên gần đúng sau này có thể tham khảo lại
+
+void list_couse::hien_thi_lop_theo_tc(int tc){
+    int dem = 0;
+    for(int i = 0;i<p.size();i++){
+        if(p[i]->get_tin_chi() == tc){
+            p[i] ->hienthi();
+            ++dem;
+        }
+    }
+    cout<<endl;
+    if(dem == 0){
+        cout<<"Không có kết quả!";
+    }else{
+        cout<<"Tìm kiếm tổng cộng "<<dem<<" lớp học";
+    }
+}
+
 void list_couse::nhap_test(giangvien *gv_func, subject *sub_func,string file_name) {
     string chose;
     cout << "Nhap loai lop hoc muon dang (ON / OFF): ";
@@ -84,16 +65,16 @@ void list_couse::nhap_test(giangvien *gv_func, subject *sub_func,string file_nam
         newCourse = new offline;
     }
     else {
-        UI::doi_mau_full(4);
+        doi_mau_full(4);
         cout << "Loi nhap lieu, vui long chon dung!\n";
-        UI::doi_mau_full(7);
+        doi_mau_full(7);
         return;
     }
     // Gọi hàm nhập dữ liệu lớp học
     if(newCourse->nhap(gv_func, sub_func)){
-        UI::doi_mau_full(2);
+        doi_mau_full(2);
         cout<<"tao lop moi thanh cong!";
-        UI::doi_mau_full(7);
+        doi_mau_full(7);
         
         newCourse ->xuat_du_lieu_file(file_name);
     // Đưa vào danh sách
@@ -101,9 +82,9 @@ void list_couse::nhap_test(giangvien *gv_func, subject *sub_func,string file_nam
     }else{
         newCourse = nullptr;
         delete newCourse;
-        UI::doi_mau_full(4);
+        doi_mau_full(4);
         cout<<"tao lop moi that bai!";
-        UI::doi_mau_full(7);
+        doi_mau_full(7);
     }
 }
 bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub,string file_name){
@@ -158,20 +139,30 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub
        }
     }
 }
-UI::doi_mau_full(2);
+doi_mau_full(2);
 cout<<"da nhap thanh cong "<<dem+1<<" lop hoc!"<<endl;
-UI::doi_mau_full(7);
+doi_mau_full(7);
 f.close();
     return true;
 }
 
 couse* list_couse::tim_lop_theo_ma(string ma){
-    for(int i = 0;i<p.size();i++){
-        if(p[i]->get_ma_lop_hoc() == ma){
-            return p[i];
+    //Tìm kiếm nhị phân cho tối ưu
+    int l = 0;
+    int r = p.size() - 1;
+    int m;
+    while(l<=r){
+        m = (l + r) /2;
+        if(p[m]->get_ma_lop_hoc() == ma){
+            return p[m];
+        }else if(p[m]->get_ma_lop_hoc() < ma ){
+            l = m+1;
+        }else{
+            r = m-1;
         }
     }
-    return nullptr;
+    couse* temp = nullptr;
+    return temp;
 }
 
 bool list_couse::check_id_hop_le(string id){
@@ -210,9 +201,14 @@ bool list_couse::delete_lop_hoc(string ma_lop,string file_name){
                 cout<<"xoa ma lop hoc khoi mon hoc that bai!"<<endl;
                 return false;
             }
+
             giangvien *x = p[i]->get_gv();
             if(!x->xoa_couse_da_day_id(ma_lop)){
                 cout<<"xoa lop hoc khoi giang vien that bai!"<<endl;
+                return false;
+            }
+            if(!x->xoa_lich_day(p[i]->get_time())){
+                cout<<"Xoá lịch dạy giảng viên thất bại!";
                 return false;
             }
             delete p[i];

@@ -6,10 +6,10 @@ using namespace std;
 void online::hienthi(){
     int width = 58;
     cout << "  ╭──────────────────────────────────────────────────────────╮" << endl;
-    UI::doi_mau_full(14);
+    doi_mau_full(14);
     // cout << "  │"<<left<< setw(width - 2)<<"ONLINE" << "│" << endl;
     cout << "  │" << setw(26) << "" << "ONLINE" << setw(26) << "" << "│" << endl;
-    UI::doi_mau_full(7);
+    doi_mau_full(7);
     couse::hienthi();
     cout << "  |"<<left<< setw(width +5)<<(" Nền tảng học: "+nen_tang)<< " │" << endl;
     cout << "  ╰──────────────────────────────────────────────────────────╯" << endl;

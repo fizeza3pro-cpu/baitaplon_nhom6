@@ -15,6 +15,9 @@ class list_couse{
         return p[i];
     }
     couse* tim_lop_theo_ma(string ma);
+    void hien_thi_lop_theo_tc(int tc);
+    void hien_thi_lop_theo_thu(int thu);
+
     bool nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub,string file_name);
     void add_couse(couse *a){
         p.push_back(a);

@@ -37,13 +37,13 @@ void nghiepvu::dang_ky_lop_hoc(string id_sv,string ma_lop){
         b->tang_sv();
         phieu_dang_ky temp(a,b);
         ds_phieu_dky.push_back(temp);
-        UI::doi_mau_full(2);
+        doi_mau_full(2);
         cout<<"✔ Đăng ký lớp học thành công!"<<endl;
     }else{
-        UI::doi_mau_full(4);
+        doi_mau_full(4);
         cout<<"❌ Đăng ký môn học không thành công"<<endl;
     }   
-    UI::doi_mau_full(7);
+    doi_mau_full(7);
 }
 void nghiepvu::huy_dang_ky_lop_hoc(string id_sv,string ma_lop){
      sinhvien * a = ds_sv.tim_sinhvien_theo_id(id_sv);
@@ -70,13 +70,13 @@ void nghiepvu::huy_dang_ky_lop_hoc(string id_sv,string ma_lop){
 }
 void nghiepvu::hienthi_ds_phieu_dky(){
     cout<<"─────────────────────────────────────LỊCH SỬ ĐĂNG KÝ────────────────────────────────────"<<"\n"<<endl;
-    UI::doi_mau_full(6); // Màu vàng cho tiêu đề nổi bật
+    doi_mau_full(6); // Màu vàng cho tiêu đề nổi bật
     cout << "   " << left 
                << setw(19) << "Mã SV" 
                << setw(29) << "Họ và tên" 
                << setw(25) << "Lớp đăng ký" 
                << "Thời gian" << endl;
-               UI::doi_mau_full(7); // Trả về màu trắng cho dữ liệu
+               doi_mau_full(7); // Trả về màu trắng cho dữ liệu
                cout<<"────────────────────────────────────────────────────────────────────────────────────────"<<endl;
     for(int i = 0;i<ds_phieu_dky.size();i++){
         ds_phieu_dky[i].hien_thi_phieu_dky();
@@ -207,7 +207,7 @@ void nghiepvu::tim_kiem_lop_hoc(){
        cout<<"│"<<setw(6)<<""<<"4.Tìm kiếm lớp học theo số tín chỉ"<<setw(19)<<""<<"│"<<endl;
        cout<<"│"<<setw(6)<<""<<"Nhập lựa chọn của bạn: "<<setw(30)<<""<<"│"<<endl;
        cout<<"╰───────────────────────────────────────────────────────────╯"<<endl;
-       UI::gotoxy(30,6);
+       gotoxy(30,6);
        int temp;
        cin>>temp;
        if (cin.fail()) {
@@ -225,28 +225,61 @@ void nghiepvu::tim_kiem_lop_hoc(){
         cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
         cout<<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
         cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
-        UI::gotoxy(10,2);
+        gotoxy(6,2);
         cin.ignore();
         getline(cin,temp);
         system("cls");
-        UI::doi_mau_full(10);
+        doi_mau_full(10);
         cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"  │"<<left<<setw(58 + UI::getUTF8LenDiff(temp))<<("⌕ " + temp)<<"│"<<endl;
+        cout<<"  │"<<left<<setw(58 + getUTF8LenDiff(temp))<<("⌕ " + temp)<<"│"<<endl;
         cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
-        UI::doi_mau_full(7);
+        doi_mau_full(7);
         ds_lop.timkiem_ten(temp);
         break;
        }
        case 2:
+       {
+        system("cls");
+        string temp;
+        cout<<"Nhập vào mã lớp học: "<<endl;
+        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout<<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
+        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        gotoxy(6,2);
+        cin.ignore();
+        getline(cin,temp);
+        system("cls");
+        doi_mau_full(10);
+        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout<<"  │"<<left<<setw(58 + getUTF8LenDiff(temp))<<("⌕ " + temp)<<"│"<<endl;
+        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        doi_mau_full(7);
+        couse *lop_temp = ds_lop.tim_lop_theo_ma(temp);
+        if(lop_temp == nullptr){
+            cout<<"Không tìm thấy lớp học!";
+            break;
+        }else{
+            lop_temp->hienthi();
+        }
         break;
+       }
        case 3:
        {
         system("cls");
         string temp;
-        cout<<"Nhập vào mã giảng viên: ";
+        cout<<"Nhập vào ID giảng viên: "<<endl;
+        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout<<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
+        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        gotoxy(6,2);
         cin.ignore();
         getline(cin,temp);
         system("cls");
+        doi_mau_full(10);
+        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout<<"  │"<<left<<setw(58 + getUTF8LenDiff(temp))<<("⌕ " + temp)<<"│"<<endl;
+        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        doi_mau_full(7);
          giangvien *gv_temp = ds_gv.tim_giangvien_theo_id(temp);
         if(gv_temp == nullptr){
         cout<<"Không tồn tại giảng viên";
@@ -262,12 +295,13 @@ void nghiepvu::tim_kiem_lop_hoc(){
         }else if (gv_temp ->get_hoc_vi() == "Thạc Sĩ"){
             hocvi = "ThS";
         }else hocvi = "";
-        UI::doi_mau_full(13);
+        doi_mau_full(13);
         cout<<"╭──────────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"│"<<left<<setw(13)<<""<<setw(52 + UI::getUTF8LenDiff(gv_temp->get_name()))<<("GIẢNG VIÊN  "+hocvi+"."+ gv_temp->get_name())<<"│"<<endl;
-        cout<<"│"<<left<<setw(3)<<""<<setw(24)<<("Mã GV:" + gv_temp->get_id())<<setw(39 + UI::getUTF8LenDiff(gv_temp->get_bo_mon()))<<("Bộ môn: " + gv_temp->get_bo_mon())<<"│"<<endl;
+        cout<<"│"<<left<<setw(13)<<""<<setw(52 + getUTF8LenDiff(gv_temp->get_name()))<<("GIẢNG VIÊN  "+hocvi+"."+ gv_temp->get_name())<<"│"<<endl;
+        cout<<"│"<<left<<setw(3)<<""<<setw(24)<<("Mã GV:" + gv_temp->get_id())<<setw(39 + getUTF8LenDiff(gv_temp->get_bo_mon()))<<("Bộ môn: " + gv_temp->get_bo_mon())<<"│"<<endl;
         cout<<"╰───────────────────────DANH SÁCH LỚP HỌC──────────────────────╯"<<endl;
-        UI::doi_mau_full(7);
+        cout<<endl;
+        doi_mau_full(7);
         couse * couse_temp;
         for(int i = 0;i<gv_temp->get_size_lop();i++){
             couse_temp = ds_lop.tim_lop_theo_ma(gv_temp ->get_lop(i));
@@ -278,7 +312,32 @@ void nghiepvu::tim_kiem_lop_hoc(){
            break;
        }
        case 4:
+       {
+          system("cls");
+        int temp;
+        cout<<"Nhập vào số tín chỉ : "<<endl;
+        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout<<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
+        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        gotoxy(6,2);
+        cin>>temp;    
+        if (cin.fail()) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout<<"Nhập không hợp lệ!";
+        cin.ignore();
         break;
+        }   
+        system("cls");
+        doi_mau_full(10);
+        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout<<"  │"<<left<<setw(58 + getUTF8LenDiff(to_string(temp)))<<("⌕ " + to_string(temp))<<"│"<<endl;
+        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        doi_mau_full(7);
+        ds_lop.hien_thi_lop_theo_tc(temp);
+        cin.ignore();
+        break;
+       }
        
        default:
         break;

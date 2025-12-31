@@ -17,14 +17,14 @@ void couse::hienthi(){
     // time.hienthithongtin();
     // cout<<"\t"<<"So tin chi: "<<mon_hoc->get_tin_chi()<<"\t\t";
     // if(cur_sv<max_sv){
-    //     UI::doi_mau_full(2);
+    //     doi_mau_full(2);
     // }else UI::doi_mau_full(4);
     // cout<<"So luong :"<<cur_sv<<"/"<<max_sv<<endl;
     // UI::doi_mau_full(7);
    // Thiết kế độ rộng thẻ là 60 ký tự
     int width = 58; 
-    int do_lech = UI::getUTF8LenDiff(mon_hoc->get_ten());
-    int do_lech2 = UI::getUTF8LenDiff(gv->get_name());
+    int do_lech = getUTF8LenDiff(mon_hoc->get_ten());
+    int do_lech2 = getUTF8LenDiff(gv->get_name());
     cout << "  ├──────────────────────────────────────────────────────────┤" << endl;   
     // Dòng 2: Tên môn học (In hoa cho nổi bật)
     cout << "  │ " << left << setw(width  + do_lech) << ("Tên môn: " + mon_hoc->get_ten()) << " │" << endl;  
@@ -34,11 +34,11 @@ void couse::hienthi(){
      cout<<"  │ "<<right<<setw(width + 2)<<" │"<<endl;  
     cout << "  │ " << left << setw(29) <<("Số tín chỉ: " + to_string(mon_hoc->get_tin_chi()));
     if(cur_sv<max_sv){
-        UI::doi_mau_full(2);
-    }else UI::doi_mau_full(4);
+        doi_mau_full(2);
+    }else doi_mau_full(4);
     string siSoStr = to_string(cur_sv) + "/" + to_string(max_sv);
     cout <<left<<setw(width - 23)<<("Sĩ số: " + siSoStr);
-    UI::doi_mau_full(7);
+    doi_mau_full(7);
     cout<<" │" << endl;  
      cout<<"  │ "<<right<<setw(width + 2)<<" │"<<endl;
     // Dòng 5: Thời gian
@@ -77,9 +77,9 @@ bool couse::nhap(giangvien *gv_func,subject *sub_func){
         mon_hoc->add_ma_lop_hoc(ma_lop_hoc);
         return true;
     }else{
-        UI::doi_mau_full(4);
+        doi_mau_full(4);
         cout<<" ❗Giảng viên đã trùng lịch";
-        UI::doi_mau_full(7);
+        doi_mau_full(7);
         return false;
     }
 }

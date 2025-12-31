@@ -6,7 +6,7 @@
 #include<stdlib.h>
 using namespace std;
 int main() {
-    UI::chuanhoa(65001);
+    chuanhoa(65001);
     list_sinhvien sv;
     list_giangvien gv;
     list_subject mon;
@@ -17,12 +17,12 @@ int main() {
     // loading();
     nghiepvu nv(lop,sv,gv,mon);
     nv.nhap_du_lieu_cho_couse("D:/dulieulophoc.txt");
-    cin.get();
+    pause();
     while(1){
     system("cls");
-    UI::doi_mau_full(6);
-    UI::drawTitle();
-    UI::doi_mau_full(7);
+    doi_mau_full(6);
+    drawTitle();
+    doi_mau_full(7);
     cout<<"𝟙.hiển thị danh sách lớp học"<<endl;
     cout<<"𝟚.Dang ky lop hoc"<<endl;
     cout<<"3.Huy dang ky lop hoc"<<endl;
@@ -34,6 +34,11 @@ int main() {
     cout<<"Nhap lua chon cua ban: ";
     int chose;
     cin>>chose;
+    if (cin.fail()) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout<<"Nhập không hợp lệ!";
+        }
     switch (chose){
     case 1:
     {
@@ -121,18 +126,6 @@ int main() {
     case 8:
     {
       system("cls");
-      // string temp;
-      // cout<<"nhập vào :";
-      // cin.ignore();
-      // getline(cin,temp);
-      // if(lop.timkiem_ten(temp)){
-      //   UI::doi_mau_full(2);
-      //   cout<<"tìm kiếm thành công";
-      // }else{
-      //   UI::doi_mau_full(4);
-      //   cout<<"ko có kết quả";
-      // }
-      // UI::doi_mau_full(7);
       nv.tim_kiem_lop_hoc();
       cin.get();
     }
