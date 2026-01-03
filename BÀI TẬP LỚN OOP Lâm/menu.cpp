@@ -217,7 +217,7 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
       cin.get();
     break;
 }
-    case 2:
+    case 3:
       {
       system("cls");
       cin.ignore();
@@ -229,7 +229,7 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
       cin.get();
       break;
     }
-    case 3:
+    case 2:
     {
       system("cls");
       cin.ignore();

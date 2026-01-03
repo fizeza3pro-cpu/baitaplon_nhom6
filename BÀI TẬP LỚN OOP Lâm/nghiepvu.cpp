@@ -136,6 +136,8 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
                     cout << "giang vien bi trung lich , ko the doi";
                 }
                 else {
+                    giangvien *gv_cu = lop->get_gv();
+                    gv_cu->xoa_couse_da_day_id(lop->get_ma_lop_hoc());
                     lop->set_giangvien(gv);
                     gv->them_couse_da_day_id(lop->get_ma_lop_hoc());
                     gv->them_lich_day(lop->get_time());
@@ -167,6 +169,8 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
                         cout << "lop hoc dang day mon nay, ko the doi!";
                     }
                     else {
+                        subject *mon_cu = lop->get_mon_hoc();
+                        mon_cu->xoa_ma_lop_hoc(lop->get_ma_lop_hoc());
                         lop->set_mon(mon);
                         mon->add_ma_lop_hoc(lop->get_ma_lop_hoc());
                         cout << "thay doi mon hoc thanh cong!";
