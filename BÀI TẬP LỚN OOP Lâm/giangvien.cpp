@@ -145,33 +145,7 @@ void giangvien::nhapthongtin() {
 
     // cout << "=> Da luu thong tin giang vien va lich day.\n";
 }
-
-// void giangvien::hienthithongtin() {
-//     cout << "\n📋 CHI TIET GIANG VIEN: " << ten_giang_vien << "\n";
-//     cout << "==========================================\n";
-
-//     // Nhóm thông tin
-//     cout << "\n📌 THONG TIN CA NHAN:\n";
-//     cout << "  - Gioi tinh: " << gioi_tinh << endl;
-//     cout << "  - Ngay sinh: " << birth[0] << "/" << birth[1] << "/" << birth[2] << endl;
-
-//     int tuoi = 2025 - birth[2];
-//     cout << "  - Tuoi: " << tuoi << endl;
-//     cout << "  - SDT: " << sdt << endl;
-
-//     cout << "\n🎓 THONG TIN CHUYEN MON:\n";
-//     cout << "  - Hoc vi: " << hoc_vi << endl;
-//     cout << "  - Bo mon: " << bo_mon << endl;
-
-//     // cout << "\n📚 MON DA GIANG DAY:\n";
-//     // if (mon_da_day.empty()) {
-//     //     cout << "  - Chua co mon nao duoc phan cong\n";
-//     // } else {
-//     //     cout << "  - Tong so mon: " << mon_da_day.size() << endl;
-//     // cout << "==========================================\n";
-//     // }
-// }
-
+//tùng lâm viết lại class hiển thị
 void giangvien::hienthithongtin_gv() {
     // cout << "        THONG TIN GIANG VIEN             " << endl;
     // cout << "ID            : " << id << endl;
@@ -205,34 +179,31 @@ void giangvien::hienthithongtin_gv() {
             lop_day += couse_da_day[i] + " ";
         }
     }
-
     // 1. Thanh ngang trên (Màu Cyan)
     doi_mau_full(11);
     cout << "\n  " <<  "╭──────────────────────────────────────────────────────────╮"<< endl;
-
     // 2. Dòng Tên & Học vị (Màu Vàng sáng)
     cout << "  " <<  "│" << "  ";
     doi_mau_full(14);
     cout << left << setw(card_w - 10+ getUTF8LenDiff(full_title)) << full_title;
     doi_mau_full(11);
     cout << "  " << "│"<< endl;
-
     // 3. Thanh ngăn cách giữa
-      cout << "  ├──────────────────────────────────────────────────────────┤" << endl;
-
+    cout << "  ├──────────────────────────────────────────────────────────┤" << endl;
     // 4. Thông tin chi tiết (Màu Trắng)
+    cout<< "  " << "│";
     doi_mau_full(7);
-    cout << "  " << "│" << "  ID: " << left << setw(13) << id 
+    cout << "  ID: " << left << setw(13) << id 
          << "Giới tính: " << left << setw(11 + getUTF8LenDiff(gioi_tinh)) << gioi_tinh 
          << "NS:  " << left << setw(12) << (to_string(birth[0]) + "/" + to_string(birth[1])+ "/" + to_string(birth[2]));
     doi_mau_full(11);
     cout << "│" << endl;
+    cout<< "  " << "│";
     doi_mau_full(7);
-    cout << "  " << "│" << "  Bộ môn: " << left << setw(31 + getUTF8LenDiff(bo_mon)) << bo_mon
+    cout << "  Bộ môn: " << left << setw(31 + getUTF8LenDiff(bo_mon)) << bo_mon
          << "SĐT: "+sdt << "  ";
     doi_mau_full(11);
     cout << "│" << endl;
-
     // 5. Dòng danh sách lớp dạy (Màu Xanh lá)
     doi_mau_full(11);
     cout << "  ├──────────────────────────────────────────────────────────┤" << endl;
@@ -240,7 +211,6 @@ void giangvien::hienthithongtin_gv() {
     cout << "  │ "<< left << setw(card_w - 9 + getUTF8LenDiff(lop_day)) << lop_day;
     doi_mau_full(11);
     cout << "  " << "│" << endl;
-
     // 6. Thanh ngang dưới
      cout << "  ╰──────────────────────────────────────────────────────────╯" << endl;
     doi_mau_full(7); // Trả lại màu gốc

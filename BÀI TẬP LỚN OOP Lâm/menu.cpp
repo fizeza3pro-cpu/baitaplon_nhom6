@@ -4,7 +4,7 @@ using namespace std;
 void menu_nghiep_vu(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_subject &mon,nghiepvu &nv){
     while(1){
     system("cls");
-    string space = "\t\t\t\t\t\t"; // Khoảng trắng để căn giữa
+    string space = "                                     ";
     
     doi_mau_full(11); // Màu Cyan
     cout << "\n\n" << space << "╭──────────────────────────────────────────╮" << endl;
@@ -112,7 +112,7 @@ void menu_nghiep_vu(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_
     {
         system("cls");
         string malop;
-        cout<<"Nhập mã lớp học: ";
+        cout<<"Nhập mã môn học: ";
         cin.ignore();
         getline(cin,malop);
         system("cls");
@@ -166,7 +166,7 @@ void menu_nghiep_vu(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_
 void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_subject &mon,nghiepvu &nv){
     while(1){
     system("cls");
-    string space = "                         "; // Căn giữa
+    string space = "                                     ";
 
     // --- HEADER QUẢN LÝ ---
     doi_mau_full(12); // Màu Đỏ (Cảnh báo/Admin)
@@ -186,7 +186,7 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
     cout   << space << "   8. " << left << setw(23) << "Thêm môn học"    << "9. Xoá môn học" << endl;
     // --- FOOTER ---
    doi_mau_full(8); // Màu xám
-    cout << "\n" << space << "──────────────────────────────────────────────" << endl;
+    cout << "\n" << space << "────────────────────────────────────────────" << endl;
    doi_mau_full(12);
     cout << space << "   0. QUAY LẠI MENU CHÍNH" << endl;
    doi_mau_full(7);
@@ -302,13 +302,30 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
 void menu_chinh(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_subject &mon,nghiepvu &nv){
     while(1){
     system("cls");
-    doi_mau_full(6);
+    doi_mau_full(14);
     drawTitle();
-    doi_mau_full(7);
-    cout<<"1.Nghiệp vụ hệ thống"<<endl;
-    cout<<"2.Nghiệp vụ quản lý"<<endl;
-    cout<<"0.Thoát chương trình"<<endl;
-    cout<<"Nhập lựa chọn của bạn: ";
+    doi_mau_full(11); // Màu Cyan
+    string space = "                                     ";
+    cout << space << "╔═══════════════════════════════════════════════╗" << endl;
+    cout << space << "║       HỆ THỐNG QUẢN LÝ ĐĂNG KÝ LỚP HỌC        ║" << endl;
+    cout << space << "╠═══════════════════════════════════════════════╣" << endl;
+
+    // --- CÁC LỰA CHỌN ---
+    doi_mau_full(10); // Xanh lá cho User
+    cout << space << "║   [1] NGHIỆP VỤ HỆ THỐNG (Dành cho SV/GV)     ║" << endl;
+    cout << space << "║                                               ║" << endl;  
+    doi_mau_full(12); // Đỏ/Hồng cho Quản lý
+    cout << space << "║   [2] NGHIỆP VỤ QUẢN LÝ (Dành cho Admin)      ║" << endl;
+    cout << space << "║                                               ║" << endl;
+    doi_mau_full(8); // Xám cho Thoát
+    cout << space << "║   [0] THOÁT CHƯƠNG TRÌNH                      ║" << endl;
+    cout << space << "║                                               ║" << endl;
+    
+    doi_mau_full(15); // Trắng
+    cout << space << "║  >> Nhập lựa chọn của bạn:                    ║"<<endl;
+    doi_mau_full(11);
+    cout << space << "╚═══════════════════════════════════════════════╝" << endl;
+    gotoxy(66,17);
     int chose;
     cin>>chose;
     if (cin.fail()) {
