@@ -1,4 +1,5 @@
-﻿#include<iostream>
+﻿#pragma once
+#include<iostream>
 #include"list_couse.h"
 #include"sinhvien.h"
 #include<ctime>

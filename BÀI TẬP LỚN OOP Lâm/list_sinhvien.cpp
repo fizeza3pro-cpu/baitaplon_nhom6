@@ -66,7 +66,7 @@ bool list_sinhvien::delete_sinhvien(string ma_sv, string file_name) {
 		if (dssv[i].get_ma() == ma_sv) {
 
 			// 2. Kiểm tra ràng buộc (đã đăng ký môn chưa)
-			if (dssv[i].get_ds_mon_dky().size() != 0) {
+			if (dssv[i].get_lop_size() != 0) {
 				cout << "ko the xoa sinh vien vi da dang ky mon hoc!" << endl;
 				return false;
 			}

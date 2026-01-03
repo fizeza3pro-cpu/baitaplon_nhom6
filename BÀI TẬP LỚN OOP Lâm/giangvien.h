@@ -5,8 +5,8 @@
 #include<fstream>
 #include<string>
 using namespace std;
-class giangvien {
-private:
+class giangvien{
+    private:
     string id;
     string ten_giang_vien;
     string gioi_tinh;
@@ -16,8 +16,8 @@ private:
     string bo_mon;
     vector<string>couse_da_day;
     vector<Time>lich_day;
-public:
-    giangvien(string a0, string a, string b, string c, string d, string d2, int e, int f, int g) {
+    public:
+    giangvien(string a0,string a , string b, string c, string d,string d2,int e, int f, int g){
         id = a0;
         ten_giang_vien = a;
         gioi_tinh = b;
@@ -28,37 +28,38 @@ public:
         birth[1] = f;
         birth[2] = g;
     }
-    giangvien() {
+    giangvien(){
         id = "chua xac dinh";
         ten_giang_vien = "chua xac dinh";
         gioi_tinh = "chua xac dinh";
         hoc_vi = "chua xac dinh";
         sdt = "chua xac dinh";
         bo_mon = "chua xac dinh";
-        birth[0] = 0;
+       birth[0] = 0;
         birth[1] = 0;
         birth[2] = 0;
     }
     void nhapthongtin();
-    void hienthithongtin();
+    void hienthithongtin_gv();
     void hienthi_mondangday();
-    bool nhap_du_lieu_tu_file(ifstream& f);
-    void them_couse_da_day_id(string ma_couse) {
-        couse_da_day.push_back(ma_couse);
-    }
+    bool nhap_du_lieu_tu_file(ifstream &f);
+    void ghi_du_lieu_vao_file(ofstream& f);
+    void them_couse_da_day_id(string ma_couse);
     bool xoa_couse_da_day_id(string ma_lop);
-    bool check_lop_dang_day(string ma_lop) {
-        for (int i = 0; i < couse_da_day.size(); i++) {
-            if (couse_da_day[i] == ma_lop) {
-                return true;
-            }
-        }
-        return false;
-    }
-    string get_id()const {
+    bool check_lop_dang_day(string ma_lop);
+    string get_id()const{
         return id;
     }
-    string get_name()const {
+    string get_lop(int i)const{
+        if(i>=0 && i<couse_da_day.size()){
+            return couse_da_day[i];
+        }
+        return "";
+    }
+    int get_size_lop(){
+        return couse_da_day.size();
+    }
+    string get_name()const{
         return ten_giang_vien;
     }
     string get_hoc_vi()const{
@@ -67,10 +68,8 @@ public:
     string get_bo_mon()const{
         return bo_mon;
     }
-    bool kra_trung_lich(Time a);
-    void them_lich_day(Time a) {
-        lich_day.push_back(a);
-    }
+    bool kiemtra_trung_lich(Time a);
+    void them_lich_day(Time a);
     bool xoa_lich_day(Time a);
    /*  get học vị các thứ phục vụ hiển thị về sau */
 };

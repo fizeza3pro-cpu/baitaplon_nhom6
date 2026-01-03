@@ -3,6 +3,12 @@
 #include<fstream>
 #include"sinhvien.h"
 using namespace std;
+void sinhvien::hien_thi_lop_da_dky(){
+    for( couse *p : ds_mon_dky){
+        p->hienthi();
+        cout<<"\n";        
+    }
+}
 bool sinhvien::dadangky(couse* mon) {
     if (ds_mon_dky.size() == 0) {
         return false;

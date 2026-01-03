@@ -48,15 +48,20 @@ public:
     string get_ma()const {
         return id;
     }
-
+// ---------lâm viết-----------
     void nhap();
     void hienthithongtin();
     bool dadangky(couse* mon);
     bool add_couse(couse* mon);
     bool delete_couse(couse* mon);
+    void hien_thi_lop_da_dky();
+     int get_lop_size() const{
+        return ds_mon_dky.size();
+    }
+    // ----------------------------
+
     bool nhap_du_lieu_tu_file(ifstream& f);
     void ghi_vao_file();
-
     string get_gioi_tinh() const { return gioi_tinh; }
     string get_sdt() const { return sdt; }
     string get_chuyen_nganh() const { return chuyen_nganh; }
@@ -64,5 +69,5 @@ public:
     int get_khoa() const { return khoa; }
     int get_cur_tc() const { return cur_tc; }
     int get_max_tc() const { return max_tc; }
-    vector<couse*> get_ds_mon_dky() const { return ds_mon_dky; }
+    // vector<couse*> get_ds_mon_dky() const { return ds_mon_dky; }
 };

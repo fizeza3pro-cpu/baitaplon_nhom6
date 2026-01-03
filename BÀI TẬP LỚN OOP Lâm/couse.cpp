@@ -69,7 +69,7 @@ bool couse::ktra_full() {
 }
 bool couse::nhap(giangvien* gv_func, subject* sub_func) {
     time.nhap();
-    if (!gv_func->kra_trung_lich(time)) {
+    if (!gv_func->kiemtra_trung_lich(time)) {
         cout << "Nhập số lượng sinh viên tối đa: ";
         cin >> max_sv;
         cur_sv = 0;
@@ -79,18 +79,10 @@ bool couse::nhap(giangvien* gv_func, subject* sub_func) {
         mon_hoc = sub_func;
         mon_hoc->add_ma_lop_hoc(ma_lop_hoc);
         return true;
-<<<<<<< HEAD
     }else{
         doi_mau_full(4);
         cout<<" ❗Giảng viên đã trùng lịch";
         doi_mau_full(7);
-=======
-    }
-    else {
-        UI::doi_mau_full(4);
-        cout << " ❗Giảng viên đã trùng lịch";
-        UI::doi_mau_full(7);
->>>>>>> 73aa9b80af4464efd3f24652abd5453f63bb6cb5
         return false;
     }
 }

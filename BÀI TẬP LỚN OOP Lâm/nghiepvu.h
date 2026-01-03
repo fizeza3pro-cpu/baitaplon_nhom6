@@ -1,3 +1,4 @@
+#pragma once
 #include<iostream>
 #include"list_couse.h"
 #include"list_sinhvien.h"
@@ -24,6 +25,8 @@ public:
     void hienthi_ds_phieu_dky();
     void nhap_du_lieu_cho_couse(string file_name);
     void thaydoithongtin_couse(string ma_lop, string file_name);
-    void xoa_sinh_vien(string ma_sv, string file_sv);
-
+    void tim_kiem_lop_hoc();
+    void hien_thi_lop_hoc_cua_gv(string ma_gv);
+    void hien_thi_lop_hoc_cua_sv(string ma_sv);
+    void hien_thi_lop_hoc_cua_mon_hoc(string ma_mon);
 };

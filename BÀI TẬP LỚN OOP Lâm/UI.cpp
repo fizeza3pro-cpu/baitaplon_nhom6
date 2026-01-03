@@ -14,19 +14,6 @@ using namespace std;
 // 5 = Purple     13 = Light Purple
 // 6 = Yellow     14 = Light Yellow
 // 7 = White      15 = Bright White
-// void setColor(Color c) {
-//     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);
-// }
-
-// void println(const std::string& s, Color c) {
-//     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-//     CONSOLE_SCREEN_BUFFER_INFO csbi;
-//     GetConsoleScreenBufferInfo(h, &csbi);
-
-//     setColor(c);
-//     std::cout << s << std::endl;
-//     SetConsoleTextAttribute(h, csbi.wAttributes);
-// }
 void doi_mau_full(int x) {
     HANDLE mau;
     mau = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -62,23 +49,11 @@ void gotoxy(int x, int y) {
     c.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
-// void form_tim_kiem(string &search){
-//         cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
-//         cout<<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
-//         cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
-//         gotoxy(6,2);
-//         cin.ignore();
-//         getline(cin,search);
-//         system("cls");
-//         doi_mau_full(10);
-//         cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
-//         cout<<"  │"<<left<<setw(58 + getUTF8LenDiff(search))<<("⌕ " + temp)<<"│"<<endl;
-//         cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
-//         doi_mau_full(7);
-// }
 void pause() {
-    cout << "\nNhan Enter de tiep tuc...";
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "\nNhấn Enter để tiếp tục...";
+    // cin.ignore(numeric_limits<streamsize>::max(), '\n');
+     string tmp;
+    getline(cin, tmp);
 
     // char c;
     // do {
