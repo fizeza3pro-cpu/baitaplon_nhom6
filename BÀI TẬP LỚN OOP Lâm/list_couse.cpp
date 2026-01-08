@@ -53,7 +53,7 @@ void list_couse::hien_thi_lop_theo_tc(int tc){
 
 void list_couse::nhap_test(giangvien *gv_func, subject *sub_func,string file_name) {
     string chose;
-    cout << "Nhap loai lop hoc muon dang (ON / OFF): ";
+    cout << "Nhập loại lớp học muốn tạo (ON / OFF): ";
     getline(cin, chose);
 
     couse* newCourse = nullptr;
@@ -66,14 +66,14 @@ void list_couse::nhap_test(giangvien *gv_func, subject *sub_func,string file_nam
     }
     else {
         doi_mau_full(4);
-        cout << "Loi nhap lieu, vui long chon dung!\n";
+        cout << "Lỗi nhập liệu, vui lòng chọn đúng (ON/OFF)!\n";
         doi_mau_full(7);
         return;
     }
     // Gọi hàm nhập dữ liệu lớp học
     if(newCourse->nhap(gv_func, sub_func)){
         doi_mau_full(2);
-        cout<<"tao lop moi thanh cong!";
+        cout<<"Tạo lớp mới thành công!";
         doi_mau_full(7);
         
         newCourse ->xuat_du_lieu_file(file_name);
@@ -117,8 +117,8 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub
        couse *mon = nullptr;
        giangvien *gv_temp = ds_gv.tim_giangvien_theo_id(a[3]);
        subject *sub_temp = ds_sub.tim_mon_theo_ma(a[2]);
-       if(a[0] == "online" && a.size() == 9){
-        mon = new online(a[1],sub_temp,gv_temp,stoi(a[4]),stoi(a[5]),stoi(a[6]),stoi(a[7]),a[8]);
+       if(a[0] == "online" && a.size() == 10){
+        mon = new online(a[1],sub_temp,gv_temp,stoi(a[4]),stoi(a[5]),stoi(a[6]),stoi(a[7]),a[8],a[9]);
        }else if(a[0] == "offline" && a.size() == 10){
         mon = new offline(a[1],sub_temp,gv_temp,stoi(a[4]),stoi(a[5]),stoi(a[6]),stoi(a[7]),a[8],a[9]);
        }else{
@@ -176,51 +176,106 @@ bool list_couse::check_id_hop_le(string id){
     return true;
 }
 
-void list_couse::xuat_du_lieu_ra_file(string file_name){
+// void list_couse::xuat_du_lieu_ra_file(string file_name){
+//     ofstream f(file_name);
+//         if(!f.is_open()){
+//             cout<<"ko mo dc file"<<endl;
+//         }else{
+//             for(int j = 0;j<p.size();j++){
+//                 p[j]->xuat_du_lieu_file(file_name);
+//             }
+//         }
+//     f.close();
+// }
+void list_couse::xuat_du_lieu_ra_file_full(string file_name){
     ofstream f(file_name);
-        if(!f.is_open()){
-            cout<<"ko mo dc file"<<endl;
-        }else{
-            for(int j = 0;j<p.size();j++){
-                p[j]->xuat_du_lieu_file(file_name);
-            }
-        }
+    if (!f.is_open()) {
+        cout << "Không mở được file!";
+        return;
+    }
+    string line;
+    for(int i = 0;i<p.size();i++){
+        p[i]->string_file(line);
+        f<<line<<endl;
+    }
+    cout<<"Lưu dữ liệu vào file "<<file_name<<" thành công!";
     f.close();
 }
 
 bool list_couse::delete_lop_hoc(string ma_lop,string file_name){
+    //for(int i = 0;i<p.size();i++){
+    //     if(p[i]->get_ma_lop_hoc() == ma_lop){
+    //         if(p[i]->get_cur_sv() != 0){
+
+    //             cout<<"ko the xoa lop hoc vi da co sinh vien dang ky!"<<endl;
+    //             return false;
+    //         }
+    //         subject *y = p[i]->get_mon_hoc();
+    //         if(!y->xoa_ma_lop_hoc(ma_lop)){
+    //             cout<<"xoa ma lop hoc khoi mon hoc that bai!"<<endl;
+    //             return false;
+    //         }
+
+    //         giangvien *x = p[i]->get_gv();
+    //         if(!x->xoa_couse_da_day_id(ma_lop)){
+    //             cout<<"xoa lop hoc khoi giang vien that bai!"<<endl;
+    //             return false;
+    //         }
+    //         if(!x->xoa_lich_day(p[i]->get_time())){
+    //             cout<<"Xoá lịch dạy giảng viên thất bại!";
+    //             return false;
+    //         }
+    //         delete p[i];
+    //         p.erase(p.begin() + i);
+    //         cout<<"xoa lop hoc khoi danh sach thanh cong!"<<endl;
+    //         // Cập nhật lại file sau khi xóa
+    //        xuat_du_lieu_ra_file(file_name);
+    //         cout<<"cap nhat file sau xoa lop hoc thanh cong!"<<endl;
+    //         return true;
+    //     }
+    // }
+    // cout<<"ko tim thay lop hoc de xoa!"<<endl;
+    // return false;
     for(int i = 0;i<p.size();i++){
         if(p[i]->get_ma_lop_hoc() == ma_lop){
-            if(p[i]->get_cur_sv() != 0){
+            if (p[i]->get_cur_sv() != 0) {
+                cout << "ko the xoa lop hoc vi da co sinh vien dang ky!\n";
+                return false;
+            }   
 
-                cout<<"ko the xoa lop hoc vi da co sinh vien dang ky!"<<endl;
-                return false;
-            }
-            subject *y = p[i]->get_mon_hoc();
-            if(!y->xoa_ma_lop_hoc(ma_lop)){
-                cout<<"xoa ma lop hoc khoi mon hoc that bai!"<<endl;
+            subject* y = p[i]->get_mon_hoc();
+            giangvien* x = p[i]->get_gv();
+
+            if (!y || !x) return false;
+
+// check trước
+            if (!y->check_ma_lop_hoc(ma_lop)) {
+                cout << "Môn học "<<y->get_ten()<<"  không chứa lớp này!\n";
                 return false;
             }
 
-            giangvien *x = p[i]->get_gv();
-            if(!x->xoa_couse_da_day_id(ma_lop)){
-                cout<<"xoa lop hoc khoi giang vien that bai!"<<endl;
+            if (!x->check_lop_dang_day(ma_lop)) {
+                cout << "Giảng viên "<<x->get_name()<<" chưa dạy lớp này!\n";
                 return false;
             }
-            if(!x->xoa_lich_day(p[i]->get_time())){
-                cout<<"Xoá lịch dạy giảng viên thất bại!";
-                return false;
-            }
-            delete p[i];
-            p.erase(p.begin() + i);
-            cout<<"xoa lop hoc khoi danh sach thanh cong!"<<endl;
-            // Cập nhật lại file sau khi xóa
-           xuat_du_lieu_ra_file(file_name);
-            cout<<"cap nhat file sau xoa lop hoc thanh cong!"<<endl;
-            return true;
+
+            // if (!x->co_lich_day(p[i]->get_time())) {
+            //     cout << "Giảng viên "<<x->get_name()<<" chưa có lịch dạy của lớp này!\n";
+            //     return false;
+            // }
+            y->xoa_ma_lop_hoc(ma_lop);
+        x->xoa_couse_da_day_id(ma_lop);
+        x->xoa_lich_day(p[i]->get_time());
+        
+        delete p[i];
+        p.erase(p.begin() + i);
+        
+        xuat_du_lieu_ra_file_full(file_name);
+        cout << "\nXoá lớp học thành công!\n";
+        return true;
         }
     }
-    cout<<"ko tim thay lop hoc de xoa!"<<endl;
+    cout << "\nXoá lớp học không thành công!\n";
     return false;
 }
 

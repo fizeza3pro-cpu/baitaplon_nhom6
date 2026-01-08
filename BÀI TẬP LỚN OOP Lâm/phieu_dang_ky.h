@@ -16,16 +16,23 @@ public:
     {
         sv_dky = nullptr;
         lop_dky = nullptr;
-        thoi_gian_dky = "";//lỗi gì gì đấy
+        thoi_gian_dky = "Không xác định";//lỗi gì gì đấy
     }
-    phieu_dang_ky(sinhvien* a, couse* b) {
+    phieu_dang_ky(sinhvien* a, couse* b,string tg) {
+        sv_dky = a;
+        lop_dky = b;
+        thoi_gian_dky = tg;
+    }
+    void tao_phieu_dky(sinhvien* a,couse *b ){
         sv_dky = a;
         lop_dky = b;
         thoi_gian_dky = lay_tg_thuc();
     }
-    // void tao_phieu_dky(sinhvien a,couse *b );
     void hien_thi_phieu_dky();
     string lay_tg_thuc();
     string to_string2(int x);
+    string string_file();
     bool checkphieu(sinhvien* a, couse* b);
+    void ghi_tiep_vao_file(string file_name);
+    void nhap_du_lieu_tu_file(ifstream &f);
 };

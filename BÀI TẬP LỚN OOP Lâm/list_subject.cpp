@@ -16,6 +16,7 @@ void list_subject::lay_du_lieu_tu_file(string file_name) {
             ds_mon.push_back(mon_temp);
         }
     }
+    cout<<"Nhập thành công dữ liệu môn học từ "<<file_name<<" !"<<endl;
     f.close();
 }
 

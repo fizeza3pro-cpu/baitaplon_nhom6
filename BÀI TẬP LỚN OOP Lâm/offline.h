@@ -25,6 +25,7 @@ public:
     string get_loai()const {
         return loai;
     }
+    virtual void string_file(string &line); 
     bool nhap(giangvien* gv_func, subject* sub_func);
     void hienthi();
     bool xuat_du_lieu_file(string& file_name);

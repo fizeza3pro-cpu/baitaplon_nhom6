@@ -36,6 +36,7 @@ bool list_sinhvien::lay_du_lieu_tu_file(string file_name) {
 			dssv.push_back(sv_temp);
 		}
 	}
+	cout<<"Nhập thành công dữ liệu sinh viên từ "<<file_name<<" !"<<endl;
 	f.close();
 	return true;
 }

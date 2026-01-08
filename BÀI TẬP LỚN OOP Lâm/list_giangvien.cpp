@@ -14,6 +14,7 @@ void list_giangvien::lay_du_lieu_tu_file(string file_name) {
         while (gv_temp.nhap_du_lieu_tu_file(f)) {
             ds_gv.push_back(gv_temp);
         }
+        cout<<"Nhập thành công dữ liệu giảng viên từ "<<file_name<<" !"<<endl;
     }
     f.close();
 }
@@ -36,23 +37,6 @@ giangvien* list_giangvien::tim_giangvien_theo_id(string ma_gv) {
     return nullptr;
 }
 
-// void list_giangvien::luu_du_lieu_vao_file_continue(string file_name) {
-//     ofstream f(file_name,ios::app); // Mở file ở chế độ ghi mới (ghi đè) | lâm: đoạn này ghi mới cả file làm gì, nối tiếp vào dữ liệu cũ là đc r
-//     if (!f.is_open()) {
-//         cout << "Khong the mo file de ghi!" << endl;
-//         return;
-//     }
-
-//     for (int i = 0; i < ds_gv.size(); i++) {
-//         ds_gv[i].ghi_du_lieu_vao_file(f);
-//         // Nếu không phải giảng viên cuối cùng thì mới xuống dòng
-//         if (i < ds_gv.size() - 1) {
-//             f << endl;
-//         }
-//     }
-//     f.close();
-//     cout << "Da luu thay doi vao file: " << file_name << endl;
-// }
 void list_giangvien::luu_du_lieu_vao_file(string file_name) {
     ofstream f(file_name); // Mở file ở chế độ ghi mới (ghi đè)
     if (!f.is_open()) {
@@ -68,14 +52,18 @@ void list_giangvien::luu_du_lieu_vao_file(string file_name) {
         }
     }
     f.close();
-    cout << "Da luu thay doi vao file: " << file_name << endl;
+    cout << "Đã lưu thay đổi vào file: " << file_name << endl;
 }
+
 void list_giangvien::add_giangvien(string file_name){
     giangvien temp;
     temp.nhapthongtin();
     ds_gv.push_back(temp);
      ofstream f(file_name,ios::app);
     temp.ghi_du_lieu_vao_file(f);
+    f<<"\n";
+    f.close();
+    cout<<"Đã thêm giảng viên vào file";
 
 }
 //lâm sửa lại hàm delete

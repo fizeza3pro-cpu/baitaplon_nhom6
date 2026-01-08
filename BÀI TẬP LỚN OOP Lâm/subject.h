@@ -58,6 +58,14 @@ public:
         ma_lop_hoc.push_back(a); 
     }
     bool xoa_ma_lop_hoc(string ma_lop);
+    bool check_ma_lop_hoc(string ma_lop){
+        for(int i = 0;i<ma_lop_hoc.size();i++){
+            if(ma_lop_hoc[i] == ma_lop){
+                return true;
+            }
+        }
+        return false;
+    }
 
     friend ostream& operator<<(ostream& os, const subject& s);
     friend istream& operator>>(istream& is, subject& s);

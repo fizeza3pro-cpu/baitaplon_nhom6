@@ -21,10 +21,7 @@ string phieu_dang_ky::lay_tg_thuc() {
         + to_string(lmt->tm_mon + 1) + "/" + to_string(1900 + lmt->tm_year);
     return thoi_gian;
 }
-// void phieu_dang_ky::hien_thi_phieu_dky(){
-//     cout<<"Masinhvien: "<<sv_dky->get_ma()<<"\t"<<"Ho va ten: "<<sv_dky->get_name()<<"\t"<<"Lop dang ky: "<<"["<<lop_dky->get_ma_lop_hoc()<<"]"<<lop_dky->get_mon_hoc()->get_ten()<<endl;
-//    cout<<"Thoi gian dang ky: "<<thoi_gian_dky<<endl;
-// }
+
 void phieu_dang_ky::hien_thi_phieu_dky(){
     int do_lech = getUTF8LenDiff(sv_dky->get_name());
     cout << "   " << left
@@ -39,3 +36,23 @@ bool phieu_dang_ky::checkphieu(sinhvien* a, couse* b) {
     }
     return false;
 }
+string phieu_dang_ky::string_file(){
+    string temp = sv_dky->get_ma()+"|"+lop_dky->get_ma_lop_hoc()+"|"+thoi_gian_dky;
+    return temp;
+
+}
+
+void phieu_dang_ky::ghi_tiep_vao_file(string file_name){
+    ofstream f(file_name,ios::app);
+    if (!f.is_open()){
+        cout<<"Lỗi không mở đc file!";
+        return;
+    }
+    f<<string_file()<<endl;
+    f.close();
+}
+// void phieu_dang_ky::nhap_du_lieu_tu_file(ifstream &f){
+    
+
+// }
+

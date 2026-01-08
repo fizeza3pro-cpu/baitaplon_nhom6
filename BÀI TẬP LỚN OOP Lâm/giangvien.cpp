@@ -123,12 +123,12 @@ void giangvien::nhapthongtin() {
     cout << "Nhap bo mon: ";
     getline(cin, bo_mon);
 
-    // nhập couse và lịch dạy tương ứng
-    int n;
-    cout << "Giang vien nay day may lop? ";
-    cin >> n;
-    cin.ignore();
     //đoạn này là đc rồi, lớp học là do mình toạn, ko nhập đc cho giảng viên đâu
+    // nhập couse và lịch dạy tương ứng
+    // int n;
+    // cout << "Giang vien nay day may lop? ";
+    // cin >> n;
+    // cin.ignore();
 
     // for (int i = 0; i < n; i++) {
     //     string ma_lop;
@@ -334,7 +334,7 @@ void giangvien::them_couse_da_day_id(string ma_lop) {
         }
     }
     couse_da_day.push_back(ma_lop);
-    cout << "Da them lop hoc " << ma_lop << " vao danh sach mon da day cua giang vien " << ten_giang_vien << endl;
+    cout << "Đã thêm lớp học " << ma_lop << " vào danh sách môn đã dạy của giảng viên " << ten_giang_vien << endl;
 }
 
 void giangvien::ghi_du_lieu_vao_file(ofstream& f) {

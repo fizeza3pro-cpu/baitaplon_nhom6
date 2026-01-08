@@ -12,15 +12,6 @@ void couse::tusinhma() {
     ma_lop_hoc = "MTA" + ma_lop_hoc;
 }
 void couse::hienthi() {
-    // cout<<"[+] Ten mon hoc: "<<mon_hoc->get_ten()<<"\t"<<"Ma mon hoc: "<<ma_lop_hoc<<"\t"<<"Giang vien: "<<gv->get_name()<<endl;
-    // cout<<"    Thoi gian: ";
-    // time.hienthithongtin();
-    // cout<<"\t"<<"So tin chi: "<<mon_hoc->get_tin_chi()<<"\t\t";
-    // if(cur_sv<max_sv){
-    //     doi_mau_full(2);
-    // }else UI::doi_mau_full(4);
-    // cout<<"So luong :"<<cur_sv<<"/"<<max_sv<<endl;
-    // UI::doi_mau_full(7);
    // Thiết kế độ rộng thẻ là 60 ký tự
     int width = 58; 
     int do_lech = getUTF8LenDiff(mon_hoc->get_ten());
@@ -98,7 +89,7 @@ bool couse::nhap(giangvien* gv_func, subject* sub_func) {
 //     return true;    
 //  }
 bool couse::xuat_du_lieu_file(string& line) {
-    line = ma_lop_hoc + "|" + mon_hoc->get_ten() + "|" + gv->get_id() + "|" + to_string(time.get_bat_dau()) + "|" + to_string(time.get_ket_thuc()) + "|" + to_string(time.get_thu())
+    line = ma_lop_hoc + "|" + mon_hoc->get_ma_mon() + "|" + gv->get_id() + "|" + to_string(time.get_bat_dau()) + "|" + to_string(time.get_ket_thuc()) + "|" + to_string(time.get_thu())
         + "|" + to_string(max_sv);
     return true;
 }
@@ -107,5 +98,10 @@ void couse::cap_nhat_id(string id) {
     if (so > sl) {
         sl = so;
     }
+}
+void couse::string_file(string &line){
+    line = ma_lop_hoc + "|" + mon_hoc->get_ma_mon() + "|" + gv->get_id() + "|" + to_string(time.get_bat_dau()) + "|" + to_string(time.get_ket_thuc()) + "|" + to_string(time.get_thu())
+        + "|" + to_string(max_sv);
+
 }
 

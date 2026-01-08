@@ -27,6 +27,6 @@ public:
         p.erase(p.begin() + i);
     }
     bool check_id_hop_le(string id);
-    void xuat_du_lieu_ra_file(string file_name);
+    void xuat_du_lieu_ra_file_full(string file_name);
     void timkiem_ten(string ten_mon);
 };

@@ -6,10 +6,10 @@ using namespace std;
 class Time {
 private:
     int thu;
-    int thoi_gian_bat_dau;
-    int thoi_gian_ket_thuc;
+    float thoi_gian_bat_dau;
+    float thoi_gian_ket_thuc;
 public:
-    Time(int a, int b, int c) {
+    Time(int a, float b, float c) {
         thu = c;
         thoi_gian_bat_dau = a;
         thoi_gian_ket_thuc = b;

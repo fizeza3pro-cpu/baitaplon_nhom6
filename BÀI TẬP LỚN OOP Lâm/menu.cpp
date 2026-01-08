@@ -59,7 +59,7 @@ void menu_nghiep_vu(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_
       getline(cin,masv);
       cout<<"Nhập mã lớp học: ";
       getline(cin,ma_lop);
-      nv.dang_ky_lop_hoc(masv,ma_lop);
+      nv.dang_ky_lop_hoc(masv,ma_lop,FILE_PHIEU_DKY);
       cin.get();
       break;
     }
@@ -72,7 +72,7 @@ void menu_nghiep_vu(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_
         getline(cin,masv);
         cout<<"Nhập mã lớp học: ";
         getline(cin,ma_lop);
-        nv.huy_dang_ky_lop_hoc(masv,ma_lop);
+        nv.huy_dang_ky_lop_hoc(masv,ma_lop,FILE_PHIEU_DKY);
         cin.get();
         break;
     }

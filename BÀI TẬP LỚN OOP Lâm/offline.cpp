@@ -39,5 +39,9 @@ bool offline::xuat_du_lieu_file(string& file_name) {
         f.close();
     }
     return true;
-
 }
+ void offline::string_file(string &line){
+    couse::string_file(line);
+    line.insert(0,"offline|");
+    line +="|" + phong_hoc + "|" + nha;
+ }

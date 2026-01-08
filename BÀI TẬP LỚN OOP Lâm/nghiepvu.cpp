@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include"nghiepvu.h"
 using namespace std;
+//---------------------------lớp học---------------------------
 void nghiepvu::them_mon_hoc(string ma_gv, string ten_mon, string file_name) {
     /* truyền vào hàm có thể là mã gv,... nhưng truyền cả đối tượng cho trực quan */
     giangvien* c = ds_gv.tim_giangvien_theo_id(ma_gv);
@@ -9,7 +10,7 @@ void nghiepvu::them_mon_hoc(string ma_gv, string ten_mon, string file_name) {
         cout << "⚠ Không tìm thấy giảng viên" << endl;
         return;
     }
-    subject* e = ds_mon.tim_mon_theo_ten(ten_mon);
+    subject* e = ds_mon.tim_mon_theo_ma(ten_mon);
     if (e == nullptr) {
         cout << "⚠ Không tìm thấy môn học" << endl;
         return;
@@ -18,7 +19,8 @@ void nghiepvu::them_mon_hoc(string ma_gv, string ten_mon, string file_name) {
     /*    phải thêm mã  lơp shocj vào cho mon, giangvien vs time */
 
 }
-void nghiepvu::dang_ky_lop_hoc(string id_sv, string ma_lop) {
+
+void nghiepvu::dang_ky_lop_hoc(string id_sv, string ma_lop,string file_name_pdk) {
     sinhvien* a = ds_sv.tim_sinhvien_theo_id(id_sv);
     if (a == nullptr) {
         cout << "⚠ Không tìm thấy sinh viên" << endl;
@@ -35,8 +37,10 @@ void nghiepvu::dang_ky_lop_hoc(string id_sv, string ma_lop) {
     }
     if (a->add_couse(b)) {
         b->tang_sv();
-        phieu_dang_ky temp(a, b);
+        phieu_dang_ky temp;
+        temp.tao_phieu_dky(a,b);
         ds_phieu_dky.push_back(temp);
+        temp.ghi_tiep_vao_file(file_name_pdk);
         doi_mau_full(2);
         cout<<"✔ Đăng ký lớp học thành công!"<<endl;
     }else{
@@ -45,7 +49,8 @@ void nghiepvu::dang_ky_lop_hoc(string id_sv, string ma_lop) {
     }   
     doi_mau_full(7);
 }
-void nghiepvu::huy_dang_ky_lop_hoc(string id_sv, string ma_lop) {
+
+void nghiepvu::huy_dang_ky_lop_hoc(string id_sv, string ma_lop,string file_name_pdk) {
     sinhvien* a = ds_sv.tim_sinhvien_theo_id(id_sv);
     if (a == nullptr) {
         cout << "Khong tim thay sinh vien!" << endl;
@@ -56,19 +61,31 @@ void nghiepvu::huy_dang_ky_lop_hoc(string id_sv, string ma_lop) {
         cout << "Khong tim thay lop hoc!" << endl;
         return;
     }
+    //Duyệt hết các phiếu đăng ký, tìm nếu có phiếu phù hợp thì huỷ đăng ký
+    //=>nếu có nhiều phiếu trùng nhau thì ko sao cả vì huỷ phiếu đầu tiên( xoá nó khỏi list rồi)
+    // nên trong file sẽ vẫn đúng vì ghi ra từ list trong chương trình
     for (int i = 0; i < ds_phieu_dky.size(); i++) {
         if (ds_phieu_dky[i].checkphieu(a, b)) {
             if (a->delete_couse(b)) {
                 ds_phieu_dky.erase(ds_phieu_dky.begin() + i);
+         //----------chú ý đoạn này nhập đường dẫn gốc vào, có j nhớ sửa----------------
+                ghi_du_lieu_file_phieu_dky(file_name_pdk);
                 b->giam_sv();
-                cout << "huy dang ky thanh cong!";
+                doi_mau_full(10);
+                cout << "Huỷ đăng ký thành công!";
+                doi_mau_full(7);
+                return;
             }
-        }
-        else {
-            cout << "sinh vien chua dang ky lop nay!";
         }
     }
 }
+
+void nghiepvu::nhap_du_lieu_cho_couse(string file_name) {
+    if (ds_lop.nhap_du_lieu_tu_file(ds_gv, ds_mon, file_name)) {
+        cout << "Nhập dữ liệu cho couse từ "<<file_name<<" thành công!" << endl;
+    }
+}
+
 void nghiepvu::hienthi_ds_phieu_dky(){
     cout<<"─────────────────────────────────────LỊCH SỬ ĐĂNG KÝ────────────────────────────────────"<<"\n"<<endl;
     doi_mau_full(6); // Màu vàng cho tiêu đề nổi bật
@@ -85,11 +102,75 @@ void nghiepvu::hienthi_ds_phieu_dky(){
     }
     cout << "────────────────────────────────────────────────────────────────────────────────────────";
 }
-void nghiepvu::nhap_du_lieu_cho_couse(string file_name) {
-    if (ds_lop.nhap_du_lieu_tu_file(ds_gv, ds_mon, file_name)) {
-        cout << "nhap du lieu cho couse thanh cong!" << endl;
+
+void nghiepvu::ghi_du_lieu_file_phieu_dky(string file_name){
+    ofstream f(file_name);
+    if (!f.is_open()){
+        cout<<"Lỗi không mở đc file!";
+        return;
     }
+        for(int i = 0;i<ds_phieu_dky.size();i++){
+            f<<ds_phieu_dky[i].string_file()<<endl;
+        }
+        cout<<"Ghi dữ liệu vào file"<<file_name<<" thành công"<<endl;
 }
+
+void nghiepvu::nhap_du_lieu_file_phieu_dky(string file_name){
+     vector<string> a;
+    string line;   
+    string temp = "";
+    int dem = 0;
+    ifstream f(file_name);
+    if(!f.is_open()){  
+        cout<<"Không mở đc file!"<<endl;
+        return;
+    }else{
+        while(getline(f,line)){
+            //clear a và temp ngay từ đầu cho vòng lặp tiếp 
+            a.clear();
+            temp = "";
+
+         if(line.empty()) continue;
+          for(char c : line){ 
+            if(c == '|'){
+                a.push_back(temp); /* đoạn này tách chuỗi theo dấu '|' */
+                temp = "";
+            }else{
+                temp +=c;
+            }
+            }
+       a.push_back(temp);
+       sinhvien *sv_temp = ds_sv.tim_sinhvien_theo_id(a[0]);
+       couse *lop_temp = ds_lop.tim_lop_theo_ma(a[1]);
+       if (!sv_temp || !lop_temp) {
+        cout<<"Không tồn tại lớp học hoặc sinh viên, skip!"<<endl;
+        continue;
+    }
+       if(sv_temp->check_lop_dky(lop_temp)){
+            cout<<"Phát hiện trùng phiếu đăng ký trong file, tiến hành bỏ qua"<<endl;
+            continue;
+       }
+       phieu_dang_ky temp(sv_temp,lop_temp,a[2]);
+       //Kiểm tra xem có add vào ds couse của sinh viên hay ko, nếu ko thì skip
+       if(sv_temp->add_couse(lop_temp)){
+           ds_phieu_dky.push_back(temp);
+           lop_temp->tang_sv();
+            dem++;
+       }else{
+        cout<<"vượt mức tín chỉ tối đa của sinh viên "<<sv_temp->get_ma()<<" tiến hành bỏ qua!"<<endl;
+        continue;
+       }
+       }
+    }
+doi_mau_full(2);
+cout<<"Đã nhập thành công "<<dem<<" phiếu đăng ký từ "<<file_name<<"!"<<endl;
+doi_mau_full(7);
+f.close();
+}
+
+
+
+
 void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
     couse* lop = ds_lop.tim_lop_theo_ma(ma_lop);
     if (lop == nullptr) {
@@ -151,16 +232,16 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
         {
             cin.ignore();
             if (lop->get_cur_sv() != 0) {
-                cout << "lop da co nguoi dang ky, ko the thay doi mon hoc!";
+                cout << "Lớp đã có sinh viên đăng ký, không thể thay đổi môn học!";
             }
             else {
                 cin.ignore();
                 string ten_mon;
-                cout << "nhap ten mon muon doi: ";
+                cout << "Nhập mã môn học muốn đổi: ";
                 getline(cin, ten_mon);
-                subject* mon = ds_mon.tim_mon_theo_ten(ten_mon);
+                subject* mon = ds_mon.tim_mon_theo_ma(ten_mon);
                 if (mon == nullptr) {
-                    cout << "ko ton tai mon hoc!";
+                    cout << "kHÔNG TỒN TẠI MÔN HỌC!";
                 }
                 else {
                     cout << "THONG TIN MON HOC: " << endl;
@@ -222,7 +303,7 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
         }
 
     }
-    ds_lop.xuat_du_lieu_ra_file(file_name);
+    ds_lop.xuat_du_lieu_ra_file_full(file_name);
     cout<<"Cập nhật dữ liệu vào file thành công"<<endl;
 }
 } 
@@ -232,7 +313,7 @@ void nghiepvu::tim_kiem_lop_hoc(){
        cout<<"│"<<""<<setw(59)<<""<<"│"<<endl;
        cout<<"│"<<setw(6)<<""<<"1.Tìm kiếm lớp học theo môn học"<<setw(22)<<""<<"│"<<endl;
        cout<<"│"<<setw(6)<<""<<"2.Tìm kiếm lớp học theo mã lớp học"<<setw(19)<<""<<"│"<<endl;
-       cout<<"│"<<setw(6)<<""<<"3.Tìm kiếm lớp học theo tên giảng viên"<<setw(15)<<""<<"│"<<endl;
+       cout<<"│"<<setw(6)<<""<<"3.Tìm kiếm lớp học theo mã giảng viên"<<setw(16)<<""<<"│"<<endl;
        cout<<"│"<<setw(6)<<""<<"4.Tìm kiếm lớp học theo số tín chỉ"<<setw(19)<<""<<"│"<<endl;
        cout<<"│"<<setw(6)<<""<<"Nhập lựa chọn của bạn: "<<setw(30)<<""<<"│"<<endl;
        cout<<"╰───────────────────────────────────────────────────────────╯"<<endl;

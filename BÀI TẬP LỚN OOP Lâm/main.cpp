@@ -6,6 +6,7 @@
 #include"menu.h"
 using namespace std;
 int main() {
+    srand(time(NULL));
     chuanhoa(65001);
     list_sinhvien sv;
     list_giangvien gv;
@@ -17,6 +18,7 @@ int main() {
     // loading();
     nghiepvu nv(lop, sv, gv, mon);
     nv.nhap_du_lieu_cho_couse("D:/dulieulophoc.txt");
+    nv.nhap_du_lieu_file_phieu_dky("D://dangky.txt");
     pause();
     menu_chinh(lop,gv,sv,mon,nv);
 }

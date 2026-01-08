@@ -58,6 +58,17 @@ public:
      int get_lop_size() const{
         return ds_mon_dky.size();
     }
+    bool check_lop_dky(couse *lop_temp){
+        if(ds_mon_dky.empty()){
+            return false;
+        }
+        for(int i = 0;i<ds_mon_dky.size();i++){
+            if(ds_mon_dky[i] == lop_temp){
+                return true;
+            }
+        }
+        return false;
+    }
     // ----------------------------
 
     bool nhap_du_lieu_tu_file(ifstream& f);

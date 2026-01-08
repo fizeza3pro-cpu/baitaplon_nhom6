@@ -64,6 +64,7 @@ public:
     }
 
     static void cap_nhat_id(string id);
+    virtual void string_file(string &line) = 0;
     virtual string get_data()const = 0;
     virtual string get_loai() const = 0;
     virtual bool nhap(giangvien* gv_func, subject* sub_func);
