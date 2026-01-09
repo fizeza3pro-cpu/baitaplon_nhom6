@@ -181,24 +181,24 @@ void giangvien::hienthithongtin_gv() {
     }
     // 1. Thanh ngang trên (Màu Cyan)
     doi_mau_full(11);
-    cout << "\n  " <<  "╭──────────────────────────────────────────────────────────╮"<< endl;
+    cout << "\n  "<<space() <<  "╭──────────────────────────────────────────────────────────╮"<< endl;
     // 2. Dòng Tên & Học vị (Màu Vàng sáng)
-    cout << "  " <<  "│" << "  ";
+    cout<<space() << "  " <<  "│" << "  ";
     doi_mau_full(14);
     cout << left << setw(card_w - 10+ getUTF8LenDiff(full_title)) << full_title;
     doi_mau_full(11);
     cout << "  " << "│"<< endl;
     // 3. Thanh ngăn cách giữa
-    cout << "  ├──────────────────────────────────────────────────────────┤" << endl;
+    cout<<space() << "  ├──────────────────────────────────────────────────────────┤" << endl;
     // 4. Thông tin chi tiết (Màu Trắng)
-    cout<< "  " << "│";
+    cout<<space()<< "  " << "│";
     doi_mau_full(7);
     cout << "  ID: " << left << setw(13) << id 
          << "Giới tính: " << left << setw(11 + getUTF8LenDiff(gioi_tinh)) << gioi_tinh 
          << "NS:  " << left << setw(12) << (to_string(birth[0]) + "/" + to_string(birth[1])+ "/" + to_string(birth[2]));
     doi_mau_full(11);
     cout << "│" << endl;
-    cout<< "  " << "│";
+    cout<<space()<< "  " << "│";
     doi_mau_full(7);
     cout << "  Bộ môn: " << left << setw(31 + getUTF8LenDiff(bo_mon)) << bo_mon
          << "SĐT: "+sdt << "  ";
@@ -206,13 +206,13 @@ void giangvien::hienthithongtin_gv() {
     cout << "│" << endl;
     // 5. Dòng danh sách lớp dạy (Màu Xanh lá)
     doi_mau_full(11);
-    cout << "  ├──────────────────────────────────────────────────────────┤" << endl;
+    cout<<space() << "  ├──────────────────────────────────────────────────────────┤" << endl;
     doi_mau_full(10);
-    cout << "  │ "<< left << setw(card_w - 9 + getUTF8LenDiff(lop_day)) << lop_day;
+    cout<<space() << "  │ "<< left << setw(card_w - 9 + getUTF8LenDiff(lop_day)) << lop_day;
     doi_mau_full(11);
     cout << "  " << "│" << endl;
     // 6. Thanh ngang dưới
-     cout << "  ╰──────────────────────────────────────────────────────────╯" << endl;
+     cout<<space() << "  ╰──────────────────────────────────────────────────────────╯" << endl;
     doi_mau_full(7); // Trả lại màu gốc
 }
 

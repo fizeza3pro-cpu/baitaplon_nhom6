@@ -72,7 +72,7 @@ public:
     // ----------------------------
 
     bool nhap_du_lieu_tu_file(ifstream& f);
-    void ghi_vao_file();
+    void ghi_vao_file(ofstream &f);
     string get_gioi_tinh() const { return gioi_tinh; }
     string get_sdt() const { return sdt; }
     string get_chuyen_nganh() const { return chuyen_nganh; }

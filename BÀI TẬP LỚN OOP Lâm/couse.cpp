@@ -16,26 +16,26 @@ void couse::hienthi() {
     int width = 58; 
     int do_lech = getUTF8LenDiff(mon_hoc->get_ten());
     int do_lech2 = getUTF8LenDiff(gv->get_name());
-    cout << "  ├──────────────────────────────────────────────────────────┤" << endl;   
+    cout << space() << "  ├──────────────────────────────────────────────────────────┤" << endl;   
     // Dòng 2: Tên môn học (In hoa cho nổi bật)
-    cout << "  │ " << left << setw(width + do_lech) << ("Tên môn: " + mon_hoc->get_ten()) << " │" << endl;
-    cout << "  │ " << right << setw(width + 2) << " │" << endl;
+    cout << space()<< "  │ " << left << setw(width + do_lech) << ("Tên môn: " + mon_hoc->get_ten()) << " │" << endl;
+    cout <<space()<< "  │ " << right << setw(width + 2) << " │" << endl;
     // Dòng 3 & 4: Mã môn và Giảng viên
-    cout << "  │ " << left << setw(29) << ("Mã lớp học: " + ma_lop_hoc )  << setw(width - 26 + do_lech2) << ("GV: " + gv->get_name()) << " │" << endl;  
-     cout<<"  │ "<<right<<setw(width + 2)<<" │"<<endl;  
-    cout << "  │ " << left << setw(29) <<("Số tín chỉ: " + to_string(mon_hoc->get_tin_chi()));
+    cout<<space() << "  │ " << left << setw(29) << ("Mã lớp học: " + ma_lop_hoc )  << setw(width - 26 + do_lech2) << ("GV: " + gv->get_name()) << " │" << endl;  
+     cout<<space()<<"  │ "<<right<<setw(width + 2)<<" │"<<endl;  
+    cout<<space() << "  │ " << left << setw(29) <<("Số tín chỉ: " + to_string(mon_hoc->get_tin_chi()));
     if(cur_sv<max_sv){
-        doi_mau_full(2);
+        doi_mau_full(10);
     }else doi_mau_full(4);
     string siSoStr = to_string(cur_sv) + "/" + to_string(max_sv);
     cout <<left<<setw(width - 23)<<("Sĩ số: " + siSoStr);
-    doi_mau_full(7);
+    doi_mau_full(15);
     cout<<" │" << endl;  
-     cout<<"  │ "<<right<<setw(width + 2)<<" │"<<endl;
+     cout<<space()<<"  │ "<<right<<setw(width + 2)<<" │"<<endl;
     // Dòng 5: Thời gian
-    cout << "  │ " << left << setw(width + 8) << ("Lịch học(hằng tuần): " + time.hienthithongtin_string()) << " │" << endl;
+    cout<<space() << "  │ " << left << setw(width + 8) << ("Lịch học(hằng tuần): " + time.hienthithongtin_string()) << " │" << endl;
 
-    cout << "  ├──────────────────────────────────────────────────────────┤" << endl;
+    cout<<space() << "  ├──────────────────────────────────────────────────────────┤" << endl;
 }
 
 bool couse::tang_sv() {
@@ -103,5 +103,17 @@ void couse::string_file(string &line){
     line = ma_lop_hoc + "|" + mon_hoc->get_ma_mon() + "|" + gv->get_id() + "|" + to_string(time.get_bat_dau()) + "|" + to_string(time.get_ket_thuc()) + "|" + to_string(time.get_thu())
         + "|" + to_string(max_sv);
 
+}
+
+bool so_sanh_tc(couse *a, couse *b){
+    return a->get_tin_chi() < b->get_tin_chi();
+}
+
+bool so_sanh_sv(couse *a, couse *b){
+    return a->get_cur_sv() < b->get_cur_sv();
+}
+
+bool so_sanh_time(couse *a, couse *b){
+    return b->get_time() < a->get_time();
 }
 

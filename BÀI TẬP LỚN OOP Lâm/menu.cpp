@@ -29,6 +29,7 @@ void menu_nghiep_vu(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_
     cout << space << "   8. Danh sách Giảng viên" << endl;
     cout << space << "   9. Danh sách Sinh viên" << endl;
     cout << space << "   10. Danh sách Môn học" << endl;
+    cout << space << "   12. Sắp xếp lớp học" << endl;
 
     doi_mau_full(12); // Màu Đỏ cho mục thoát
     cout << "\n" << space << "   0. THOÁT HỆ THỐNG" << endl;
@@ -139,6 +140,10 @@ void menu_nghiep_vu(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_
     }
     case 9:
     {
+      system("cls");
+        sv.xuatds();
+        pause();
+        cin.get();
         break;
     }
     case 10:
@@ -158,6 +163,15 @@ void menu_nghiep_vu(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_
       cin.get();
       break;
     }
+    case 12:
+    {
+      system("cls");
+      lop.sap_xep_couse();
+      cin.ignore();
+      cin.get();
+      break;
+    }
+
     default:
       break;
     }
@@ -208,9 +222,9 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
       system("cls");
       cin.ignore();
       string magv,ten_sub;
-      cout<<"nhap ma giang vien: ";
+      cout<<"Nhập mã giảng viên: ";
       getline(cin,magv);
-      cout<<"nhap ten mon hoc:  ";
+      cout<<"Nhập mã môn học:  ";
       getline(cin,ten_sub);
       nv.them_mon_hoc(magv,ten_sub,"D:/dulieulophoc.txt");
       cin.ignore();
@@ -222,7 +236,7 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
       system("cls");
       cin.ignore();
       string ma_lop;
-      cout<<"nhap ma lop muon sua: ";
+      cout<<"Nhập mã môn học muốn sửa: ";
       getline(cin,ma_lop);
       cin.ignore();
       nv.thaydoithongtin_couse(ma_lop,"D:/dulieulophoc.txt");
@@ -234,12 +248,12 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
       system("cls");
       cin.ignore();
       string ma_lop;
-      cout<<"nhap ma lop muon xoa: ";
+      cout<<"Nhập mã lớp muốn xoá: ";
       getline(cin,ma_lop);
       if(lop.delete_lop_hoc(ma_lop,"D:/dulieulophoc.txt")){
-        cout<<"Thanh cong!";
+        cout<<"Thành công!";
       }else{
-        cout<<"ko thanh cong!";
+        cout<<"Không thành công!";
       }
       cin.get();
       break;
@@ -267,10 +281,24 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
     }
     case 6:
     {
+      system("cls");
+      cin.ignore();
+      sv.them_sinhvien();
+      pause();
+      cin.get();
       break;
     }
     case 7:
     {
+      system("cls");
+      string sv_xoa;
+      cout<<"Nhập vào mã sinh viên muốn xoá: ";
+      cin.ignore();
+      getline(cin,sv_xoa);
+      if(sv.delete_sinhvien(sv_xoa,FILE_SINH_VIEN)){
+        cout<<"Xoá sinh viên thành công!";
+      }else cout<<"Xoá sinh viên thất bại!";
+      pause();
       break;
     }
     case 8:
@@ -351,3 +379,28 @@ void menu_chinh(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_subj
     }
 }
 }
+
+
+// bool so_sanh_tc(couse *a, couse *b){
+//     return a->get_tin_chi() < b->get_tin_chi();
+// }
+
+// bool so_sanh_sv(couse *a, couse *b){
+//     return a->get_cur_sv() < b->get_cur_sv();
+// }
+
+// bool so_sanh_time(couse *a, couse *b){
+//     return a->get_time()<b->get_time();
+// }
+
+// void insert_sort(vector<couse*> &a,bool (*ham_so_sanh)(couse *a, couse *b)){
+//     for (int i = 1; i < a.size(); i++) {
+//    couse* temp = a[i];
+//     int j = i - 1;
+//     while (j >= 0 && ham_so_sanh(temp, a[j])) {
+//         a[j+1] = a[j];
+//         j--;
+//     }
+//     a[j+1] = temp;
+// }
+// }

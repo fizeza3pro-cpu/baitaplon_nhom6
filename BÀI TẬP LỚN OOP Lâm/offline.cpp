@@ -6,14 +6,20 @@
 using namespace std;
 void offline::hienthi() {
     int width = 58;
-    cout << "  ╭──────────────────────────────────────────────────────────╮" << endl;
-   doi_mau_full(14);
-    // cout << "  │"<<left<< setw(width)<<"OFFLINE" << "│" << endl;
-    cout << "  │" << setw(26) << "" << "OFFINE" << setw(26) << "" << "│" << endl;
-   doi_mau_full(7);
+    cout<<space() << "  ╭──────────────────────────────────────────────────────────╮" << endl;
+    cout<<space() << "  │" ;
+    doi_mau_full(14);
+    cout << left << setw(26) << "" << "OFFLINE" << setw(25) << "" ;
+    doi_mau_full(15);
+    cout << "│" << endl;
+    doi_mau_full(15);
     couse::hienthi();
-    cout << "  │" << left << setw(width + 5) << (" Địa điểm: " + phong_hoc + "-" + nha) << " │" << endl;
-    cout << "  ╰──────────────────────────────────────────────────────────╯" << endl;
+    cout<<space() << "  │";
+    doi_mau_full(6);
+    cout << left << setw(width + 5) << (" Địa điểm: " + phong_hoc + "-" + nha);
+    doi_mau_full(15);
+    cout << " │" << endl;
+    cout<<space() << "  ╰──────────────────────────────────────────────────────────╯" << endl;
 }
 bool offline::nhap(giangvien* gv_func, subject* sub_func) {
     if (couse::nhap(gv_func, sub_func)) {

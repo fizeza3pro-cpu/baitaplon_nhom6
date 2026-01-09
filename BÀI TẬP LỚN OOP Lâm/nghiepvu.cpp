@@ -214,7 +214,10 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
                     cout << "giang vien dang day lop nay!";
                 }
                 else if (gv->kiemtra_trung_lich(lop->get_time())) {
-                    cout << "giang vien bi trung lich , ko the doi";
+                    cout<<"Lịch bị trùng : ";
+                    lop->get_time().hienthithongtin();
+                    cout<<" của lớp "<<lop->get_ma_lop_hoc()<<endl;
+                    cout << "Giảng viên đã bị trùng lịch, không thể đổi!";
                 }
                 else {
                     giangvien *gv_cu = lop->get_gv();

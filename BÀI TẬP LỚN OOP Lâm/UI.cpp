@@ -62,3 +62,15 @@ void pause() {
     //     c = cin.get();
     // } while (c != '\n');
 }
+void skip_cin_false(){
+    if (cin.fail()) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout<<"Nhập không hợp lệ!";
+         pause();
+    }
+}
+string space(){
+    return "                         ";
+}
+

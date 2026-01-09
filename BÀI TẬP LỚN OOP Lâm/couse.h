@@ -23,7 +23,7 @@ public:
         sl++;
         tusinhma();
     }
-    couse(string u, subject* c, giangvien* a, int x, int y, int z, int p) :time(x, y, z) {
+    couse(string u, subject* c, giangvien* a, float y, float z, int x, int p) :time(y, z, x) {
         ma_lop_hoc = u;
         cur_sv = 0;
         gv = a;
@@ -76,3 +76,6 @@ public:
     void tusinhma();  /* hàm tự sinh mã, đại khái sẽ tự sinh mã =))*/
     // virtual void nhap_thong_tin_file(string file_name) = 0;
 };
+bool so_sanh_tc(couse *a, couse *b);
+bool so_sanh_sv(couse *a, couse *b);
+bool so_sanh_time(couse *a, couse *b);

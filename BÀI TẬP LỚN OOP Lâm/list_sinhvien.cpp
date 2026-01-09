@@ -17,7 +17,7 @@ void list_sinhvien::nhapds()
 }
 void list_sinhvien::xuatds()
 {
-	cout << "-------Thong tin sinh vien-------";
+	 cout<<"              ─────────────── ✦ ───────────────DANH SÁCH SINH VIÊN─────────────── ✦ ───────────────"<<endl;
 	for (int i = 0; i < dssv.size(); i++)
 	{
 		dssv[i].hienthithongtin();
@@ -56,7 +56,7 @@ void list_sinhvien::them_sinhvien() {
 	dssv.push_back(sv);
 
 	ofstream f("D:/dulieusinhvien.txt", ios::app);  // ghi thêm cuối file
-	sv.ghi_vao_file();
+	sv.ghi_vao_file(f);
 	f.close();
 }
 

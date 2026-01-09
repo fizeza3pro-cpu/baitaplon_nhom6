@@ -5,15 +5,23 @@
 using namespace std;
 void online::hienthi() {
     int width = 58;
-    cout << "  ╭──────────────────────────────────────────────────────────╮" << endl;
-    doi_mau_full(14);
+    cout<<space() << "  ╭──────────────────────────────────────────────────────────╮" << endl;
     // cout << "  │"<<left<< setw(width - 2)<<"ONLINE" << "│" << endl;
-    cout << "  │" << setw(26) << "" << "ONLINE" << setw(26) << "" << "│" << endl;
-    doi_mau_full(7);
+    cout<<space() << "  │" ;
+    doi_mau_full(14);
+    cout << left << setw(26) << "" << "ONLINE" << setw(26) << "" ;
+    doi_mau_full(15);
+    cout << "│" << endl;
+    doi_mau_full(15);
     couse::hienthi();
-    cout << "  |" << left << setw(width + 5) << (" Nền tảng học: " + nen_tang) << " │" << endl;
-    cout << "  |" << left << setw(width -1  + getUTF8LenDiff(link)) << (" Link: " + link) << " │" << endl;
-    cout << "  ╰──────────────────────────────────────────────────────────╯" << endl;
+    cout<<space() << "  │" << left << setw(width + 5) << (" Nền tảng học: " + nen_tang) << " │" << endl;
+    cout<<space() << "  │ Link: " ;
+    doi_mau_full(1);
+    cout << left << setw(width -8  + getUTF8LenDiff(link))<< link ;
+    doi_mau_full(15);
+    cout << " │" << endl;
+
+    cout<<space() << "  ╰──────────────────────────────────────────────────────────╯" << endl;
 }
 bool online::nhap(giangvien* gv_func, subject* sub_func) {
     if (couse::nhap(gv_func, sub_func)) {
@@ -54,7 +62,7 @@ bool online::xuat_du_lieu_file(string& file_name) {
         string line;
         couse::xuat_du_lieu_file(line);
         line.insert(0, "online|");
-        f << line + "|" + nen_tang + "|" + link;
+        f << line + "|" + nen_tang + "|" + link<<endl;
         f.close();
     }
     return true;

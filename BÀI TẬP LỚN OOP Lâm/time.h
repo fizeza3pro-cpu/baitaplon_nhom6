@@ -9,10 +9,10 @@ private:
     float thoi_gian_bat_dau;
     float thoi_gian_ket_thuc;
 public:
-    Time(int a, float b, float c) {
-        thu = c;
-        thoi_gian_bat_dau = a;
-        thoi_gian_ket_thuc = b;
+    Time(float b, float c,int a) {
+        thu = a;
+        thoi_gian_bat_dau = b;
+        thoi_gian_ket_thuc = c;
     }
     Time() {
         thu = 0;
@@ -36,15 +36,25 @@ public:
     int get_thu()const {
         return thu;
     }
-    int get_bat_dau()const {
+    float get_bat_dau()const {
         return thoi_gian_bat_dau;
     }
-    int get_ket_thuc()const {
+    float get_ket_thuc()const {
         return thoi_gian_ket_thuc;
     }
     bool operator==(Time& a)const {
         if (thu == a.thu && thoi_gian_bat_dau == a.thoi_gian_bat_dau && thoi_gian_ket_thuc == a.thoi_gian_ket_thuc) {
             return true;
+        }
+        return false;
+    }
+    bool operator<(const Time&a)const{
+        if(thu < a.thu){
+            return true;
+        }else if(thu == a.thu && thoi_gian_bat_dau < a.thoi_gian_bat_dau){
+            return true;
+        }else{
+            return false;
         }
         return false;
     }

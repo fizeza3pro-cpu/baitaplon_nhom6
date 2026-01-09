@@ -8,10 +8,13 @@ void Time::nhap() {
    do {
     cout << "Nhập thứ học trong tuần (2-7): ";
     cin >> thu;
+    skip_cin_false();
     cout << "Nhập thời gian bắt đầu (vd: 7.5 = 7h30): ";
     cin >> thoi_gian_bat_dau;
+    skip_cin_false();
     cout << "Nhập thời gian kết thúc: ";
     cin >> thoi_gian_ket_thuc;
+    skip_cin_false();
     if (thu < 2 || thu > 7)
         cout << "❌ Thứ không hợp lệ!\n";
     else if (thoi_gian_bat_dau >= thoi_gian_ket_thuc)

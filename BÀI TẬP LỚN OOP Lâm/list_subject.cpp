@@ -23,7 +23,7 @@ void list_subject::lay_du_lieu_tu_file(string file_name) {
 void list_subject::ghi_du_lieu_vao_file(string file_name) {
     ofstream f(file_name);
     if (!f.is_open()) return;
-    for (size_t i = 0; i < ds_mon.size(); i++) {
+    for (int i = 0; i < ds_mon.size(); i++) {
         f << ds_mon[i].to_file_string();
         if (i < ds_mon.size() - 1) f << endl;
     }
@@ -39,7 +39,7 @@ subject* list_subject::tim_mon_theo_ma(string ma_mon) {
 }
 
 subject* list_subject::tim_mon_theo_ten(string ten_mon) {
-    for (size_t i = 0; i < ds_mon.size(); i++) {
+    for (int i = 0; i < ds_mon.size(); i++) {
         if (ds_mon[i].get_ten() == ten_mon) 
             return &ds_mon[i];
     }
@@ -66,6 +66,10 @@ void list_subject::hthi_ds_mon_hoc(){
 bool list_subject::xoa_mon_hoc_theo_ma(string ma,string file_name) {
     for (size_t i = 0; i < ds_mon.size(); i++) {
         if (ds_mon[i].get_ma_mon() == ma) {
+            if(ds_mon[i].get_size_lop() >0){
+                cout<<"Môn học này đang có lớp học, không thể xoá!"<<endl;
+                return false;
+            }
             ds_mon.erase(ds_mon.begin() + i);
             //xoá xong thì ghi lại vào file để cập nhât
             ghi_du_lieu_vao_file(file_name);

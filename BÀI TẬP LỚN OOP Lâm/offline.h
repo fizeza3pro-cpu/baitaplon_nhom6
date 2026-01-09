@@ -15,8 +15,8 @@ public:
         nha = "chua xac dinh";
         phong_hoc = "chua xac dinh";
     }
-    offline(string u, subject* c, giangvien* a, int x, int y, int z, int p, string k, string q) :
-        couse(u, c, a, x, y, z, p), phong_hoc(k), nha(q) {
+    offline(string u, subject* c, giangvien* a,  float y, float z, int x, int p, string k, string q) :
+        couse(u, c, a, y, z, x, p), phong_hoc(k), nha(q) {
         loai = "OFFLINE";
     }
     string get_data()const {

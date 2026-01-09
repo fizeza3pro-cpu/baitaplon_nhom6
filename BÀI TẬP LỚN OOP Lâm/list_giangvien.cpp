@@ -20,9 +20,9 @@ void list_giangvien::lay_du_lieu_tu_file(string file_name) {
 }
 void list_giangvien::hienthids_gv(){
     if (ds_gv.empty()) {
-        cout << "Danh sach trong!" << endl;
+        cout << "Danh sách trống!" << endl;
     }
-    cout << "-------Danh sach giang vien-------" << endl;
+    cout<<"              ─────────────── ✦ ───────────────DANH SÁCH GIẢNG VIÊN─────────────── ✦ ───────────────"<<endl;
     for (int i = 0; i < ds_gv.size(); i++) {
         ds_gv[i].hienthithongtin_gv();
         cout << "\n";
@@ -70,6 +70,10 @@ void list_giangvien::add_giangvien(string file_name){
 bool list_giangvien::delete_giangvien(string ma,string file_name){
     for(int i = 0;i<ds_gv.size();i++){
         if(ds_gv[i].get_id() == ma){
+            if(ds_gv[i].get_size_lop() >0){
+                cout<<"Giảng viên này đang dạy lớp, không thể xoá!"<<endl;
+                return false;
+            }
             ds_gv.erase(ds_gv.begin() + i);
             luu_du_lieu_vao_file(file_name);
             return true;

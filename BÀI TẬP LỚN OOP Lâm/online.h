@@ -13,8 +13,8 @@ public:
         nen_tang = "";
         link = ""; /* link tam thoi chua viet */
     }
-    online(string u, subject* c, giangvien* a, int x, int y, int z, int p, string k,string q) :
-        couse(u, c, a, x, y, z, p) {
+    online(string u, subject* c, giangvien* a, float y, float z, int x, int p, string k,string q) :
+        couse(u, c, a, y, z, x, p) {
         nen_tang = k;
         link = q;
         loai = "o";

@@ -12,3 +12,7 @@ const string FILE_GIANG_VIEN = "D:/dulieugiangvien.txt";
 void menu_chinh(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_subject &mon,nghiepvu &nv);
 void menu_nghiep_vu(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_subject &mon,nghiepvu &nv);
 void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_subject &mon,nghiepvu &nv);
+// bool so_sanh_tc(couse *a, couse *b);
+// bool so_sanh_sv(couse *a, couse *b);
+// bool so_sanh_time(couse *a, couse *b);
+// void insert_sort(vector<couse*> &a,bool (*ham_so_sanh)(couse *a, couse *b));

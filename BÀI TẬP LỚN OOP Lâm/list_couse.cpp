@@ -5,7 +5,9 @@
 #include<string>
 using namespace std;
 void list_couse::hienthidanhsach(){
-    cout<<" ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ DANH SÁCH TEST ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦"<<endl;
+    doi_mau_full(14);
+    cout<<"                ─────────────── ✦ ───────────────DANH SÁCH LỚP HỌC─────────────── ✦ ───────────────"<<endl;
+    doi_mau_full(7);
     for(int i = 0;i<p.size();i++){
         p[i] ->hienthi();
         cout<<"\n";
@@ -118,9 +120,9 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub
        giangvien *gv_temp = ds_gv.tim_giangvien_theo_id(a[3]);
        subject *sub_temp = ds_sub.tim_mon_theo_ma(a[2]);
        if(a[0] == "online" && a.size() == 10){
-        mon = new online(a[1],sub_temp,gv_temp,stoi(a[4]),stoi(a[5]),stoi(a[6]),stoi(a[7]),a[8],a[9]);
+        mon = new online(a[1],sub_temp,gv_temp,stof(a[4]),stof(a[5]),stoi(a[6]),stoi(a[7]),a[8],a[9]);
        }else if(a[0] == "offline" && a.size() == 10){
-        mon = new offline(a[1],sub_temp,gv_temp,stoi(a[4]),stoi(a[5]),stoi(a[6]),stoi(a[7]),a[8],a[9]);
+        mon = new offline(a[1],sub_temp,gv_temp,stof(a[4]),stof(a[5]),stoi(a[6]),stoi(a[7]),a[8],a[9]);
        }else{
         cout<<"loai lop hoc khong hop le!"<<endl;
         continue;
@@ -148,21 +150,28 @@ f.close();
 
 couse* list_couse::tim_lop_theo_ma(string ma){
     //Tìm kiếm nhị phân cho tối ưu
-    int l = 0;
-    int r = p.size() - 1;
-    int m;
-    while(l<=r){
-        m = (l + r) /2;
-        if(p[m]->get_ma_lop_hoc() == ma){
-            return p[m];
-        }else if(p[m]->get_ma_lop_hoc() < ma ){
-            l = m+1;
-        }else{
-            r = m-1;
-        }
+    // int l = 0;
+    // int r = p.size() - 1;
+    // int m;
+    // while(l<=r){
+    //     m = (l + r) /2;
+    //     if(p[m]->get_ma_lop_hoc() == ma){
+    //         return p[m];
+    //     }else if(p[m]->get_ma_lop_hoc() < ma ){
+    //         l = m+1;
+    //     }else{
+    //         r = m-1;
+    //     }
+    // }
+    // couse* temp = nullptr;
+    // return temp;
+    for(int i = 0;i<p.size();i++){
+         if(p[i]->get_ma_lop_hoc() == ma){
+           return p[i];
+         }
     }
-    couse* temp = nullptr;
-    return temp;
+     couse* temp = nullptr;
+     return temp;
 }
 
 bool list_couse::check_id_hop_le(string id){
@@ -278,6 +287,66 @@ bool list_couse::delete_lop_hoc(string ma_lop,string file_name){
     cout << "\nXoá lớp học không thành công!\n";
     return false;
 }
+void list_couse::sap_xep_couse(){
+       system("cls");
+        cout<<"╭──────────────────────DANH SÁCH SẮP XẾP────────────────────╮"<<endl;
+       cout<<"│"<<""<<setw(59)<<""<<"│"<<endl;
+       cout<<"│"<<setw(6)<<""<<"1.Xếp theo số sinh viên đã đăng ký (giảm dần)"<<setw(8)<<""<<"│"<<endl;
+       cout<<"│"<<setw(6)<<""<<"2.Xếp theo số tín chỉ (giảm dần)"<<setw(21)<<""<<"│"<<endl;
+       cout<<"│"<<setw(6)<<""<<"3.Xếp theo thời gian học"<<setw(29)<<""<<"│"<<endl;
+       cout<<"│"<<setw(6)<<""<<"Nhập lựa chọn của bạn: "<<setw(30)<<""<<"│"<<endl;
+       cout<<"╰───────────────────────────────────────────────────────────╯"<<endl;
+       gotoxy(30,5);
+       int chose;
+       cin>>chose;
+       if (cin.fail()) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout<<"Nhập không hợp lệ!";
+        return;
+        }
+        switch (chose)
+        {
+        case 1:
+        {
+           bbsort(so_sanh_sv);
+            cout<<"\nĐã sắp xếp theo sinh viên ";
+          
+            break;
+        }
+        case 2:
+        {
+           bbsort(so_sanh_tc);
+            cout<<"\nĐã sắp xếp theo tín chỉ";
+          
+            break;
+        }
+        case 3:
+        {
+           bbsort(so_sanh_time);
+            cout<<"\nĐã sắp xếp theo thời gian tăng dần";
+          
+            break;
+        }
+        
+        default:
+        cout<<"Lựa chọn không hợp lệ";
+            break;
+        }
+    
+}
+//phương thức sắp xếp 
+void list_couse::bbsort(bool (*ham_so_sanh)(couse *a, couse *b)){
+    int n = p.size();
+    for(int i = 0;i<n;i++){
+        for(int j = 0;j<n-i-1;j++){
+            if(ham_so_sanh(p[j],p[j+1])){
+                swap(p[j],p[j+1]);
+            }
+        }
+    }
+}
+
 
     
 

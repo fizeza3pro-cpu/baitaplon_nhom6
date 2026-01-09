@@ -68,7 +68,7 @@ bool subject::xoa_ma_lop_hoc(string ma_lop) {
     // ===== NẠP CHỒNG TOÁN TỬ =====
     ostream& operator<<(ostream & os, const subject & s) {
         os << "• Mã môn: " << left << setw(15 + getUTF8LenDiff(s.ma_mon_hoc)) << s.ma_mon_hoc
-            << "  Têm môn: " << setw(45 + getUTF8LenDiff(s.ten_mon_hoc)) << s.ten_mon_hoc
+            << "  Tên môn: " << setw(45 + getUTF8LenDiff(s.ten_mon_hoc)) << s.ten_mon_hoc
             << "  Số tín chỉ: " << setw(2) << s.so_tin_chi
             << "  Số buổi: " << setw(2) << s.so_buoi<<endl;
 

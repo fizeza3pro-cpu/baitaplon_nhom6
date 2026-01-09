@@ -29,4 +29,6 @@ public:
     bool check_id_hop_le(string id);
     void xuat_du_lieu_ra_file_full(string file_name);
     void timkiem_ten(string ten_mon);
+    void bbsort(bool (*ham_so_sanh)(couse *a, couse *b));
+    void sap_xep_couse();
 };
