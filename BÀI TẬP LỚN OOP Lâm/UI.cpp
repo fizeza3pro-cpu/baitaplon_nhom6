@@ -66,7 +66,7 @@ void skip_cin_false(){
     if (cin.fail()) {
         cin.clear();
         cin.ignore(1000, '\n');
-        cout<<"Nhập không hợp lệ!";
+        cout<<"Nhập không hợp lệ, bỏ qua dòng nhập này!";
          pause();
     }
 }

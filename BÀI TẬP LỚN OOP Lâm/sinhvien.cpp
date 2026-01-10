@@ -25,11 +25,11 @@ bool sinhvien::dadangky(couse* mon) {
 }
 bool sinhvien::add_couse(couse* mon) {
     if (dadangky(mon)) {
-        cout << "mon hoc da dc dang ki!" << endl;
+        cout << "Môn học đã được đăng ký!" << endl;
         return false;
     }
     else if (cur_tc + mon->get_tin_chi() > max_tc) {
-        cout << "vuot qua so luong tin chi, ko the them" << endl;
+        cout << "Vượt quá số lượng tín chỉ, không thể thêm" << endl;
         return false;
     }
     else {
@@ -41,7 +41,7 @@ bool sinhvien::add_couse(couse* mon) {
 }
 bool sinhvien::delete_couse(couse* mon) {
     if (!dadangky(mon)) {
-        cout << "ko co mon hoc, ko the xoa!" << endl;
+        cout << "Không có môn học, không thể xóa!" << endl;
         return false;
     }
     else {
@@ -162,7 +162,7 @@ bool sinhvien::nhap_du_lieu_tu_file(ifstream& f) {
     }
     a.push_back(temp);
     temp = "";
-    if (a.size() != 11) return false;
+    if (a.size() != 10) return false;
     id = a[0];
     name = a[1];
     gioi_tinh = a[2];
@@ -172,8 +172,7 @@ bool sinhvien::nhap_du_lieu_tu_file(ifstream& f) {
     birth[1] = stoi(a[6]);
     birth[2] = stoi(a[7]);
     khoa = stoi(a[8]);
-    cur_tc = stoi(a[9]);
-    max_tc = stoi(a[10]);
+    max_tc = stoi(a[9]);
     return true;
 }
 
@@ -182,5 +181,5 @@ void sinhvien::ghi_vao_file(ofstream &f)
     f << id << "|" << name << "|" << gioi_tinh << "|"
         << chuyen_nganh << "|" << sdt << "|" << birth[0] << "|"
         << birth[1] << "|" << birth[2] << "|" << khoa << "|"
-        << cur_tc << "|" << max_tc << endl;
+        << max_tc << endl;
 }

@@ -5,25 +5,22 @@
 using namespace std;
 class online : public couse {
 private:
-    string loai;
     string nen_tang;
     string link;
 public:
     online() :couse() {
         nen_tang = "";
-        link = ""; /* link tam thoi chua viet */
+        link = "ko có dữ liệu"; 
     }
     online(string u, subject* c, giangvien* a, float y, float z, int x, int p, string k,string q) :
         couse(u, c, a, y, z, x, p) {
         nen_tang = k;
         link = q;
-        loai = "o";
+
     }
+    ~online() {}
     string get_data()const {
         return nen_tang;
-    }
-    string get_loai()const {
-        return loai;
     }
     virtual void string_file(string &line);
     string tao_random(int do_dai);

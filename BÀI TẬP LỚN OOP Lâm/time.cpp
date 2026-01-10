@@ -15,10 +15,12 @@ void Time::nhap() {
     cout << "Nhập thời gian kết thúc: ";
     cin >> thoi_gian_ket_thuc;
     skip_cin_false();
-    if (thu < 2 || thu > 7)
-        cout << "❌ Thứ không hợp lệ!\n";
-    else if (thoi_gian_bat_dau >= thoi_gian_ket_thuc)
-        cout << "❌ Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc!\n";
+    if (thu < 2 || thu > 7){
+        doi_mau_full(4);
+        cout << "❌ Thứ không hợp lệ, nhập lại!\n";
+    }else if (thoi_gian_bat_dau >= thoi_gian_ket_thuc)
+        cout << "❌ Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc, nhập lại!\n";
+        doi_mau_full(7);
 } while (thu < 2 || thu > 7 || thoi_gian_bat_dau >= thoi_gian_ket_thuc);
 }
 void Time::hienthithongtin() {

@@ -14,6 +14,9 @@ public:
     couse* get_p(int i) {
         return p[i];
     }
+    int get_size() {
+        return p.size();
+    }
     couse* tim_lop_theo_ma(string ma);
     void hien_thi_lop_theo_tc(int tc);
     void hien_thi_lop_theo_thu(int thu);
@@ -30,5 +33,5 @@ public:
     void xuat_du_lieu_ra_file_full(string file_name);
     void timkiem_ten(string ten_mon);
     void bbsort(bool (*ham_so_sanh)(couse *a, couse *b));
-    void sap_xep_couse();
+    void sap_xep_couse(string file_name);
 };

@@ -7,7 +7,7 @@ using namespace std;
 void list_subject::lay_du_lieu_tu_file(string file_name) {
     ifstream f(file_name);
     if (!f.is_open()) {
-        cout << "ko mo dc file!" << endl;
+        cout << "Không mở được file!" << endl;
         return;
     }
     else {
@@ -25,7 +25,7 @@ void list_subject::ghi_du_lieu_vao_file(string file_name) {
     if (!f.is_open()) return;
     for (int i = 0; i < ds_mon.size(); i++) {
         f << ds_mon[i].to_file_string();
-        if (i < ds_mon.size() - 1) f << endl;
+         f << endl;
     }
     f.close();
 }
@@ -78,17 +78,5 @@ bool list_subject::xoa_mon_hoc_theo_ma(string ma,string file_name) {
     }
     return false;
 }
-// ostream& operator<<(ostream& os, const list_subject& l) {
-//     os << "\n------- DANH SACH MON HOC -------\n"<<endl;
-//     for (size_t i = 0; i < l.ds_mon.size(); i++) {
-//         os << l.ds_mon[i] << endl;
-//     }
-//     return os;
-// }
-// istream& operator>>(istream& is, list_subject& l) {
-//     subject temp;
-//     is >> temp;
-//     l.ds_mon.push_back(temp);
-//     return is;
-// }
+
 

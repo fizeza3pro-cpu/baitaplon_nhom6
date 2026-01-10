@@ -23,9 +23,9 @@ void offline::hienthi() {
 }
 bool offline::nhap(giangvien* gv_func, subject* sub_func) {
     if (couse::nhap(gv_func, sub_func)) {
-        cout << "nhap phong hoc: ";
+        cout << "Nhập phòng học: ";
         cin >> phong_hoc;
-        cout << "nhap toa nha: ";
+        cout << "Nhập tòa nhà: ";
         cin >> nha;
         return true;
     }
@@ -34,7 +34,7 @@ bool offline::nhap(giangvien* gv_func, subject* sub_func) {
 bool offline::xuat_du_lieu_file(string& file_name) {
     ofstream f(file_name, ios::app);
     if (!f.is_open()) {
-        cout << "ko mo dc file!";
+        cout << "Không mở được file!";
         return false;
     }
     else {

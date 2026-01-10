@@ -5,25 +5,20 @@
 using namespace std;
 class offline : public couse {
 private:
-    string loai;
     string phong_hoc;
     string nha;
 public:
     offline() :couse() {
         // tusinhma();
-        loai = "OFFLINE";
         nha = "chua xac dinh";
         phong_hoc = "chua xac dinh";
     }
     offline(string u, subject* c, giangvien* a,  float y, float z, int x, int p, string k, string q) :
         couse(u, c, a, y, z, x, p), phong_hoc(k), nha(q) {
-        loai = "OFFLINE";
     }
+    ~offline() {}
     string get_data()const {
         return phong_hoc + "|" + nha;
-    }
-    string get_loai()const {
-        return loai;
     }
     virtual void string_file(string &line); 
     bool nhap(giangvien* gv_func, subject* sub_func);

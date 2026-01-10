@@ -7,11 +7,11 @@ using namespace std;
 void list_sinhvien::nhapds()
 {
 	int sl;
-	cout << "Nhap so luong sinh vien :";
+	cout << "Nhập số lượng sinh viên :";
 	cin >> sl;
 	for (int i = 0; i < sl; i++)
 	{
-		cout << "Nhap thong tin sinh vien thu " << i + 1 << ":" << endl;
+		cout << "Nhập thông tin sinh viên thứ " << i + 1 << ":" << endl;
 		dssv[i].nhap();
 	}
 }
@@ -27,7 +27,7 @@ void list_sinhvien::xuatds()
 bool list_sinhvien::lay_du_lieu_tu_file(string file_name) {
 	ifstream f(file_name);
 	if (!f.is_open()) {
-		cout << "ko mo dc file!" << endl;
+		cout << "Không mở được file!" << endl;
 		return false; //lỗi gì gì đấy
 	}
 	else {
@@ -68,18 +68,18 @@ bool list_sinhvien::delete_sinhvien(string ma_sv, string file_name) {
 
 			// 2. Kiểm tra ràng buộc (đã đăng ký môn chưa)
 			if (dssv[i].get_lop_size() != 0) {
-				cout << "ko the xoa sinh vien vi da dang ky mon hoc!" << endl;
+				cout << "Không thể xóa sinh viên vì đã đăng ký môn học!" << endl;
 				return false;
 			}
 
 			// 3. Xóa sinh viên khỏi danh sách
 			dssv.erase(dssv.begin() + i);
-			cout << "xoa sinh vien khoi danh sach thanh cong!" << endl;
+			cout << "Xóa sinh viên khỏi danh sách thành công!" << endl;
 
 			// 4. Ghi lại file sau khi xóa
 			ofstream f(file_name);
 			if (!f.is_open()) {
-				cout << "ko mo dc file de cap nhat!" << endl;
+				cout << "Không mở được file để cập nhật!" << endl;
 				return false;
 			}
 
@@ -93,12 +93,12 @@ bool list_sinhvien::delete_sinhvien(string ma_sv, string file_name) {
 			}
 
 			f.close();
-			cout << "cap nhat file sau xoa sinh vien thanh cong!" << endl;
+			cout << "Cập nhật file sau xóa sinh viên thành công!" << endl;
 			return true;
 		}
 	}
 
-	cout << "ko tim thay sinh vien de xoa!" << endl;
+	cout << "Không tìm thấy sinh viên để xóa!" << endl;
 	return false;
 }
 

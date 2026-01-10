@@ -6,7 +6,7 @@ using namespace std;
 void list_giangvien::lay_du_lieu_tu_file(string file_name) {
     ifstream f(file_name);
     if (!f.is_open()) {
-        cout << "ko mo dc file!" << endl;
+        cout << "Không mở được file!" << endl;
         return;
     }
     else {
@@ -40,16 +40,16 @@ giangvien* list_giangvien::tim_giangvien_theo_id(string ma_gv) {
 void list_giangvien::luu_du_lieu_vao_file(string file_name) {
     ofstream f(file_name); // Mở file ở chế độ ghi mới (ghi đè)
     if (!f.is_open()) {
-        cout << "Khong the mo file de ghi!" << endl;
+        cout << "Không thể mở file để ghi!" << endl;
         return;
     }
 
     for (int i = 0; i < ds_gv.size(); i++) {
         ds_gv[i].ghi_du_lieu_vao_file(f);
         // Nếu không phải giảng viên cuối cùng thì mới xuống dòng
-        if (i < ds_gv.size() - 1) {
+        //if (i < ds_gv.size() - 1) {
             f << endl;
-        }
+        //}
     }
     f.close();
     cout << "Đã lưu thay đổi vào file: " << file_name << endl;

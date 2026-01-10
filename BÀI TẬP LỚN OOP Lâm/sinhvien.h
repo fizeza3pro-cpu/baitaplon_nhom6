@@ -80,5 +80,4 @@ public:
     int get_khoa() const { return khoa; }
     int get_cur_tc() const { return cur_tc; }
     int get_max_tc() const { return max_tc; }
-    // vector<couse*> get_ds_mon_dky() const { return ds_mon_dky; }
 };

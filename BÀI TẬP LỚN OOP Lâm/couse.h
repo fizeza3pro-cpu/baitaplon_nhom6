@@ -30,6 +30,7 @@ public:
         mon_hoc = c;
         max_sv = p;
     }
+    virtual ~couse() {}
     // ------------getter------------
     int get_tin_chi()const {
         return mon_hoc->get_tin_chi();
@@ -66,7 +67,6 @@ public:
     static void cap_nhat_id(string id);
     virtual void string_file(string &line) = 0;
     virtual string get_data()const = 0;
-    virtual string get_loai() const = 0;
     virtual bool nhap(giangvien* gv_func, subject* sub_func);
     virtual bool xuat_du_lieu_file(string& line);
     virtual void hienthi();

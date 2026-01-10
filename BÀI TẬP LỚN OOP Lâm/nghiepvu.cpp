@@ -53,12 +53,12 @@ void nghiepvu::dang_ky_lop_hoc(string id_sv, string ma_lop,string file_name_pdk)
 void nghiepvu::huy_dang_ky_lop_hoc(string id_sv, string ma_lop,string file_name_pdk) {
     sinhvien* a = ds_sv.tim_sinhvien_theo_id(id_sv);
     if (a == nullptr) {
-        cout << "Khong tim thay sinh vien!" << endl;
+        cout << "Không tìm thấy sinh viên!" << endl;
         return;
     }
     couse* b = ds_lop.tim_lop_theo_ma(ma_lop);
     if (b == nullptr) {
-        cout << "Khong tim thay lop hoc!" << endl;
+        cout << "Không tìm thấy lớp học!" << endl;
         return;
     }
     //Duyệt hết các phiếu đăng ký, tìm nếu có phiếu phù hợp thì huỷ đăng ký
@@ -162,10 +162,10 @@ void nghiepvu::nhap_du_lieu_file_phieu_dky(string file_name){
        }
        }
     }
-doi_mau_full(2);
-cout<<"Đã nhập thành công "<<dem<<" phiếu đăng ký từ "<<file_name<<"!"<<endl;
-doi_mau_full(7);
-f.close();
+    doi_mau_full(2);
+    cout<<"Đã nhập thành công "<<dem<<" phiếu đăng ký từ "<<file_name<<"!"<<endl;
+    doi_mau_full(7);
+    f.close();
 }
 
 
@@ -174,7 +174,7 @@ f.close();
 void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
     couse* lop = ds_lop.tim_lop_theo_ma(ma_lop);
     if (lop == nullptr) {
-        cout << "ko tim thay lop hoc!";
+        cout << "Không tìm thấy lớp học!";
     }
     else {
         system("cls");
@@ -189,6 +189,7 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
        gotoxy(30,6);
        int chose;
        cin>>chose;
+       cout<<endl;
        if (cin.fail()) {
         cin.clear();
         cin.ignore(1000, '\n');
@@ -199,36 +200,55 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
         {
         case 1:
         {
-            cin.ignore();
-            string ma_gv;
-            cout << "nhap ma giang vien muon doi: ";
-            getline(cin, ma_gv);
-            giangvien* gv = ds_gv.tim_giangvien_theo_id(ma_gv);
-            if (gv == nullptr) {
-                cout << "ko tim thay giang vien ";
+       
+        cin.ignore();
+    string ma_gv;
+    cout << "Nhập mã giảng viên muốn đổi: ";
+    getline(cin, ma_gv);
+    
+    giangvien* gv_moi = ds_gv.tim_giangvien_theo_id(ma_gv);
+    if (gv_moi == nullptr) {
+        cout << " Không tìm thấy giảng viên!";
+        pause();
+        return;
+    }
+    else {
+        if (gv_moi->get_id() == lop->get_gv()->get_id()) {
+            cout << " Giảng viên này hiện đang dạy lớp này rồi!";
+            pause();
+            return;
+        }
+        else {
+            // KIỂM TRA TRÙNG LỊCH BẰNG CÁCH QUÉT DANH SÁCH LỚP
+            bool bi_trung = false;
+            Time thoi_gian_lop = lop->get_time();
+
+            for (int i = 0; i < ds_lop.get_size(); i++) {
+                couse* l = ds_lop.get_p(i);
+                // Nếu lớp đó của giảng viên mới và trùng thời gian
+                if (l->get_gv()->get_id() == gv_moi->get_id()) {
+                    if (l->get_time().ktra_trung_lich(thoi_gian_lop)) {
+                        bi_trung = true;
+                        doi_mau_full(4);
+                        cout << "❌ Trùng lịch với lớp [" << l->get_ma_lop_hoc() << "] của giảng viên này!";
+                        doi_mau_full(7);
+                        break;
+                    }
+                }
             }
-            else {
-                cout << "THONG TIN GIANG VIEN:" << endl;
-                gv->hienthithongtin_gv();
-                if (gv == lop->get_gv()) {
-                    cout << "giang vien dang day lop nay!";
-                }
-                else if (gv->kiemtra_trung_lich(lop->get_time())) {
-                    cout<<"Lịch bị trùng : ";
-                    lop->get_time().hienthithongtin();
-                    cout<<" của lớp "<<lop->get_ma_lop_hoc()<<endl;
-                    cout << "Giảng viên đã bị trùng lịch, không thể đổi!";
-                }
-                else {
-                    giangvien *gv_cu = lop->get_gv();
-                    gv_cu->xoa_couse_da_day_id(lop->get_ma_lop_hoc());
-                    lop->set_giangvien(gv);
-                    gv->them_couse_da_day_id(lop->get_ma_lop_hoc());
-                    gv->them_lich_day(lop->get_time());
-                    cout << "Thay đổi giảng viên thành công!";
-                }
+
+            if (!bi_trung) {
+                // Cập nhật giảng viên mới cho lớp
+                giangvien *gv_cu = lop->get_gv();
+                gv_cu->xoa_couse_da_day_id(lop->get_ma_lop_hoc());
+                gv_cu->xoa_lich_day(lop->get_time());
+                lop->set_giangvien(gv_moi);
+                gv_moi->them_couse_da_day_id(lop->get_ma_lop_hoc());
+                gv_moi->them_lich_day(lop->get_time());
+                cout << "Thay đổi giảng viên thành công!"<<endl;
             }
-        
+        }
+    }
         break;
         }
         case 2:
@@ -236,6 +256,7 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
             cin.ignore();
             if (lop->get_cur_sv() != 0) {
                 cout << "Lớp đã có sinh viên đăng ký, không thể thay đổi môn học!";
+                break;
             }
             else {
                 cin.ignore();
@@ -247,17 +268,17 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
                     cout << "kHÔNG TỒN TẠI MÔN HỌC!";
                 }
                 else {
-                    cout << "THONG TIN MON HOC: " << endl;
+                    cout << "THÔNG TIN MÔN HỌC: " << endl;
                     cout<<mon;
                     if (lop->get_mon_hoc() == mon) {
-                        cout << "lop hoc dang day mon nay, ko the doi!";
+                        cout << "Lớp học đang dạy môn này, không thể đổi!";
                     }
                     else {
                         subject *mon_cu = lop->get_mon_hoc();
                         mon_cu->xoa_ma_lop_hoc(lop->get_ma_lop_hoc());
                         lop->set_mon(mon);
                         mon->add_ma_lop_hoc(lop->get_ma_lop_hoc());
-                        cout << "thay doi mon hoc thanh cong!";
+                        cout << "Thay đổi môn học thành công!";
                     }
                 }
             }
@@ -266,63 +287,116 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
         case 3:
         {
             int new_max;
-            cout << "nhap so luong sinh vien toi da: ";
+            cout << "Số lượng sinh viên hiện tại: " << lop->get_cur_sv() << endl;
+            cout << "Nhập số lượng sinh viên tối đa mới: ";
             cin >> new_max;
-            if (new_max < lop->get_cur_sv()) {
-                cout << "ko the duoi hoc sinh vien =))";
-            }
+
+            // Kiểm tra nếu người dùng nhập chữ hoặc số âm
+            if (cin.fail() || new_max < 0) {
+                cin.clear(); // Xóa trạng thái lỗi
+                cin.ignore(1000, '\n'); // Loại bỏ ký tự thừa
+                doi_mau_full(12);
+                cout << "❌ Giá trị nhập không hợp lệ!" << endl;
+                doi_mau_full(7);
+            } 
+            else if (new_max < lop->get_cur_sv()) {
+                doi_mau_full(12);
+                cout << "❌ Không thể đặt tối đa " << new_max 
+                    << " vì lớp đã có " << lop->get_cur_sv() << " sinh viên!" << endl;
+                doi_mau_full(7);
+            } 
             else {
                 lop->set_max_sv(new_max);
-                cout << "thay doi so luong sinh vien toi da thanh cong";
-            }
-        }
-        break;
-        case 4:
-        {
-            if (lop->get_cur_sv() != 0) {
-                cout << "lop da co nguoi dang ky, ko the thay doi thoi gian!";
-            }
-            else {
-                Time new_time;
-                cout << "Nhập thời gian học mới: " << endl;
-                new_time.nhap();
-                giangvien* now = lop->get_gv();
-                if (now->kiemtra_trung_lich(new_time)) {
-                    cout << "Thời gian mới bị trùng lịch dạy của giảng viên, ko thể đổi!";
-                }
-                else {
-                    lop->set_time(new_time);
-                    now->xoa_lich_day(lop->get_time());
-                    now->them_lich_day(new_time);
-                    cout << "thay doi lich hoc thanh cong!";
-                }
-                pause();
-                break;
-            }
-        default:
-            cout << "Lựa chọn không hợp lệ";
-            return;
+                doi_mau_full(10);
+                cout << " Thay đổi số lượng sinh viên tối đa thành công!" << endl;
+                doi_mau_full(7);
             break;
         }
+        case 4:
+        {
+        if (lop->get_cur_sv() != 0) {
+        cout << "❌ Lớp đã có " << lop->get_cur_sv() << " người đăng ký, không thể thay đổi thời gian!";
+        pause();
+        return;
+        }
+    
+        Time new_time;
+        cout << "Nhập thời gian học mới: " << endl;
+        new_time.nhap();
 
-    }
-    ds_lop.xuat_du_lieu_ra_file_full(file_name);
-    cout<<"Cập nhật dữ liệu vào file thành công"<<endl;
+        giangvien* gv_hien_tai = lop->get_gv();
+        bool bi_trung = false;
+        string ma_lop_trung = "";
+
+        // QUAN TRỌNG: Quét trực tiếp trên danh sách lớp học để đảm bảo dữ liệu mới nhất
+        for (int i = 0; i < ds_lop.get_size(); i++) {
+            couse* lop_khac = ds_lop.get_p(i);
+            
+            // Chỉ kiểm tra lớp của CÙNG giảng viên này 
+            //tìm tất cả các lớp khác lớp đang xét có cùng gv dạy vs lớp đang xét
+            if (lop_khac->get_gv()->get_id() == gv_hien_tai->get_id() && lop_khac->get_ma_lop_hoc() != lop->get_ma_lop_hoc()) {
+                
+                if (lop_khac->get_time().ktra_trung_lich(new_time)) {
+                    bi_trung = true;
+                    ma_lop_trung = lop_khac->get_ma_lop_hoc();
+                    break;
+                }
+            }
+        }
+
+        if (bi_trung) {
+            doi_mau_full(12);
+            cout << "❌ Lỗi: Giảng viên " << gv_hien_tai->get_name() 
+                << " đã có lịch dạy lớp [" << ma_lop_trung << "] vào thời gian này!" << endl;
+            doi_mau_full(7);
+            pause();
+            return;
+        }
+        else {
+            // Nếu không trùng, tiến hành cập nhật
+            Time old_time = lop->get_time();
+            lop->set_time(new_time);
+            gv_hien_tai->xoa_lich_day(old_time);
+            gv_hien_tai->them_lich_day(new_time);
+
+            // Đồng bộ lại lịch dạy trong object giảng viên (để hiển thị cho đúng)
+            // Bạn nên viết một hàm gv->cap_nhat_lich(old_time, new_time) nếu cần
+            
+            cout << " Thay đổi lịch học thành công!";
+            pause();
+            }
+            break;
+                }
+                default:
+                {
+                doi_mau_full(4);
+                    cout << "Lựa chọn không hợp lệ";
+                    doi_mau_full(7);
+                    pause();
+                    return;
+                    break;
+                }
+
+            }
+            ds_lop.xuat_du_lieu_ra_file_full(file_name);
+            pause();
+        }
+    } 
 }
-} 
 
 void nghiepvu::tim_kiem_lop_hoc(){
-       cout<<"╭───────────────────────TÌM KIẾM LỚP HỌC────────────────────╮"<<endl;
-       cout<<"│"<<""<<setw(59)<<""<<"│"<<endl;
-       cout<<"│"<<setw(6)<<""<<"1.Tìm kiếm lớp học theo môn học"<<setw(22)<<""<<"│"<<endl;
-       cout<<"│"<<setw(6)<<""<<"2.Tìm kiếm lớp học theo mã lớp học"<<setw(19)<<""<<"│"<<endl;
-       cout<<"│"<<setw(6)<<""<<"3.Tìm kiếm lớp học theo mã giảng viên"<<setw(16)<<""<<"│"<<endl;
-       cout<<"│"<<setw(6)<<""<<"4.Tìm kiếm lớp học theo số tín chỉ"<<setw(19)<<""<<"│"<<endl;
-       cout<<"│"<<setw(6)<<""<<"Nhập lựa chọn của bạn: "<<setw(30)<<""<<"│"<<endl;
-       cout<<"╰───────────────────────────────────────────────────────────╯"<<endl;
-       gotoxy(30,6);
+       cout << space() <<"╭───────────────────────TÌM KIẾM LỚP HỌC────────────────────╮"<<endl;
+       cout << space() <<"│"<<""<<setw(59)<<""<<"│"<<endl;
+       cout << space() <<"│"<<setw(6)<<""<<"1.Tìm kiếm lớp học theo môn học"<<setw(22)<<""<<"│"<<endl;
+       cout << space() <<"│"<<setw(6)<<""<<"2.Tìm kiếm lớp học theo mã lớp học"<<setw(19)<<""<<"│"<<endl;
+       cout << space() <<"│"<<setw(6)<<""<<"3.Tìm kiếm lớp học theo mã giảng viên"<<setw(16)<<""<<"│"<<endl;
+       cout << space() <<"│"<<setw(6)<<""<<"4.Tìm kiếm lớp học theo số tín chỉ"<<setw(19)<<""<<"│"<<endl;
+       cout << space() <<"│"<<setw(6)<<""<<"Nhập lựa chọn của bạn: "<<setw(30)<<""<<"│"<<endl;
+       cout << space() <<"╰───────────────────────────────────────────────────────────╯"<<endl;
+       gotoxy(55,6);
        int temp;
        cin>>temp;
+       cout<<endl;
        if (cin.fail()) {
         cin.clear();
         cin.ignore(1000, '\n');
@@ -334,18 +408,18 @@ void nghiepvu::tim_kiem_lop_hoc(){
        {
         system("cls");
         string temp;
-        cout<<"Nhập vào tên môn học: "<<endl;
-        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
-        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
-        gotoxy(6,2);
+        cout << space() <<"Nhập vào tên môn học: "<<endl;
+        cout << space() <<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout << space() <<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
+        cout << space() <<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        gotoxy(30,2);
         cin.ignore();
         getline(cin,temp);
         system("cls");
         doi_mau_full(10);
-        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"  │"<<left<<setw(58 + getUTF8LenDiff(temp))<<("⌕ " + temp)<<"│"<<endl;
-        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        cout << space() <<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout << space() <<"  │"<<left<<setw(58 + getUTF8LenDiff(temp))<<("⌕ " + temp)<<"│"<<endl;
+        cout << space() <<"  ╰────────────────────────────────────────────────────────╯"<<endl;
         doi_mau_full(7);
         ds_lop.timkiem_ten(temp);
         break;
@@ -354,18 +428,18 @@ void nghiepvu::tim_kiem_lop_hoc(){
        {
         system("cls");
         string temp;
-        cout<<"Nhập vào mã lớp học: "<<endl;
-        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
-        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
-        gotoxy(6,2);
+        cout << space() <<"Nhập vào mã lớp học: "<<endl;
+        cout << space() <<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout << space() <<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
+        cout << space() <<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        gotoxy(30,2);
         cin.ignore();
         getline(cin,temp);
         system("cls");
         doi_mau_full(10);
-        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"  │"<<left<<setw(58 + getUTF8LenDiff(temp))<<("⌕ " + temp)<<"│"<<endl;
-        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        cout << space() <<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout << space() <<"  │"<<left<<setw(58 + getUTF8LenDiff(temp))<<("⌕ " + temp)<<"│"<<endl;
+        cout << space() <<"  ╰────────────────────────────────────────────────────────╯"<<endl;
         doi_mau_full(7);
         couse *lop_temp = ds_lop.tim_lop_theo_ma(temp);
         if(lop_temp == nullptr){
@@ -380,18 +454,18 @@ void nghiepvu::tim_kiem_lop_hoc(){
        {
         system("cls");
         string temp;
-        cout<<"Nhập vào ID giảng viên: "<<endl;
-        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
-        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
-        gotoxy(6,2);
+        cout << space() <<"Nhập vào ID giảng viên: "<<endl;
+        cout << space() <<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout << space() <<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
+        cout << space() <<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        gotoxy(30,2);
         cin.ignore();
         getline(cin,temp);
         system("cls");
         doi_mau_full(10);
-        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"  │"<<left<<setw(58 + getUTF8LenDiff(temp))<<("⌕ " + temp)<<"│"<<endl;
-        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        cout << space() <<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout << space() <<"  │"<<left<<setw(58 + getUTF8LenDiff(temp))<<("⌕ " + temp)<<"│"<<endl;
+        cout << space() <<"  ╰────────────────────────────────────────────────────────╯"<<endl;
         doi_mau_full(7);
         hien_thi_lop_hoc_cua_gv(temp);
            break;
@@ -400,11 +474,11 @@ void nghiepvu::tim_kiem_lop_hoc(){
        {
           system("cls");
         int temp;
-        cout<<"Nhập vào số tín chỉ : "<<endl;
-        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
-        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
-        gotoxy(6,2);
+        cout << space() <<"Nhập vào số tín chỉ : "<<endl;
+        cout << space() <<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout << space() <<"  │"<<left<<setw(58)<<("⌕ ")<<"│"<<endl;
+        cout << space() <<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        gotoxy(30,2);
         cin>>temp;    
         if (cin.fail()) {
         cin.clear();
@@ -415,9 +489,9 @@ void nghiepvu::tim_kiem_lop_hoc(){
         }   
         system("cls");
         doi_mau_full(10);
-        cout<<"  ╭────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"  │"<<left<<setw(58 + getUTF8LenDiff(to_string(temp)))<<("⌕ " + to_string(temp))<<"│"<<endl;
-        cout<<"  ╰────────────────────────────────────────────────────────╯"<<endl;
+        cout << space() <<"  ╭────────────────────────────────────────────────────────╮"<<endl;
+        cout << space() <<"  │"<<left<<setw(58 + getUTF8LenDiff(to_string(temp)))<<("⌕ " + to_string(temp))<<"│"<<endl;
+        cout << space() <<"  ╰────────────────────────────────────────────────────────╯"<<endl;
         doi_mau_full(7);
         ds_lop.hien_thi_lop_theo_tc(temp);
         cin.ignore();
@@ -425,8 +499,11 @@ void nghiepvu::tim_kiem_lop_hoc(){
        }
        
        default:
+       cout<<"Lựa chọn không hợp lệ!";
+       pause();
         break;
        }
+       
 }
 
 void nghiepvu::hien_thi_lop_hoc_cua_gv(string ma_gv){
@@ -446,10 +523,10 @@ void nghiepvu::hien_thi_lop_hoc_cua_gv(string ma_gv){
             hocvi = "ThS";
         }else hocvi = "";
         doi_mau_full(13);
-        cout<<"╭──────────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"│"<<left<<setw(17)<<""<<setw(48 + getUTF8LenDiff(gv_temp->get_name()))<<("GIẢNG VIÊN  "+hocvi+"."+ gv_temp->get_name())<<"│"<<endl;
-        cout<<"│"<<left<<setw(3)<<""<<setw(24)<<("Mã GV:" + gv_temp->get_id())<<setw(39 + getUTF8LenDiff(gv_temp->get_bo_mon()))<<("Bộ môn: " + gv_temp->get_bo_mon())<<"│"<<endl;
-        cout<<"╰─────────────────DANH SÁCH LỚP HỌC ĐÃ DẠY─────────────────────╯"<<endl;
+        cout << space() <<"╭──────────────────────────────────────────────────────────────╮"<<endl;
+        cout << space() <<"│"<<left<<setw(17)<<""<<setw(48 + getUTF8LenDiff(gv_temp->get_name()))<<("GIẢNG VIÊN  "+hocvi+"."+ gv_temp->get_name())<<"│"<<endl;
+        cout << space() <<"│"<<left<<setw(3)<<""<<setw(24)<<("Mã GV:" + gv_temp->get_id())<<setw(39 + getUTF8LenDiff(gv_temp->get_bo_mon()))<<("Bộ môn: " + gv_temp->get_bo_mon())<<"│"<<endl;
+        cout << space() <<"╰─────────────────DANH SÁCH LỚP HỌC ĐÃ DẠY─────────────────────╯"<<endl;
         cout<<endl;
         doi_mau_full(7);
         couse * couse_temp;
@@ -468,11 +545,11 @@ void nghiepvu::hien_thi_lop_hoc_cua_sv(string ma_sv){
     }else{
         string temp = to_string(sv_temp->get_cur_tc()) + "/" + to_string(sv_temp->get_max_tc());
         doi_mau_full(13);
-        cout<<"╭──────────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"│"<<left<<setw(17)<<""<<setw(46 + getUTF8LenDiff(sv_temp->get_name()))<<("SINH VIÊN  "+ sv_temp->get_name())<<"│"<<endl;
-        cout<<"│"<<left<<setw(3)<<""<<setw(30)<<("Mã SV:" + sv_temp->get_ma())<<setw(39 + getUTF8LenDiff(temp))<<("Số tín chỉ hiện tại: " + temp)<<"│"<<endl;
-        cout<<"│"<<left<<setw(3)<<""<<setw(23)<<("Khoá:" +to_string(sv_temp->get_khoa()))<<setw(39 + getUTF8LenDiff(sv_temp->get_chuyen_nganh()))<<("Chuyên ngành: " + sv_temp->get_chuyen_nganh())<<"│"<<endl;
-        cout<<"╰─────────────────DANH SÁCH LỚP HỌC ĐÃ ĐĂNG KÝ─────────────────╯"<<endl;
+        cout << space() <<"╭──────────────────────────────────────────────────────────────╮"<<endl;
+        cout << space() <<"│"<<left<<setw(17)<<""<<setw(46 + getUTF8LenDiff(sv_temp->get_name()))<<("SINH VIÊN  "+ sv_temp->get_name())<<"│"<<endl;
+        cout << space() <<"│"<<left<<setw(3)<<""<<setw(30)<<("Mã SV:" + sv_temp->get_ma())<<setw(39 + getUTF8LenDiff(temp))<<("Số tín chỉ hiện tại: " + temp)<<"│"<<endl;
+        cout << space() <<"│"<<left<<setw(3)<<""<<setw(23)<<("Khoá:" +to_string(sv_temp->get_khoa()))<<setw(39 + getUTF8LenDiff(sv_temp->get_chuyen_nganh()))<<("Chuyên ngành: " + sv_temp->get_chuyen_nganh())<<"│"<<endl;
+        cout << space() <<"╰─────────────────DANH SÁCH LỚP HỌC ĐÃ ĐĂNG KÝ─────────────────╯"<<endl;
         cout<<endl;
         doi_mau_full(7);
         sv_temp ->hien_thi_lop_da_dky();
@@ -486,11 +563,11 @@ void nghiepvu::hien_thi_lop_hoc_cua_mon_hoc(string ma_mon){
         cout<<"Không tồn tại môn học";
     }else{
         doi_mau_full(13);
-        cout<<"╭──────────────────────────────────────────────────────────────╮"<<endl;
-        cout<<"│"<<left<<setw(17)<<""<<setw(48 + getUTF8LenDiff(mon_temp->get_ten()))<<("MÔN HỌC  "+ mon_temp->get_ten())<<"│"<<endl;
-        cout<<"│"<<left<<setw(3)<<""<<setw(30)<<("Mã môn:" + mon_temp->get_ma_mon())<<setw(34 + getUTF8LenDiff(to_string(mon_temp->get_tin_chi())))
+        cout << space() <<"╭──────────────────────────────────────────────────────────────╮"<<endl;
+        cout << space() <<"│"<<left<<setw(17)<<""<<setw(48 + getUTF8LenDiff(mon_temp->get_ten()))<<("MÔN HỌC  "+ mon_temp->get_ten())<<"│"<<endl;
+        cout << space() <<"│"<<left<<setw(3)<<""<<setw(30)<<("Mã môn:" + mon_temp->get_ma_mon())<<setw(34 + getUTF8LenDiff(to_string(mon_temp->get_tin_chi())))
         <<("Số tín: " + to_string(mon_temp->get_tin_chi()))<<"│"<<endl;
-        cout<<"╰───────────────────────DANH SÁCH LỚP HỌC──────────────────────╯"<<endl;
+        cout << space() <<"╰───────────────────────DANH SÁCH LỚP HỌC──────────────────────╯"<<endl;
         cout<<endl;
         doi_mau_full(7);
         couse * couse_temp;

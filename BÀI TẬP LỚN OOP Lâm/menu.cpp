@@ -166,15 +166,21 @@ void menu_nghiep_vu(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_
     case 12:
     {
       system("cls");
-      lop.sap_xep_couse();
+      lop.sap_xep_couse(FILE_LOP_HOC);
       cin.ignore();
       cin.get();
       break;
     }
 
     default:
+    {
+        doi_mau_full(4);
+        cout << "Lựa chọn không hợp lệ";
+        doi_mau_full(7);
+        pause();
       break;
     }
+}
 }
 }
 void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_subject &mon,nghiepvu &nv){
@@ -236,9 +242,8 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
       system("cls");
       cin.ignore();
       string ma_lop;
-      cout<<"Nhập mã môn học muốn sửa: ";
+      cout<<"Nhập mã lớp học muốn sửa: ";
       getline(cin,ma_lop);
-      cin.ignore();
       nv.thaydoithongtin_couse(ma_lop,"D:/dulieulophoc.txt");
       cin.get();
       break;
@@ -322,8 +327,14 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
       break;
     }
     default:
-        break;
+    {
+    doi_mau_full(4);
+    cout << "Lựa chọn không hợp lệ";
+    doi_mau_full(7);
+    pause();
+    break;
     }
+}
 }
 }
 
@@ -380,27 +391,3 @@ void menu_chinh(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_subj
 }
 }
 
-
-// bool so_sanh_tc(couse *a, couse *b){
-//     return a->get_tin_chi() < b->get_tin_chi();
-// }
-
-// bool so_sanh_sv(couse *a, couse *b){
-//     return a->get_cur_sv() < b->get_cur_sv();
-// }
-
-// bool so_sanh_time(couse *a, couse *b){
-//     return a->get_time()<b->get_time();
-// }
-
-// void insert_sort(vector<couse*> &a,bool (*ham_so_sanh)(couse *a, couse *b)){
-//     for (int i = 1; i < a.size(); i++) {
-//    couse* temp = a[i];
-//     int j = i - 1;
-//     while (j >= 0 && ham_so_sanh(temp, a[j])) {
-//         a[j+1] = a[j];
-//         j--;
-//     }
-//     a[j+1] = temp;
-// }
-// }

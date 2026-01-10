@@ -77,17 +77,7 @@ bool couse::nhap(giangvien* gv_func, subject* sub_func) {
         return false;
     }
 }
-// bool couse::nhap_du_lieu_file(list_giangvien &ds_gv,list_time &ds_time,list_subject &ds_sub,vector<string>a){
-//        gv = ds_gv.tim_giangvien_theo_id(a[2]);
-//     //    if(!gv) return false;
-//         time = ds_time.tim_kip_hoc_theo_tg(a[3]);
-//         // if(!time) return false;
-//         mon_hoc = ds_sub.tim_mon_theo_ten(a[1]);
-//         // if(!mon_hoc) return false;2
-//         max_sv = stoi(a[4]);
-//         cur_sv = 0;
-//     return true;    
-//  }
+
 bool couse::xuat_du_lieu_file(string& line) {
     line = ma_lop_hoc + "|" + mon_hoc->get_ma_mon() + "|" + gv->get_id() + "|" + to_string(time.get_bat_dau()) + "|" + to_string(time.get_ket_thuc()) + "|" + to_string(time.get_thu())
         + "|" + to_string(max_sv);
@@ -99,6 +89,7 @@ void couse::cap_nhat_id(string id) {
         sl = so;
     }
 }
+
 void couse::string_file(string &line){
     line = ma_lop_hoc + "|" + mon_hoc->get_ma_mon() + "|" + gv->get_id() + "|" + to_string(time.get_bat_dau()) + "|" + to_string(time.get_ket_thuc()) + "|" + to_string(time.get_thu())
         + "|" + to_string(max_sv);

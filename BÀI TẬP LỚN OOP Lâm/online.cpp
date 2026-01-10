@@ -25,7 +25,7 @@ void online::hienthi() {
 }
 bool online::nhap(giangvien* gv_func, subject* sub_func) {
     if (couse::nhap(gv_func, sub_func)) {
-        cout << "nhap nan tang hoc truc tuyen: ";
+        cout << "Nhập nền tảng học trực tuyến: ";
         cin.ignore();
         getline(cin, nen_tang);
         cout<<"Nhập link phòng học (0) hay sử dụng link tự sinh (1)?"<<endl;
@@ -55,7 +55,7 @@ bool online::nhap(giangvien* gv_func, subject* sub_func) {
 bool online::xuat_du_lieu_file(string& file_name) {
     ofstream f(file_name, ios::app);
     if (!f.is_open()) {
-        cout << "ko mo dc file!";
+        cout << "Không mở được file!";
         return false;
     }
     else {

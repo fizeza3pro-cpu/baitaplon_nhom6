@@ -82,10 +82,10 @@ void list_couse::nhap_test(giangvien *gv_func, subject *sub_func,string file_nam
     // Đưa vào danh sách
         p.push_back(newCourse);
     }else{
-        newCourse = nullptr;
         delete newCourse;
+        newCourse = nullptr;
         doi_mau_full(4);
-        cout<<"tao lop moi that bai!";
+        cout<<"Tạo lớp mới thất bại!";
         doi_mau_full(7);
     }
 }
@@ -96,7 +96,7 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub
     int dem = 0;
     ifstream f(file_name);
     if(!f.is_open()){  
-        cout<<"ko mo dc file!"<<endl;
+        cout<<"Không mở được file!"<<endl;
         return false;
     }else{
         while(getline(f,line)){
@@ -112,7 +112,7 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub
        a.push_back(temp);
        temp = ""; 
        if(!check_id_hop_le(a[1])){
-        cout<<"ma lop hoc khong hop le, bo qua lop hoc thu  "<<dem+1<<"!"<<endl;
+        cout<<"mã môn học không hợp lệ, bỏ qua lớp học thứ "<<dem+1<<"!"<<endl;
         a.clear();
         continue;
        }
@@ -124,7 +124,7 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub
        }else if(a[0] == "offline" && a.size() == 10){
         mon = new offline(a[1],sub_temp,gv_temp,stof(a[4]),stof(a[5]),stoi(a[6]),stoi(a[7]),a[8],a[9]);
        }else{
-        cout<<"loai lop hoc khong hop le!"<<endl;
+        cout<<"Loại lớp học không hợp lệ, bỏ qua dòng nhập!"<<endl;
         continue;
        }
        if(!gv_temp->kiemtra_trung_lich(mon->get_time())){
@@ -135,14 +135,14 @@ bool list_couse::nhap_du_lieu_tu_file(list_giangvien &ds_gv,list_subject &ds_sub
             dem++;
              a.clear();
        }else{
-        cout<<"du lieu trong file co trung lich, bo qua lop hoc"<<endl;
+        cout<<"dữ liệu trong file có trùng lịch, bỏ qua dòng nhập"<<endl;
         a.clear();
         continue;
        }
     }
 }
 doi_mau_full(2);
-cout<<"da nhap thanh cong "<<dem+1<<" lop hoc!"<<endl;
+cout<<"Đã nhập thành công "<<dem+1<<" lớp học!"<<endl;
 doi_mau_full(7);
 f.close();
     return true;
@@ -207,48 +207,17 @@ void list_couse::xuat_du_lieu_ra_file_full(string file_name){
         p[i]->string_file(line);
         f<<line<<endl;
     }
-    cout<<"Lưu dữ liệu vào file "<<file_name<<" thành công!";
+    doi_mau_full(2);
+    cout<<"Lưu dữ liệu vào file "<<file_name<<" thành công!"<<endl;
+    doi_mau_full(7);
     f.close();
 }
 
 bool list_couse::delete_lop_hoc(string ma_lop,string file_name){
-    //for(int i = 0;i<p.size();i++){
-    //     if(p[i]->get_ma_lop_hoc() == ma_lop){
-    //         if(p[i]->get_cur_sv() != 0){
-
-    //             cout<<"ko the xoa lop hoc vi da co sinh vien dang ky!"<<endl;
-    //             return false;
-    //         }
-    //         subject *y = p[i]->get_mon_hoc();
-    //         if(!y->xoa_ma_lop_hoc(ma_lop)){
-    //             cout<<"xoa ma lop hoc khoi mon hoc that bai!"<<endl;
-    //             return false;
-    //         }
-
-    //         giangvien *x = p[i]->get_gv();
-    //         if(!x->xoa_couse_da_day_id(ma_lop)){
-    //             cout<<"xoa lop hoc khoi giang vien that bai!"<<endl;
-    //             return false;
-    //         }
-    //         if(!x->xoa_lich_day(p[i]->get_time())){
-    //             cout<<"Xoá lịch dạy giảng viên thất bại!";
-    //             return false;
-    //         }
-    //         delete p[i];
-    //         p.erase(p.begin() + i);
-    //         cout<<"xoa lop hoc khoi danh sach thanh cong!"<<endl;
-    //         // Cập nhật lại file sau khi xóa
-    //        xuat_du_lieu_ra_file(file_name);
-    //         cout<<"cap nhat file sau xoa lop hoc thanh cong!"<<endl;
-    //         return true;
-    //     }
-    // }
-    // cout<<"ko tim thay lop hoc de xoa!"<<endl;
-    // return false;
     for(int i = 0;i<p.size();i++){
         if(p[i]->get_ma_lop_hoc() == ma_lop){
             if (p[i]->get_cur_sv() != 0) {
-                cout << "ko the xoa lop hoc vi da co sinh vien dang ky!\n";
+                cout << "Không thể xóa lớp học vì đã có sinh viên đăng ký!\n";
                 return false;
             }   
 
@@ -267,11 +236,6 @@ bool list_couse::delete_lop_hoc(string ma_lop,string file_name){
                 cout << "Giảng viên "<<x->get_name()<<" chưa dạy lớp này!\n";
                 return false;
             }
-
-            // if (!x->co_lich_day(p[i]->get_time())) {
-            //     cout << "Giảng viên "<<x->get_name()<<" chưa có lịch dạy của lớp này!\n";
-            //     return false;
-            // }
             y->xoa_ma_lop_hoc(ma_lop);
         x->xoa_couse_da_day_id(ma_lop);
         x->xoa_lich_day(p[i]->get_time());
@@ -287,7 +251,8 @@ bool list_couse::delete_lop_hoc(string ma_lop,string file_name){
     cout << "\nXoá lớp học không thành công!\n";
     return false;
 }
-void list_couse::sap_xep_couse(){
+
+void list_couse::sap_xep_couse(string file_name){
        system("cls");
         cout<<"╭──────────────────────DANH SÁCH SẮP XẾP────────────────────╮"<<endl;
        cout<<"│"<<""<<setw(59)<<""<<"│"<<endl;
@@ -330,9 +295,12 @@ void list_couse::sap_xep_couse(){
         }
         
         default:
+        doi_mau_full(4);
         cout<<"Lựa chọn không hợp lệ";
+        doi_mau_full(7);
             break;
         }
+        xuat_du_lieu_ra_file_full(file_name);
     
 }
 //phương thức sắp xếp 

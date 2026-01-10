@@ -26,7 +26,4 @@ public:
         return (int)ds_mon.size(); 
     }
 
-    // ===== Náº P CHá»’NG =====
-    // friend ostream& operator<<(ostream& os, const list_subject& l);
-    // friend istream& operator>>(istream& is, list_subject& l);
 };
