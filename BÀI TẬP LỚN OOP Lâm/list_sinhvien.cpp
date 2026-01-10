@@ -49,13 +49,13 @@ sinhvien* list_sinhvien::tim_sinhvien_theo_id(string ma_sv) {
 	return nullptr;
 }
 // -------
-void list_sinhvien::them_sinhvien() {
+void list_sinhvien::them_sinhvien(string file_name) {
 	sinhvien sv;
 	sv.nhap();
 
 	dssv.push_back(sv);
 
-	ofstream f("D:/dulieusinhvien.txt", ios::app);  // ghi thêm cuối file
+	ofstream f(file_name, ios::app);  // ghi thêm cuối file
 	sv.ghi_vao_file(f);
 	f.close();
 }

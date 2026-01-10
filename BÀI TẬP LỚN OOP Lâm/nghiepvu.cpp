@@ -3,7 +3,7 @@
 #include"nghiepvu.h"
 using namespace std;
 //---------------------------lớp học---------------------------
-void nghiepvu::them_mon_hoc(string ma_gv, string ten_mon, string file_name) {
+void nghiepvu::them_lop_hoc(string ma_gv, string ten_mon, string file_name) {
     /* truyền vào hàm có thể là mã gv,... nhưng truyền cả đối tượng cho trực quan */
     giangvien* c = ds_gv.tim_giangvien_theo_id(ma_gv);
     if (c == nullptr) {
@@ -202,18 +202,17 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
         {
        
         cin.ignore();
-    string ma_gv;
-    cout << "Nhập mã giảng viên muốn đổi: ";
-    getline(cin, ma_gv);
-    
-    giangvien* gv_moi = ds_gv.tim_giangvien_theo_id(ma_gv);
-    if (gv_moi == nullptr) {
-        cout << " Không tìm thấy giảng viên!";
-        pause();
-        return;
-    }
-    else {
-        if (gv_moi->get_id() == lop->get_gv()->get_id()) {
+        string ma_gv;
+        cout << "Nhập mã giảng viên muốn đổi: ";
+        getline(cin, ma_gv);
+        
+        giangvien* gv_moi = ds_gv.tim_giangvien_theo_id(ma_gv);
+        if (gv_moi == nullptr) {
+            cout << " Không tìm thấy giảng viên!";
+            pause();
+            return;
+        }else {
+         if (gv_moi->get_id() == lop->get_gv()->get_id()) {
             cout << " Giảng viên này hiện đang dạy lớp này rồi!";
             pause();
             return;
@@ -249,11 +248,10 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
             }
         }
     }
-        break;
-        }
+    break;
+    }
         case 2:
         {
-            cin.ignore();
             if (lop->get_cur_sv() != 0) {
                 cout << "Lớp đã có sinh viên đăng ký, không thể thay đổi môn học!";
                 break;
@@ -268,8 +266,6 @@ void nghiepvu::thaydoithongtin_couse(string ma_lop, string file_name) {
                     cout << "kHÔNG TỒN TẠI MÔN HỌC!";
                 }
                 else {
-                    cout << "THÔNG TIN MÔN HỌC: " << endl;
-                    cout<<mon;
                     if (lop->get_mon_hoc() == mon) {
                         cout << "Lớp học đang dạy môn này, không thể đổi!";
                     }

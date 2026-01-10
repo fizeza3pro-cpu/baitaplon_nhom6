@@ -38,7 +38,7 @@ public:
     string get_ma_lop_hoc()const {
         return ma_lop_hoc;
     }
-    Time get_time() {
+    Time get_time() const {
         return time;
     }
     giangvien* get_gv()const {
@@ -66,7 +66,6 @@ public:
 
     static void cap_nhat_id(string id);
     virtual void string_file(string &line) = 0;
-    virtual string get_data()const = 0;
     virtual bool nhap(giangvien* gv_func, subject* sub_func);
     virtual bool xuat_du_lieu_file(string& line);
     virtual void hienthi();

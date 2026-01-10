@@ -41,7 +41,7 @@ class giangvien{
     }
     void nhapthongtin();
     void hienthithongtin_gv();
-    void hienthi_mondangday();
+    // void hienthi_mondangday();
     bool nhap_du_lieu_tu_file(ifstream &f);
     void ghi_du_lieu_vao_file(ofstream& f);
     void them_couse_da_day_id(string ma_couse);

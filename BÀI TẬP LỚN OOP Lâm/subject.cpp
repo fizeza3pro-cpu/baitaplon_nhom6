@@ -59,7 +59,7 @@ bool subject::xoa_ma_lop_hoc(string ma_lop) {
     for (int i = 0; i < ma_lop_hoc.size(); i++) {
         if (ma_lop_hoc[i] == ma_lop) {
             ma_lop_hoc.erase(ma_lop_hoc.begin() + i);
-            cout << "da xoa ma lop hoc " << ma_lop << " khoi danh sach lop hoc cua mon " << ten_mon_hoc << endl;
+            //cout << "Đã xóa mã lớp học " << ma_lop << " khỏi danh sách lớp học của môn " << ten_mon_hoc << endl;
             return true;
         }
     }
@@ -92,13 +92,13 @@ bool subject::xoa_ma_lop_hoc(string ma_lop) {
         cout << "Nhập mã môn học: ";
         getline(is, s.ma_mon_hoc);
 
-        cout << "Nhap ten mon hoc: ";
+        cout << "Nhập tên môn học: ";
         getline(is, s.ten_mon_hoc);
 
-        cout << "Nhap so tin chi: ";
+        cout << "Nhập số tín chỉ: ";
         is >> s.so_tin_chi;
 
-        cout << "Nhap so buoi hoc: ";
+        cout << "Nhập số buổi học: ";
         is >> s.so_buoi;
         is.ignore();
         return is;

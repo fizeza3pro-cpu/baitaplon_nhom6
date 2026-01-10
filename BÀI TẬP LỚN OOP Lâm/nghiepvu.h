@@ -20,7 +20,7 @@ public:
         :ds_mon(dsm), ds_sv(dssv), ds_lop(dsl), ds_gv(dsgv) {
     };
     //----lớp học-------
-    void them_mon_hoc(string ma_gv, string ten_mon, string file_name);
+    void them_lop_hoc(string ma_gv, string ten_mon, string file_name);
     void dang_ky_lop_hoc(string id_sv, string ma_lop, string file_name_pdk);
     void huy_dang_ky_lop_hoc(string id_sv, string ma_lop,string file_name_pdk);
     void nhap_du_lieu_cho_couse(string file_name);

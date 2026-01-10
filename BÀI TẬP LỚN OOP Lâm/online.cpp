@@ -39,6 +39,7 @@ bool online::nhap(giangvien* gv_func, subject* sub_func) {
          return false;
     }else if(temp == 0){
         cout<<"Nhập link phòng học: ";
+        cin.ignore();
         getline(cin,link);
         return true;
     }else if(temp == 1){

@@ -232,7 +232,7 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
       getline(cin,magv);
       cout<<"Nhập mã môn học:  ";
       getline(cin,ten_sub);
-      nv.them_mon_hoc(magv,ten_sub,"D:/dulieulophoc.txt");
+      nv.them_lop_hoc(magv,ten_sub,FILE_LOP_HOC);
       cin.ignore();
       cin.get();
     break;
@@ -244,7 +244,7 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
       string ma_lop;
       cout<<"Nhập mã lớp học muốn sửa: ";
       getline(cin,ma_lop);
-      nv.thaydoithongtin_couse(ma_lop,"D:/dulieulophoc.txt");
+      nv.thaydoithongtin_couse(ma_lop,FILE_LOP_HOC);
       cin.get();
       break;
     }
@@ -255,7 +255,7 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
       string ma_lop;
       cout<<"Nhập mã lớp muốn xoá: ";
       getline(cin,ma_lop);
-      if(lop.delete_lop_hoc(ma_lop,"D:/dulieulophoc.txt")){
+      if(lop.delete_lop_hoc(ma_lop,FILE_LOP_HOC)){
         cout<<"Thành công!";
       }else{
         cout<<"Không thành công!";
@@ -267,7 +267,7 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
     {
       system("cls");
       cin.ignore();
-      gv.add_giangvien("D:/dulieugiangvien.txt");
+      gv.add_giangvien(FILE_GIANG_VIEN);
       pause();
       break;
     }
@@ -278,7 +278,7 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
       cout<<"Nhập vào mã giảng viên muốn xoá: ";
       cin.ignore();
       getline(cin,gv_xoa);
-      if(gv.delete_giangvien(gv_xoa,"D:/dulieugiangvien.txt")){
+      if(gv.delete_giangvien(gv_xoa,FILE_GIANG_VIEN)){
         cout<<"Xoá giảng viên thành công!";
       }else cout<<"Xoá giảng viên thất bại!";
       pause();
@@ -288,7 +288,7 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
     {
       system("cls");
       cin.ignore();
-      sv.them_sinhvien();
+      sv.them_sinhvien(FILE_SINH_VIEN);
       pause();
       cin.get();
       break;
@@ -309,7 +309,7 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
     case 8:
     {
       system("cls");
-      mon.add_mon_hoc("D:/dulieumonhoc.txt");
+      mon.add_mon_hoc(FILE_MON_HOC);
       pause();
       break;
     }
@@ -320,7 +320,7 @@ void menu_quan_ly(list_couse &lop,list_giangvien &gv, list_sinhvien &sv, list_su
       cout<<"Nhập vào mã môn học muốn xoá: ";
       cin.ignore();
       getline(cin,mon_xoa);
-      if(mon.xoa_mon_hoc_theo_ma(mon_xoa,"D:/dulieumonhoc.txt")){
+      if(mon.xoa_mon_hoc_theo_ma(mon_xoa,FILE_MON_HOC)){
         cout<<"Xoá môn học thành công!";
       }else cout<<"Xoá môn học thất bại!";
       pause();

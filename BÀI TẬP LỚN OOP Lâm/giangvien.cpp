@@ -106,21 +106,21 @@ using namespace std;
 // }
 
 void giangvien::nhapthongtin() {
-    cout << "\n--- NHAP THONG TIN GIANG VIEN ---\n";
-    cout << "Nhap ID: ";
+    cout << "\n--- Nhập thông tin giảng viên ---\n";
+    cout << "Nhập ID: ";
     getline(cin, id);
-    cout << "Nhap ten: ";
+    cout << "Nhập tên: ";
     getline(cin, ten_giang_vien);
-    cout << "Nhap gioi tinh: ";
+    cout << "Nhập giới tính: ";
     getline(cin, gioi_tinh);
-    cout << "Nhap ngay thang nam sinh (cach nhau khoang trang): ";
+    cout << "Nhập ngày tháng năm sinh (cách nhau khoảng trang): ";
     cin >> birth[0] >> birth[1] >> birth[2];
     cin.ignore(); // Xóa bộ nhớ đệm sau khi nhập số
-    cout << "Nhap hoc vi: ";
+    cout << "Nhập học vi: ";
     getline(cin, hoc_vi);
-    cout << "Nhap so dien thoai: ";
+    cout << "Nhập số điện thoại: ";
     getline(cin, sdt);
-    cout << "Nhap bo mon: ";
+    cout << "Nhập bộ môn: ";
     getline(cin, bo_mon);
 
     //đoạn này là đc rồi, lớp học là do mình toạn, ko nhập đc cho giảng viên đâu
@@ -188,30 +188,30 @@ void giangvien::hienthithongtin_gv() {
     doi_mau_full(7); // Trả lại màu gốc
 }
 
-void giangvien::hienthi_mondangday() {
-    cout << "\n   LICH GIANG DAY CHI TIET: " << ten_giang_vien << endl;
-    cout << "========================================================" << endl;
+// void giangvien::hienthi_mondangday() {
+//     cout << "\n   LICH GIANG DAY CHI TIET: " << ten_giang_vien << endl;
+//     cout << "========================================================" << endl;
 
-    if (couse_da_day.empty()) {
-       cout << "  Hien tai giang vien chua duoc phan cong lop nao." << endl;
-    }
-    else {
-       for (size_t i = 0; i < couse_da_day.size(); i++) {
-           cout << " + Lop: " << couse_da_day[i] << endl;
-           bool co_lich = false;
-           if (i < lich_day.size()) {
-               cout << "   -> Buoi hoc: ";
-               lich_day[i].hienthithongtin();
-               cout << endl;
-               co_lich = true;
-                }
+//     if (couse_da_day.empty()) {
+//        cout << "  Hien tai giang vien chua duoc phan cong lop nao." << endl;
+//     }
+//     else {
+//        for (size_t i = 0; i < couse_da_day.size(); i++) {
+//            cout << " + Lop: " << couse_da_day[i] << endl;
+//            bool co_lich = false;
+//            if (i < lich_day.size()) {
+//                cout << "   -> Buoi hoc: ";
+//                lich_day[i].hienthithongtin;
+//                cout << endl;
+//                co_lich = true;
+//                 }
 
-           if (!co_lich) {
-               cout << "   -> (Chua sap xep lich cu the)" << endl;
-               }
-            }
-        }
-    }
+//            if (!co_lich) {
+//                cout << "   -> (Chua sap xep lich cu the)" << endl;
+//                }
+//             }
+//         }
+//     }
 
 bool giangvien::nhap_du_lieu_tu_file(ifstream& f) {
     vector<string> a;
@@ -298,7 +298,7 @@ void giangvien::them_couse_da_day_id(string ma_lop) {
         }
     }
     couse_da_day.push_back(ma_lop);
-    cout << "Đã thêm lớp học " << ma_lop << " vào danh sách môn đã dạy của giảng viên " << ten_giang_vien << endl;
+    //cout << "Đã thêm lớp học " << ma_lop << " vào danh sách môn đã dạy của giảng viên " << ten_giang_vien << endl;
 }
 
 void giangvien::ghi_du_lieu_vao_file(ofstream& f) {

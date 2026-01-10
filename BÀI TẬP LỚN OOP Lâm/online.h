@@ -19,9 +19,6 @@ public:
 
     }
     ~online() {}
-    string get_data()const {
-        return nen_tang;
-    }
     virtual void string_file(string &line);
     string tao_random(int do_dai);
     bool nhap(giangvien* gv_func, subject* sub_func);

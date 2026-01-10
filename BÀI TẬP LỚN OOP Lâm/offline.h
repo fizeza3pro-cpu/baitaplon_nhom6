@@ -17,9 +17,6 @@ public:
         couse(u, c, a, y, z, x, p), phong_hoc(k), nha(q) {
     }
     ~offline() {}
-    string get_data()const {
-        return phong_hoc + "|" + nha;
-    }
     virtual void string_file(string &line); 
     bool nhap(giangvien* gv_func, subject* sub_func);
     void hienthi();

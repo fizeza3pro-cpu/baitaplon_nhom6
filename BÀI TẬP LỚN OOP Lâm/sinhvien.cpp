@@ -56,13 +56,6 @@ bool sinhvien::delete_couse(couse* mon) {
     return false;
 }
 void sinhvien::hienthithongtin() {
-    // cout << "Ma sinh vien: " << id << endl;
-    // cout << "Ho va ten: " << name << "\t\t" << "Ngay sinh: " << birth[0] << "/" << birth[1] << "/" << birth[2] << "\t\t" << endl;
-    // cout << "Gioi tinh: " << gioi_tinh << "\t\t\t\t" << "So dien thoai: " << sdt << endl;
-    // cout << "Chuyen nganh: " << chuyen_nganh << "\t\t\t" << "Khoa : K" << khoa << endl;
-    // cout << "So tin chi toi da: " << max_tc << "\t\t\t" << "So tin chi da dang ky: " << cur_tc << endl;
-    // cout << "So mon da dang ky: " << ds_mon_dky.size() << "\n" << endl;
-    // --- Cạnh trên ---
     string title = "[ SINH VIÊN ] " + name;
     string string_bỉth = (to_string(birth[0]) + "/" + to_string(birth[1]) + "/" + to_string(birth[2]));
     doi_mau_full(9); // Màu Cyan (Xanh lơ)
@@ -120,27 +113,27 @@ void sinhvien::hienthithongtin() {
 }
 void sinhvien::nhap()
 {
-    cout << "Nhap ma sinh vien: ";
+    cout << "Nhập mã sinh viên: ";
     getline(cin, id);
-    cout << "Nhap ho va ten: ";
+    cout << "Nhập họ và tên: ";
     getline(cin, name);
-    cout << "Nhap ngay thang nam sinh: \n";
-    cout << "  Ngay: ";
+    cout << "Nhập ngày tháng năm sinh: \n";
+    cout << "  Ngày: ";
     cin >> birth[0];
-    cout << "  Thang: ";
+    cout << "  Tháng: ";
     cin >> birth[1];
-    cout << "  Nam: ";
+    cout << "  Năm: ";
     cin >> birth[2];
     cin.ignore();
-    cout << "Nhap gioi tinh: ";
+    cout << "Nhập giới tính: ";
     getline(cin, gioi_tinh);
-    cout << "Nhap so dien thoai: ";
+    cout << "Nhập số điện thoại: ";
     getline(cin, sdt);
-    cout << "Nhap chuyen nganh: ";
+    cout << "Nhập chuyên ngành: ";
     getline(cin, chuyen_nganh);
-    cout << "Nhap khoa: ";
+    cout << "Nhập khóa: ";
     cin >> khoa;
-    cout << "Nhap so tin chi toi da: ";
+    cout << "Nhập số tín chỉ tối đa: ";
     cin >> max_tc;
 }
 bool sinhvien::nhap_du_lieu_tu_file(ifstream& f) {
